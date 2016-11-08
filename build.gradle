@@ -26,12 +26,13 @@ repositories {
 }
 
 dependencies {
+
     compile 'org.scala-lang:scala-library:2.12.0'
     compile 'org.springframework.boot:spring-boot-starter-web'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile 'org.specs2:specs2_2.9.2:1.12.3'
-    testCompile 'org.specs2:specs2-scalaz-core_2.9.1:6.0.1'
+    testCompile "org.specs2:specs2-core_2.11:3.7"
+    testCompile 'org.specs2:specs2-junit_2.11:3.8.6'
 
 }
