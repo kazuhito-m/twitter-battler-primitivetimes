@@ -27,7 +27,7 @@ repositories {
 
 dependencies {
 
-    compile 'org.scala-lang:scala-library:2.12.0'
+    compile 'org.scala-lang:scala-library:2.11.8'
     compile 'org.springframework.boot:spring-boot-starter-web'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
