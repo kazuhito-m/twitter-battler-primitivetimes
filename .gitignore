@@ -24,3 +24,8 @@ project/plugins/project/
 # ENSIME specific
 .ensime_cache/
 .ensime
+
+# Gradle work files
+.gradle/
+build/
+
