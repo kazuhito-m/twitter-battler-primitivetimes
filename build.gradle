@@ -30,3 +30,8 @@ dependencies {
     testCompile 'org.specs2:specs2-junit_2.11:3.8.6'
 
 }
+
+// specs2の"nUnit形式テキストファイル"の出し先が「maven形式の吐き先」になってるので、上書き設定。
+test {
+    systemProperty "stats.outdir" , "$buildDir/specs2-reports/status"
+}
