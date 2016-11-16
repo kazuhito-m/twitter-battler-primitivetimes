@@ -1,6 +1,6 @@
 package com.github.kazuhito_m.twitterbattler.primitive.fw
 
-import com.github.kazuhito_m.twitterbattler.primitive.Application
+import com.github.kazuhito_m.twitterbattler.primitive.ConfigForTest
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
   */
 object TestHelper {
 
-  val applicationContext = new AnnotationConfigApplicationContext(classOf[Application])
+  val applicationContext = new AnnotationConfigApplicationContext(classOf[ConfigForTest])
 
   /**
     * 指定したクラスのDI済Beanを取得する。

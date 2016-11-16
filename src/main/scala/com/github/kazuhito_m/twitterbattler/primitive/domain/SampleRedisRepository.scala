@@ -1,10 +1,37 @@
 package com.github.kazuhito_m.twitterbattler.primitive.domain
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
 class SampleRedisRepository {
 
-  def getSampleValue: String = "Redisのテストに使う予定の建設予定地。ここでは値取得だけ。";
+  /** Redisで取得するキー */
+  val SAMPLE_KEY = "sanple-value:string"
+
+  @Autowired
+  private val redisTemplate: StringRedisTemplate = null
+
+  /**
+    * サンプル用テキトウキーで値を取得。
+    *
+    * @return 取得できた値。
+    */
+  def getSampleValue: String = ofv.get(SAMPLE_KEY)
+
+  /**
+    * サンプル用テキトウキーで値を保存。
+    *
+    * @param value 保存する文字列。
+    */
+  def setSampleValue(value: String) = ofv.set(SAMPLE_KEY, value)
+
+  /**
+    * サンプル用テキトウキー自体を削除。
+    */
+  def clearSampleValue = redisTemplate.delete(SAMPLE_KEY)
+
+  private def ofv = redisTemplate.opsForValue()
 
 }
