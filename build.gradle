@@ -24,6 +24,7 @@ dependencies {
 
     compile 'org.scala-lang:scala-library:2.11.8'
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-redis'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.specs2:specs2-core_2.11:3.8.6'
@@ -33,5 +34,5 @@ dependencies {
 
 // specs2の"nUnit形式テキストファイル"の出し先が「maven形式の吐き先」になってるので、上書き設定。
 test {
-    systemProperty "stats.outdir" , "$buildDir/specs2-reports/status"
+    systemProperty "stats.outdir", "$buildDir/specs2-reports/status"
 }
