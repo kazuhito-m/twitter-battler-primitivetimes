@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive
+package com.github.kazuhito_m.twitterbattler.primitive.view
 
 import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod, RestController}
 
