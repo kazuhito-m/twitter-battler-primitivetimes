@@ -12,6 +12,15 @@ object TestHelper {
 
   val applicationContext = new AnnotationConfigApplicationContext(classOf[Application])
 
-  def beanBy[T](target: Class[T]): T = applicationContext.getBean(target)
+  /**
+    * 指定したクラスのDI済Beanを取得する。
+    *
+    * Scala+Specs2+Gradleなテストでは「アノテーションによるSpringDIが出来ない」ので、自力でやる。
+    *
+    * @param clazz 対象となるクラス。
+    * @tparam T 対象と成るクラス型。
+    * @return 取得できたBean。
+    */
+  def beanBy[T](clazz: Class[T]): T = applicationContext.getBean(clazz)
 
 }

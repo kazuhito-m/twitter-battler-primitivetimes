@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod, R
 class SampleController {
 
   @Autowired
-  var redisRepo: SampleRedisRepository = null
+  val redisRepo: SampleRedisRepository = null
 
   @RequestMapping(value = Array("test"), method = Array(RequestMethod.GET))
   def data = "hoge"
