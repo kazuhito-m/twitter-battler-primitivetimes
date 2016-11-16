@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive
+package com.github.kazuhito_m.twitterbattler.primitive.view
 
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
