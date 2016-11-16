@@ -14,6 +14,10 @@
 
 - [コード上だけでSpringDIする方法(等)](http://www.atmarkit.co.jp/ait/articles/0504/29/news022_2.html)
 
+## Specs2
+
+- [実行順序ではまらないようにする的なハナシ](http://sui.hateblo.jp/entry/2013/07/21/011958)
+
 ## Redis
 
 - [クライアントからCLIで参照](http://qiita.com/sawada_masahiko/items/1f60936c421ecab8dfbf)
