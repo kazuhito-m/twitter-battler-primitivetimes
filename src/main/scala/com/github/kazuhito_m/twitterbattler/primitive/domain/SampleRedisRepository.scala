@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 class SampleRedisRepository {
 
   /** Redisで取得するキー */
-  val SAMPLE_KEY = "sanple-value:string"
+  val SAMPLE_KEY = "sample-value:string"
 
   @Autowired
   private val redisTemplate: StringRedisTemplate = null

@@ -6,7 +6,6 @@ import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 import org.specs2.specification.BeforeEach
 
-
 @RunWith(classOf[JUnitRunner])
 class SampleRedisRepositoryTest extends Specification with BeforeEach {
 
