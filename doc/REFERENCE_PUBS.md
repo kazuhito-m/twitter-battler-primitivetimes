@@ -10,6 +10,9 @@
 
 - [ScalaでSpringBootやってる例(sbtだけど)](http://mao-instantlife.hatenablog.com/entry/2015/09/07/SpringBoot%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92Scala_%2B_sbt%E3%81%A7%E6%A7%8B%E7%AF%89%E3%81%99%E3%82%8B)
 
+## Spring
+
+- [コード上だけでSpringDIする方法(等)](http://www.atmarkit.co.jp/ait/articles/0504/29/news022_2.html)
 
 ## Redis
 
