@@ -1,0 +1,22 @@
+{
+  "name": "twitter-battler-primitivetimes",
+  "version": "1.0.0",
+  "description": "Twitter Battler - Primitive Times",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazuhito-m/twitter-battler-primitivetimes.git"
+  },
+  "author": "kazuhito-m",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kazuhito-m/twitter-battler-primitivetimes/issues"
+  },
+  "homepage": "https://github.com/kazuhito-m/twitter-battler-primitivetimes#readme"
+}
