@@ -18,6 +18,18 @@ Twitter Battler - Primitive Times
 
 - TODO
 
+## Usage
+
+以下に「開発時に使えるコマンド」を書きます。
+
+## Webアプリ立ち上げ
+
+`./gradlew clean bootRun`
+
+## JSを監視して「変化があればテスト」してくれるモード
+
+`./gradlew npm_run_develop`
+
 ## Author
 
 Kazuhito Miura ( [@kazuhito_m](https://twitter.com/kazuhito_m) on Twitter )
