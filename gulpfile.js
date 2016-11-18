@@ -30,8 +30,6 @@ const paths = {
     ps_test_dir: './build/js/power-assert-test/js/',
     coverage_dir: './build/js/coverage',
     report_dir: './build/js/report',
-    dist_dir: './work/dist',
-    dist_all: './work/dist/**/*',
     format_dir: './build/js/format'
 };
 
@@ -39,16 +37,6 @@ const paths = {
 gulp.task('clean', (cb) => {
     return del([paths.work_dir], cb);
 });
-
-// スクリプトの起点(index.js)をdistディレクトリにコピー
-gulp.task('js', () => {
-    return gulp.src(
-            [paths.mains, paths.models, paths.configs], {
-                base: paths.main_dir
-            })
-        .pipe(gulp.dest(paths.dist_dir));
-});
-
 
 // テスト周り
 
