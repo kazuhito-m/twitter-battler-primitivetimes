@@ -34,4 +34,4 @@ build/
 
 # node.js 
 node_modules
-/src/main/resouces/static/js/index.js
+src/main/resources/static/js/index.js
