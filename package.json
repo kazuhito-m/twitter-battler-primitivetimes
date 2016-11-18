@@ -11,6 +11,7 @@
   },
   "scripts": {
     "test": "gulp test",
+    "build": "gulp build",
     "clean": "gulp clean",
     "develop": "gulp develop"
   },

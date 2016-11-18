@@ -246,3 +246,11 @@ gulp.task('transpile', function() {
         .pipe(source('index.js'))
         .pipe(gulp.dest(paths.dest_dir));
 });
+
+gulp.task('build', (cb) => {
+    return runSequence(
+        'test',
+        'transpile',
+        cb
+    );
+});
