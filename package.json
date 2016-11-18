@@ -4,19 +4,46 @@
   "description": "Twitter Battler - Primitive Times",
   "main": "index.js",
   "directories": {
-    "doc": "doc"
+    "test": "src/test/js/"
+  },
+  "engines": {
+    // ESLint用の設定。
+    "node": ">=7.0.0"
   },
   "scripts": {
-    "test": "test"
+    "test": "gulp test",
+    "clean": "gulp clean",
+    "develop": "gulp develop"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kazuhito-m/twitter-battler-primitivetimes.git"
   },
-  "author": "kazuhito-m",
+  "author": "kazuhito_m",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kazuhito-m/twitter-battler-primitivetimes/issues"
   },
-  "homepage": "https://github.com/kazuhito-m/twitter-battler-primitivetimes#readme"
+  "homepage": "https://github.com/kazuhito-m/twitter-battler-primitivetimes#readme",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "eslint-plugin-node": "^3.0.3",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-espower": "^1.0.2",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-jsbeautifier": "^2.0.3",
+    "gulp-mocha": "^3.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plato": "^1.0.2",
+    "gulp-plumber": "^1.1.0",
+    "gulp-watch": "^4.3.10",
+    "mkdirp": "^0.5.1",
+    "mocha": "^3.1.2",
+    "node-notifier": "^4.6.1",
+    "power-assert": "^1.4.2",
+    "run-sequence": "^1.2.2",
+    "through2": "^2.0.1"
+  },
+  "dependencies": {}
 }
