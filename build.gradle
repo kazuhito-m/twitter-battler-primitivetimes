@@ -47,3 +47,9 @@ test {
 
 // gulp_test叩くときには、強制的に npm_install を前に実行するように。
 npm_test.dependsOn npm_install
+
+// gradle test の前には、かならず「jsのテスト」を挟む。
+test.dependsOn npm_test
+
+// gradle bootRun の前にも、必ず「jsのトランスパイル」を挟む
+bootRun.dependsOn npm_run_build
