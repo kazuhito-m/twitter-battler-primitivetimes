@@ -1,7 +1,7 @@
 'use strict';
 const gulp = require('gulp');
-const espower = require("gulp-espower");
-const mocha = require("gulp-mocha");
+const espower = require('gulp-espower');
+const mocha = require('gulp-mocha');
 const istanbul = require('gulp-istanbul');
 const del = require('del');
 const mkdirp = require('mkdirp');
@@ -15,6 +15,8 @@ const watch = require('gulp-watch');
 const fs = require('fs');
 const notify = require('gulp-notify');
 const notifier = require('node-notifier');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
 
 // 定数的pathマップ
 const paths = {
@@ -30,7 +32,8 @@ const paths = {
     ps_test_dir: './build/js/power-assert-test/js/',
     coverage_dir: './build/js/coverage',
     report_dir: './build/js/report',
-    format_dir: './build/js/format'
+    format_dir: './build/js/format',
+    dest_dir: './src/main/resources/static/js'
 };
 
 // distディレクトリのクリーンアップ
@@ -231,4 +234,14 @@ gulp.task('develop', () => {
     }, (event) => {
         gulp.start('all-test-with-notify');
     });
+});
+
+// 本チャン出力まわり
+
+gulp.task('transpile', function () {
+    return browserify()
+          .add(paths.main_dir + '/index.js')
+        .bundle()
+        .pipe(source('index.js'))
+        .pipe(gulp.dest(paths.dest_dir));
 });
