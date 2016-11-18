@@ -1,4 +1,5 @@
 'use strict';
+
 const gulp = require('gulp');
 const espower = require('gulp-espower');
 const mocha = require('gulp-mocha');
@@ -128,7 +129,7 @@ gulp.task('format', (cb) => {
 
 // ESLintは「コンパイルがわり」に使う(構文おかしかったらコケてくれるように)
 gulp.task('static-analysis-eslint', () => {
-    return gulp.src([paths.mains])
+    return gulp.src([paths.mains, '!/**/index.js']) // index.jsは「UIの境界」なのｄ「未定義」などあるから除外
         .pipe(eslint({
             useEslintrc: true
         })) // .eslintrc を参照
@@ -238,9 +239,9 @@ gulp.task('develop', () => {
 
 // 本チャン出力まわり
 
-gulp.task('transpile', function () {
+gulp.task('transpile', function() {
     return browserify()
-          .add(paths.main_dir + '/index.js')
+        .add(paths.main_dir + '/index.js')
         .bundle()
         .pipe(source('index.js'))
         .pipe(gulp.dest(paths.dest_dir));
