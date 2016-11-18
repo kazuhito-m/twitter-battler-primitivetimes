@@ -23,3 +23,4 @@
 - [クライアントからCLIで参照](http://qiita.com/sawada_masahiko/items/1f60936c421ecab8dfbf)
 - [CLIでのコマンド一覧](http://qiita.com/rubytomato@github/items/d66d932959d596876ab5)
 - [Dockerで「Redisサーバ」公式イメージ](https://hub.docker.com/_/redis/)
+- [spring-boot-starter-redis と RedisTemplateでやる網羅的なサンプル](http://blog.rakugakibox.net/entry/2015/07/27/spring-boot-with-redis)

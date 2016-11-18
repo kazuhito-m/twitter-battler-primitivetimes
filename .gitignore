@@ -32,3 +32,6 @@ build/
 # what's ?
 /classes/
 
+# node.js 
+node_modules
+src/main/resources/static/js/index.js

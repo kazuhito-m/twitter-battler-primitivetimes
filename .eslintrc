@@ -1,0 +1,11 @@
+{
+  "env" : {
+    "es6": true,  
+    "node": true
+  },
+  "plugins": ["node"],
+  "extends": ["eslint:recommended", "plugin:node/recommended"],
+  "rules": {
+    "comma-dangle": 0
+  }
+}
