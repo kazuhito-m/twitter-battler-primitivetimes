@@ -17,7 +17,12 @@ const fs = require('fs');
 const notify = require('gulp-notify');
 const notifier = require('node-notifier');
 const browserify = require('browserify');
+const babel = require("gulp-babel");
 const source = require('vinyl-source-stream');
+const uglify = require("gulp-uglify");
+const buffer = require("vinyl-buffer");
+const babelify = require('babelify');
+
 
 // 定数的pathマップ
 const paths = {
@@ -240,10 +245,16 @@ gulp.task('develop', () => {
 // 本チャン出力まわり
 
 gulp.task('transpile', function() {
-    return browserify()
-        .add(paths.main_dir + '/index.js')
+    return browserify({
+            entries: paths.main_dir + '/index.js'
+        })
+        .transform(babelify, {
+            presets: ['es2015']
+        })
         .bundle()
         .pipe(source('index.js'))
+        .pipe(buffer())
+        .pipe(uglify()) // uglifyfyでbrowserify内で出来るのだが、圧縮結果が変わるのでここでやる
         .pipe(gulp.dest(paths.dest_dir));
 });
 

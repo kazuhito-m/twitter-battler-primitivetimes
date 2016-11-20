@@ -18,6 +18,10 @@ Twitter Battler - Primitive Times
 
 - TODO
 
+### Devalopment Requirement
+
+- JavaScriptは `es2015` までの記法
+
 ## Usage
 
 以下に「開発時に使えるコマンド」を書きます。

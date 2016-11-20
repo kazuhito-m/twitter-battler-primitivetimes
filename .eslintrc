@@ -1,11 +1,25 @@
 {
   "env" : {
-    "es6": true,  
+    "browser": true,
+    "es6": true,
     "node": true
   },
-  "plugins": ["node"],
+  "parserOptions": {
+    "sourceType": "module",
+  },
+  "plugins": ["node","babel"],
   "extends": ["eslint:recommended", "plugin:node/recommended"],
   "rules": {
-    "comma-dangle": 0
+    "comma-dangle": 0,
+
+    "babel/generator-star-spacing": 2,
+    "babel/new-cap": [2, {"capIsNewExceptions": ["express.Router"]}],
+    "babel/array-bracket-spacing": 2,
+    "babel/object-curly-spacing": 2,
+    "babel/object-shorthand": 2,
+    "babel/arrow-parens": 2,
+    "babel/no-await-in-loop": 2,
+
+    "node/no-unsupported-features": [2, {"version": 7}]
   }
 }
