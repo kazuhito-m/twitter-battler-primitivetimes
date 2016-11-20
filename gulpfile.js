@@ -134,7 +134,7 @@ gulp.task('format', (cb) => {
 
 // ESLintは「コンパイルがわり」に使う(構文おかしかったらコケてくれるように)
 gulp.task('static-analysis-eslint', () => {
-    return gulp.src([paths.mains, '!/**/index.js']) // index.jsは「UIの境界」なのｄ「未定義」などあるから除外
+    return gulp.src([paths.mains])
         .pipe(eslint({
             useEslintrc: true
         })) // .eslintrc を参照
