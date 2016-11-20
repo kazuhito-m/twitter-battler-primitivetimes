@@ -75,7 +75,7 @@ gulp.task('test-mapping-coverage-src', () => {
 });
 
 // テスト実行。その際、テストが成功していればカバレッジレポートを作成。
-gulp.task('unit-test', () => {
+gulp.task('unit-test-nonstop', () => {
     return gulp.src([paths.ps_tests], {
             read: false
         })
@@ -98,6 +98,33 @@ gulp.task('unit-test', () => {
         .pipe(plumber.stop());
 });
 
+// Mochaテストだけするタスク。
+gulp.task('unit-test', () => {
+    return gulp.src([paths.ps_tests], {
+            read: false
+        })
+        .pipe(mocha({
+            reporter: 'list'
+        }));
+});
+
+// カバレッジに取るタスク。
+gulp.task('coverage', () => {
+    return gulp.src([paths.ps_tests], {
+            read: false
+        })
+        .pipe(istanbul.writeReports({
+            reportOpts: {
+                dir: paths.coverage_dir
+            }
+        }))
+        .pipe(istanbul.enforceThresholds({
+            thresholds: {
+                global: 10
+            }
+        }));
+});
+
 gulp.task('test', (cb) => {
     return runSequence(
         'clean',
@@ -107,11 +134,25 @@ gulp.task('test', (cb) => {
         'test-transpile-power-assert',
         'test-mapping-coverage-src',
         'unit-test',
+        'coverage',
         'static-analysis-plato',
         cb
     );
 });
 
+gulp.task('test-for-loop', (cb) => {
+    return runSequence(
+        'clean',
+        'static-analysis-eslint', // コードフォーマットがズタズタにならないため、事前にESLintでチェック。
+        'format',
+        'test-src-copy',
+        'test-transpile-power-assert',
+        'test-mapping-coverage-src',
+        'unit-test-nonstop',
+        'static-analysis-plato',
+        cb
+    );
+});
 
 
 // ソースフォーマット周り
@@ -216,7 +257,7 @@ gulp.task('all-test-with-notify', () => {
         }))
         .pipe(through.obj((file, encoding, callback) => {
             runSequence(
-                ['test'], (error) => {
+                ['test-for-loop'], (error) => {
                     if (error === undefined) {
                         return;
                     }
