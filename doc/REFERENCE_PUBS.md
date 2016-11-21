@@ -53,3 +53,9 @@
 
 - [uglifyify(結局使わないことにしたのだが )](https://github.com/hughsk/uglifyify)
 - [Browserify with gulp](http://blog.revathskumar.com/2016/02/browserify-with-gulp.html)
+
+## Twitter
+
+### Sign in with Twitter
+
+- [PHPで「Sign in with Twitter」を実装する方法](http://www.msng.info/archives/2010/02/sign_in_with_twitter.php)
