@@ -13,6 +13,8 @@
 ## Spring
 
 - [コード上だけでSpringDIする方法(等)](http://www.atmarkit.co.jp/ait/articles/0504/29/news022_2.html)
+- [Spring Boot でプロパティファイルを外部ファイル化する](http://d.hatena.ne.jp/eerga/20150906/1441512269)
+- [HTTPSで動かす](http://qiita.com/yhidai/items/11d50aece86ef0e10a2a)
 
 ## Specs2
 
@@ -59,3 +61,6 @@
 ### Sign in with Twitter
 
 - [PHPで「Sign in with Twitter」を実装する方法](http://www.msng.info/archives/2010/02/sign_in_with_twitter.php)
+- [’Sign in with Twitter’フローの変更](http://api.techmood.jp/2013/03/01/144)
+- []()
+- [認証できないハマリ](http://d.hatena.ne.jp/speg03/20091019/1255957580)
