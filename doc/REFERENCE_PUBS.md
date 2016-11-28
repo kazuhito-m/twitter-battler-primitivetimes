@@ -16,6 +16,10 @@
 - [Spring Boot でプロパティファイルを外部ファイル化する](http://d.hatena.ne.jp/eerga/20150906/1441512269)
 - [HTTPSで動かす](http://qiita.com/yhidai/items/11d50aece86ef0e10a2a)
 
+### Springboot Security
+
+- [Spring Bootで認証を行う方法](http://qiita.com/nvtomo1029/items/8827d95327b647a6cf50)
+
 ## Specs2
 
 - [実行順序ではまらないようにする的なハナシ](http://sui.hateblo.jp/entry/2013/07/21/011958)
@@ -64,3 +68,10 @@
 - [’Sign in with Twitter’フローの変更](http://api.techmood.jp/2013/03/01/144)
 - []()
 - [認証できないハマリ](http://d.hatena.ne.jp/speg03/20091019/1255957580)
+
+### 純然たる「OAuth」
+
+- [おそらくいちばんマッチしてると思われるSpring&Twitter](https://spring.io/guides/gs/accessing-twitter/)
+- [OAuth認証でTwitterを利用するWebアプリケーション（Javaの場合）](http://blog.unfindable.net/archives/1697)
+- [phpの例](http://wauke.org/536)
+- [OAuth 認証の方法と何が起こっているのかとなぜそんなことをしているのか](http://nskw-style.com/2016/wordpress/wp-api/oauth1.html)
