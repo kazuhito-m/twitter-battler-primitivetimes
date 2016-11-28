@@ -35,3 +35,6 @@ build/
 # node.js 
 node_modules
 src/main/resources/static/js/index.js
+
+# idea
+*.iml
