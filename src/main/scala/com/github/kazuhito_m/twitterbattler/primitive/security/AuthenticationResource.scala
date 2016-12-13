@@ -16,8 +16,7 @@ class AuthenticationResource {
 
   @RequestMapping(method = Array(RequestMethod.GET))
   def session(user: Principal): User = {
-    val name = if (user == null) null else user.getName
-    new User(name)
+    User(if (user == null) null else user.getName)
   }
 
   @RequestMapping(method = Array(RequestMethod.DELETE))
