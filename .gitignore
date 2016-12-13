@@ -38,3 +38,6 @@ src/main/resources/static/js/index.js
 
 # idea
 *.iml
+
+# user difinition
+src/main/resources/config/sosial.yml
