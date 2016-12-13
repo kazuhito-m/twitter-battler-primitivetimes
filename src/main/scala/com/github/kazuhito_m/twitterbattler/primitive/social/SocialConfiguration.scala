@@ -8,18 +8,17 @@ import org.springframework.web.context.request.NativeWebRequest
 
 @Configuration
 class SocialConfiguration {
+
+  // https://github.com/spring-projects/spring-social/blob/master/spring-social-config/src/main/java/org/springframework/social/config/annotation/SocialConfiguration.java#L87
   @Bean
-  def socialConfigurerAdapter: SocialConfigurer = {
-    // https://github.com/spring-projects/spring-social/blob/master/spring-social-config/src/main/java/org/springframework/social/config/annotation/SocialConfiguration.java#L87
-    new SocialConfigurer
-  }
+  def socialConfigurerAdapter: SocialConfigurer = new SocialConfigurer
 
   @Bean
   def authSignInAdapter: SignInAdapter = new SignInAdapter() {
 
     def signIn(userId: String, connection: Connection[_], request: NativeWebRequest): String = {
       AuthUtil.authenticate(connection)
-      return null
+      null
     }
 
   }

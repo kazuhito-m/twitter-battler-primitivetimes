@@ -15,12 +15,8 @@ class AuthenticationResource {
   val authenticationManager: AuthenticationManager = null
 
   @RequestMapping(method = Array(RequestMethod.GET))
-  def session(user: Principal): User = {
-    User(if (user == null) null else user.getName)
-  }
+  def session(user: Principal) = User(if (user == null) null else user.getName)
 
   @RequestMapping(method = Array(RequestMethod.DELETE))
-  def logout(session: HttpSession) {
-    session.invalidate()
-  }
+  def logout(session: HttpSession) = session.invalidate()
 }
