@@ -20,6 +20,10 @@
 
 - [Spring Bootで認証を行う方法](http://qiita.com/nvtomo1029/items/8827d95327b647a6cf50)
 
+### Spring Sosial Twitter
+
+[Spring social example](https://www.javacodegeeks.com/2014/06/spring-social-example-on-spring-boot-or-how-i-stopped-worrying-and-loved-autoconfiguration.html)
+
 ## Specs2
 
 - [実行順序ではまらないようにする的なハナシ](http://sui.hateblo.jp/entry/2013/07/21/011958)
