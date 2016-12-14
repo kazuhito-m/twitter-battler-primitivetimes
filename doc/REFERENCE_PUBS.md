@@ -22,7 +22,8 @@
 
 ### Spring Sosial Twitter
 
-[Spring social example](https://www.javacodegeeks.com/2014/06/spring-social-example-on-spring-boot-or-how-i-stopped-worrying-and-loved-autoconfiguration.html)
+- [公式ドキュメント](http://docs.spring.io/spring-social-twitter/docs/1.0.5.RELEASE/reference/html/)
+- [Spring social example](https://www.javacodegeeks.com/2014/06/spring-social-example-on-spring-boot-or-how-i-stopped-worrying-and-loved-autoconfiguration.html)
 
 ## Specs2
 
