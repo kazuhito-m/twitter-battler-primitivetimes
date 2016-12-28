@@ -35,4 +35,8 @@ class SignupController {
     }
     "redirect:/"
   }
+
+  @RequestMapping(value = Array("/signin"))
+  def signin(request: WebRequest) = "redirect:/login.html"
+
 }

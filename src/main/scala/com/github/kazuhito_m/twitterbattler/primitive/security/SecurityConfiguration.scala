@@ -15,10 +15,16 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @throws[Exception]
   override protected def configure(http: HttpSecurity) {
 
+    http.formLogin().loginPage("/login.html").permitAll
+      .and.logout.clearAuthentication(true)
+
     def h2 = http
       .authorizeRequests
-      .antMatchers("/api/session").permitAll
       .antMatchers("/api/**").authenticated
+      .antMatchers("/").authenticated
+      .antMatchers("/**.html").authenticated
+      .antMatchers("/api/session").permitAll
+      .antMatchers("/login.html").permitAll
       .and.asInstanceOf[HttpSecurity]
 
     h2.headers().frameOptions().disable() // for h2
