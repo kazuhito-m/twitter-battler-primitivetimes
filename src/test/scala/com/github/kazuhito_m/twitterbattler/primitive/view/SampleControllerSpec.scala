@@ -5,7 +5,7 @@ import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class SampleControllerTest extends Specification {
+class SampleControllerSpec extends Specification {
 
   "Scalaでテスト書けるかのテスト" should {
 
