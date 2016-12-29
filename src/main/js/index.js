@@ -1,37 +1,22 @@
 'use strict';
 
-const page_main = require('./page_main');
+// クラスインポート。
+const HtmlUtils = require('./html_utils');
 
-/**
- * metaタグを名前指定でcontent値を取得する。
- */
-function getMetaContent(name) {
-    var tags = document.getElementsByTagName('meta');
-    for (let i = 0; i < tags.length; i++) {
-        let meta = tags[i];
-        if (meta.getAttribute("name") === name) {
-            return meta.getAttribute("content");
-        }
-    }
-    return "";
-}
-
-/**
- * メタタグから「現在の画面ID（画面の抽象名）を取得する。
- */
-function getScreenId() {
-    return getMetaContent('screanId');
-}
+const MenuPage = require('./page/menu');
 
 /** HTMLとの境界、エントリポイント。 */
 window.onload = function() {
-    const screenId = getScreenId();
+    const html = new HtmlUtils();
+    const screenId = html.getScreenId();
+    let page;
     switch (screenId) {
         case 'main':
-            page_main();
+            page = new MenuPage();
             break;
         default:
-            alert('Invalid screanId');
+            alert('Invalid screenId');
             break;
     }
+    page.startUp();
 }
