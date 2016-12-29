@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.security
+package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.security
 
 import java.security.Principal
 import javax.servlet.http.HttpSession

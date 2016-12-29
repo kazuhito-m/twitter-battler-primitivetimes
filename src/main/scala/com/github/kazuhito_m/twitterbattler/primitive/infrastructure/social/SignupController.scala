@@ -1,6 +1,6 @@
-package com.github.kazuhito_m.twitterbattler.primitive.social
+package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.social
 
-import com.github.kazuhito_m.twitterbattler.primitive.security.AuthUtil
+import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.security.AuthUtil
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.social.connect.web.ProviderSignInUtils

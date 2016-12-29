@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.social
+package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.social
 
 import org.springframework.social.config.annotation.SocialConfigurerAdapter
 import org.springframework.social.connect.ConnectionFactoryLocator

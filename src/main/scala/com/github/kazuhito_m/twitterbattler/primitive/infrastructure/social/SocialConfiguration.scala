@@ -1,6 +1,6 @@
-package com.github.kazuhito_m.twitterbattler.primitive.social
+package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.social
 
-import com.github.kazuhito_m.twitterbattler.primitive.security.AuthUtil
+import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.security.AuthUtil
 import org.springframework.context.annotation.{Bean, Configuration}
 import org.springframework.social.connect.Connection
 import org.springframework.social.connect.web.SignInAdapter

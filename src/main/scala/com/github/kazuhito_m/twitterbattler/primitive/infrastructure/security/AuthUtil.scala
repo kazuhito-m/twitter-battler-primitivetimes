@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.security
+package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.security
 
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken

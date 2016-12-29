@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.security
+package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.security
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration
