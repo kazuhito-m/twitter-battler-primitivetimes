@@ -9,6 +9,9 @@ class ServerUtils {
         this._xhr = new XMLHttpRequest();
     }
 
+    /**
+     * URL指定でサーバから結果をJSONオブジェクトにして返す。
+     */
     getJson(url) {
         const xhr = this._xhr;
         xhr.open('POST', url, false);

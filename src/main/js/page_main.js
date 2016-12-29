@@ -5,7 +5,6 @@
 
 const ServerUtils = require('./server_utils');
 
-
 function setTextById(id, text) {
     const target = document.getElementById(id);
     target.innerHTML = text;
