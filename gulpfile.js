@@ -295,7 +295,8 @@ gulp.task('transpile', function() {
         .bundle()
         .pipe(source('index.js'))
         .pipe(buffer())
-        .pipe(uglify()) // uglifyfyでbrowserify内で出来るのだが、圧縮結果が変わるのでここでやる
+        // TODO 可読性重視で一時的に殺す。本番になれば蘇らす。
+        //        .pipe(uglify()) // uglifyfyでbrowserify内で出来るのだが、圧縮結果が変わるのでここでやる
         .pipe(gulp.dest(paths.dest_dir));
 });
 
