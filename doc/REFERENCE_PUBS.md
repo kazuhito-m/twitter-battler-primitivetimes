@@ -15,6 +15,7 @@
 - [コード上だけでSpringDIする方法(等)](http://www.atmarkit.co.jp/ait/articles/0504/29/news022_2.html)
 - [Spring Boot でプロパティファイルを外部ファイル化する](http://d.hatena.ne.jp/eerga/20150906/1441512269)
 - [HTTPSで動かす](http://qiita.com/yhidai/items/11d50aece86ef0e10a2a)
+- [SpringBootにおけるログ設定](http://qiita.com/tag1216/items/b898b8fb58920bf335b2)
 
 ### Springboot Security
 
@@ -24,6 +25,10 @@
 
 - [公式ドキュメント](http://docs.spring.io/spring-social-twitter/docs/1.0.5.RELEASE/reference/html/)
 - [Spring social example](https://www.javacodegeeks.com/2014/06/spring-social-example-on-spring-boot-or-how-i-stopped-worrying-and-loved-autoconfiguration.html)
+
+### Spring Data Redis
+
+- [わかりやすい資料](http://www.slideshare.net/yoshidanaohiro52/spring-framework-boot-data-spring-data-redis)
 
 ## Specs2
 
@@ -64,6 +69,13 @@
 
 - [uglifyify(結局使わないことにしたのだが )](https://github.com/hughsk/uglifyify)
 - [Browserify with gulp](http://blog.revathskumar.com/2016/02/browserify-with-gulp.html)
+
+### UnitTest関連
+
+- [XMLHttpRequestのMock化](https://www.npmjs.com/package/fake-request)
+- []()
+- []()
+- []()
 
 ## Twitter
 
