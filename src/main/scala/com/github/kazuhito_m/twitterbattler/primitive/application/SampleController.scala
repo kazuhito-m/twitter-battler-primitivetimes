@@ -14,7 +14,6 @@ class SampleController {
   @RequestMapping(value = Array("test"), method = Array(RequestMethod.GET))
   def data = "hoge"
 
-
   @RequestMapping(value = Array("redisgetsample"), method = Array(RequestMethod.GET))
   def redisGetSample(): String = redisRepo.getSampleValue
 
