@@ -29,7 +29,7 @@ const paths = {
     mains: './src/main/js/*.js',
     main_dir: './src/main/js/',
     tests: './src/test/js/*.js',
-    srcs: './src/*/js/**',
+    srcs: './src/*/js/**/*',
     src_dir: './src',
     work_dir: './build/js/',
     work_mains: './build/js/main/js/*.js',
