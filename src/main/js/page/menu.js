@@ -1,6 +1,6 @@
 'use strict';
 
-const ServerUtils = require('../server_utils');
+const ServerUtils = require('../util/server_utils');
 const HtmlUtils = require('../util/html_utils');
 
 /*
