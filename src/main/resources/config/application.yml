@@ -1,8 +1,8 @@
 spring:
   social:
     twitter:
-      appId: x
-      appSecret: x
+      appId: mxsGonBL83TVN11yjKS9Q
+      appSecret: WrqFsVdaGkT89VmLT2xvFSrQNyE0lq2CuSjyxiEI7c
       auto-connection-views: true
   redis:
     host: localhost

@@ -1,8 +1,10 @@
 'use strict';
-
 /*
  * メインメニュー画面(いまのところindex.html)のクライアントロジック。
  */
+
+const ServerUtils = require('./server_utils');
+
 
 function setTextById(id, text) {
     const target = document.getElementById(id);
@@ -11,8 +13,15 @@ function setTextById(id, text) {
 
 /** メインメニュー画面のOnLoad */
 module.exports = function() {
+
+    const utils = new ServerUtils();
+
+    // プレイヤー情報を取得。
+    const player = utils.getJson('api/game/getPlayer');
+    console.log(player)
+
     // 初期表示系
-    setTextById("playerId", "よくわからないがまずはJS側から表示できるまで。");
-    setTextById("playerLv", "9999");
+    setTextById("playerId", player.id);
+    setTextById("playerLv", player.level);
 
 }

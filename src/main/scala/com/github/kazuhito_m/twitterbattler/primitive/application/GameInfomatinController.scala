@@ -21,11 +21,7 @@ class GameInformationController {
   private val gameInfoService: GameInformationService = null
 
   @RequestMapping(value = Array("getPlayer"), method = Array(GET, POST))
-  //  @RequestMapping(value = Array("getPlayer"), method = Array(POST, GET), consumes = Array(MediaType.APPLICATION_JSON_UTF8_VALUE))
-//  @ResponseBody
-//  def getPlayer(user: Principal) = gameInfoService.getPlayer(user.getName)
   def getPlayer(user: Principal) = {
-    log.debug("まずは、メソッドまで届くかどうか")
     gameInfoService.getPlayer(user.getName)
   }
 

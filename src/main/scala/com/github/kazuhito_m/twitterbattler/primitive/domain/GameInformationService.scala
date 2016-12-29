@@ -23,7 +23,7 @@ class GameInformationService {
   def getPlayer(id: String): Battler = {
     log.debug("サービス内のgetPlayerに到達、idは" + id)
     // TODO 仮実装、その改修。
-    return new Battler(
+    Battler(
       "テストのIDは" + id
       , "テキトーなプロフィーうr"
       , 1
