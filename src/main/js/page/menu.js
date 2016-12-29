@@ -11,11 +11,11 @@ class MenuPage {
     /** メインメニュー画面のOnLoad */
     startUp() {
 
-        const utils = new ServerUtils();
+        const server = new ServerUtils();
         const html = new HtmlUtils();
 
         // プレイヤー情報を取得。
-        const player = utils.getJson('api/game/getPlayer');
+        const player = server.getJson('api/game/getPlayer');
         console.log(player)
 
         // 初期表示系

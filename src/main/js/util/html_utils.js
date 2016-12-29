@@ -34,7 +34,6 @@ class HtmlUtils {
         target.innerHTML = text;
     }
 
-
 }
 
 module.exports = HtmlUtils;
