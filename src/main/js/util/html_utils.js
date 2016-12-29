@@ -6,7 +6,7 @@
 class HtmlUtils {
 
     constructor(doc) {
-        if (doc == null) {
+        if (doc === null) {
             this._document = window.document;
         } else {
             this._document = doc;

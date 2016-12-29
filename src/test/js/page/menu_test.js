@@ -9,6 +9,27 @@ const MenuPage = require('../../../main/js/page/menu');
 const HtmlUtils = require('../../../main/js/util/html_utils');
 
 /**
+ * HTMLのdomモデルをMockingしたものを返す。
+ */
+function createMockDocument() {
+    const mockBrowser = new MockBrowser();
+    const doc = mockBrowser.getDocument();
+    const body = doc.getElementsByTagName("body").item(0);
+
+    const span1 = doc.createElement('span');
+    span1.id = 'playerId';
+    span1.innerHTML = "なんかかいておこう。";
+    body.appendChild(span1);
+
+    const span2 = doc.createElement('span');
+    span2.setAttribute('id', 'playerLv');
+    span2.innerHTML = "なんｋなかいておこう２";
+    body.appendChild(span2);
+
+    return doc;
+}
+
+/**
  * メインメニュー画面(いまのところindex.html)のクライアントロジックのテスト。
  */
 describe('MenuPage', () => {
@@ -44,20 +65,8 @@ describe('MenuPage', () => {
             responseHeaders: 'content-type: text/json'
         });
 
-        // ブラウザのMocking。
-        const mockBrowser = new MockBrowser();
-        const doc = mockBrowser.getDocument();
-        const body = doc.getElementsByTagName("body").item(0);
-
-        const span1 = doc.createElement('span');
-        span1.id = 'playerId';
-        span1.innerHTML = "なんかかいておこう。";
-        body.appendChild(span1);
-
-        const span2 = doc.createElement('span');
-        span2.setAttribute('id', 'playerLv');
-        span2.innerHTML = "なんｋなかいておこう２";
-        body.appendChild(span2);
+        // ブラウザ中のHTMLをMocking。
+        const doc = createMockDocument();
 
         // 対象作成。
         const sut = new MenuPage(new HtmlUtils(doc));
@@ -66,8 +75,8 @@ describe('MenuPage', () => {
         sut.startUp();
 
         // 検証
-        assert.equal(span1.innerHTML, 'test_id');
-        assert.equal(span2.innerHTML, '999');
+        assert.equal(doc.getElementById('playerId').innerHTML, 'test_id');
+        assert.equal(doc.getElementById('playerLv').innerHTML, '999');
 
     });
 
