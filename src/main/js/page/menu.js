@@ -8,11 +8,26 @@ const HtmlUtils = require('../util/html_utils');
  */
 class MenuPage {
 
-    /** メインメニュー画面のOnLoad */
+    constructor(serverUtils = null, htmlUtils = null) {
+        if (serverUtils == null) {
+            this._server = new ServerUtils();
+        } else {
+            this._server = serverUtils;
+        }
+        if (htmlUtils == null) {
+            this._html = new HtmlUtils();
+        } else {
+            this._html = htmlUtils;
+        }
+    }
+
+    /**
+     * メインメニュー画面のOnLoad
+     */
     startUp() {
 
-        const server = new ServerUtils();
-        const html = new HtmlUtils();
+        const server = this._server;
+        const html = this._html;
 
         // プレイヤー情報を取得。
         const player = server.getJson('api/game/getPlayer');
