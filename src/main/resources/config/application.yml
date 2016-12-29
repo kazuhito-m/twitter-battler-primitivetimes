@@ -1,8 +1,8 @@
 spring:
   social:
     twitter:
-      appId: mxsGonBL83TVN11yjKS9Q
-      appSecret: WrqFsVdaGkT89VmLT2xvFSrQNyE0lq2CuSjyxiEI7c
+      appId: x
+      appSecret: x
       auto-connection-views: true
   redis:
     host: localhost
@@ -17,3 +17,4 @@ spring:
 security:
   basic:
     enabled: false
+logging.level.com.github.kazuhito_m.twitterbattler.primitive: DEBUG
