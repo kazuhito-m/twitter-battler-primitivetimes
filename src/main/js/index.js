@@ -1,7 +1,7 @@
 'use strict';
 
 // クラスインポート。
-const HtmlUtils = require('./html_utils');
+const HtmlUtils = require('./util/html_utils');
 
 const MenuPage = require('./page/menu');
 

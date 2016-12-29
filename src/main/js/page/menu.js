@@ -1,7 +1,7 @@
 'use strict';
 
 const ServerUtils = require('../server_utils');
-const HtmlUtils = require('../html_utils');
+const HtmlUtils = require('../util/html_utils');
 
 /*
  * メインメニュー画面(いまのところindex.html)のクライアントロジック。
