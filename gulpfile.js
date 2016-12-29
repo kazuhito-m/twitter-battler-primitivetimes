@@ -285,7 +285,11 @@ gulp.task('develop', () => {
 
 // 本チャン出力まわり
 
-gulp.task('transpile', function() {
+gulp.task('clean_build_result', (cb) => {
+    return del([paths.dest_dir + '/index.js'], cb);
+});
+
+gulp.task('transpile', () => {
     return browserify({
             entries: paths.main_dir + '/index.js'
         })
@@ -302,6 +306,7 @@ gulp.task('transpile', function() {
 
 gulp.task('build', (cb) => {
     return runSequence(
+        'clean_build_result',
         'test',
         'transpile',
         cb
