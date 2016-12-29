@@ -5,10 +5,19 @@
  */
 class HtmlUtils {
 
+    constructor(doc) {
+        if (doc == null) {
+            this._document = window.document;
+        } else {
+            this._document = doc;
+        }
+    }
+
     /**
      * metaタグを名前指定でcontent値を取得する。
      */
     getMetaContent(name) {
+        const document = this._document;
         const tags = document.getElementsByTagName('meta');
         for (let i = 0; i < tags.length; i++) {
             let meta = tags[i];
@@ -30,6 +39,7 @@ class HtmlUtils {
      * ID指定でDOMオブジェクトに値をセットする。
      */
     setTextById(id, text) {
+        const document = this._document;
         const target = document.getElementById(id);
         target.innerHTML = text;
     }

@@ -1,21 +1,74 @@
 'use strict';
 
 const assert = require('power-assert');
-const MenuPage = require('../../main/js/page/menu');
+
+const FakeRequest = require('fake-request');
+const MockBrowser = require('mock-browser').mocks.MockBrowser;
+
+const MenuPage = require('../../../main/js/page/menu');
+const HtmlUtils = require('../../../main/js/util/html_utils');
 
 /**
  * メインメニュー画面(いまのところindex.html)のクライアントロジックのテスト。
  */
 describe('MenuPage', () => {
 
+    const AbstractBrowser = require('mock-browser').delegates.AbstractBrowser;
+
+    before((done) => {
+        FakeRequest.mock();
+        done();
+    });
+    beforeEach((done) => {
+        FakeRequest.reset();
+        done();
+    });
+    after((done) => {
+        FakeRequest.restore();
+        done();
+    });
+
+    // テスト開始。
+
     it('とりあえずnew出来る(コンストラクタのテスト)', () => {
-        const sut = new MenuPage();
+        const sut = new MenuPage(new HtmlUtils(new MockBrowser()));
     });
 
     it('MockingしたUtilityオブジェクトの呼び出しを確認', () => {
-        class MockServerUtils {}
-        class MockHtmlUtils {}
-        const sut = new MenuPage();
+
+        // サーバ送信のMocking。
+        FakeRequest.respondTo('api/game/getPlayer', {
+            readyState: 4,
+            status: 200,
+            responseText: '{"id":"test_id","level":999}',
+            responseHeaders: 'content-type: text/json'
+        });
+
+        // ブラウザのMocking。
+        const mockBrowser = new MockBrowser();
+        const doc = mockBrowser.getDocument();
+        const body = doc.getElementsByTagName("body").item(0);
+
+        const span1 = doc.createElement('span');
+        span1.id = 'playerId';
+        span1.innerHTML = "なんかかいておこう。";
+        body.appendChild(span1);
+
+        const span2 = doc.createElement('span');
+        span2.setAttribute('id', 'playerLv');
+        span2.innerHTML = "なんｋなかいておこう２";
+        body.appendChild(span2);
+
+        // 対象作成。
+        const sut = new MenuPage(new HtmlUtils(doc));
+
+        // 実行
+        sut.startUp();
+
+        // 検証
+        assert.equal(span1.innerHTML, 'test_id');
+        assert.equal(span2.innerHTML, '999');
+
     });
 
 });

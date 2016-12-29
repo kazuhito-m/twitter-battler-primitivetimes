@@ -8,17 +8,14 @@ const HtmlUtils = require('../util/html_utils');
  */
 class MenuPage {
 
-    constructor(serverUtils = null, htmlUtils = null) {
-        if (serverUtils == null) {
-            this._server = new ServerUtils();
-        } else {
-            this._server = serverUtils;
-        }
+    constructor(htmlUtils = null) {
+        // テスト時にMockして動かせるように。
         if (htmlUtils == null) {
             this._html = new HtmlUtils();
         } else {
             this._html = htmlUtils;
         }
+        this._server = new ServerUtils();
     }
 
     /**
