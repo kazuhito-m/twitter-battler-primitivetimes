@@ -11,6 +11,7 @@
   "extends": ["eslint:recommended", "plugin:node/recommended"],
   "rules": {
     "comma-dangle": 0,
+    "no-console": 1,
 
     "babel/generator-star-spacing": 2,
     "babel/new-cap": [2, {"capIsNewExceptions": ["express.Router"]}],
