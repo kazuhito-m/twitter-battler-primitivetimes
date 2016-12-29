@@ -18,6 +18,10 @@ apply plugin: 'spring-boot'
 apply plugin: 'idea'
 apply plugin: 'com.moowork.node'
 
+// 消す予定
+apply plugin: 'java'
+
+
 jar {
     baseName = 'twitter-battler-primitivetimes'
     version = '0.0.1-SNAPSHOT'
@@ -33,6 +37,11 @@ dependencies {
     compile 'org.scala-lang:scala-library:2.11.8'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-redis'
+
+    // sosial and security
+    compile 'org.springframework.boot:spring-boot-devtools'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-social-twitter'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.specs2:specs2-core_2.11:3.8.6'

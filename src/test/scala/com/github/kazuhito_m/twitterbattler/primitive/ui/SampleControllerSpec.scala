@@ -1,11 +1,12 @@
-package com.github.kazuhito_m.twitterbattler.primitive.view
+package com.github.kazuhito_m.twitterbattler.primitive.ui
 
+import com.github.kazuhito_m.twitterbattler.primitive.application.SampleController
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class SampleControllerTest extends Specification {
+class SampleControllerSpec extends Specification {
 
   "Scalaでテスト書けるかのテスト" should {
 

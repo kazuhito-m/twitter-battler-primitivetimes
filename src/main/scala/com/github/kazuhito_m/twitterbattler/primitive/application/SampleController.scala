@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.view
+package com.github.kazuhito_m.twitterbattler.primitive.application
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.SampleRedisRepository
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,38 +1,41 @@
 package com.github.kazuhito_m.twitterbattler.primitive.domain
 
-import com.github.kazuhito_m.twitterbattler.primitive.fw.TestHelper._
+import com.github.kazuhito_m.twitterbattler.primitive.ConfigForTest
+import org.hamcrest.CoreMatchers._
+import org.junit.Assert.assertThat
+import org.junit._
 import org.junit.runner.RunWith
-import org.specs2.mutable.Specification
-import org.specs2.runner.JUnitRunner
-import org.specs2.specification.BeforeEach
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.junit4.SpringRunner
 
-@RunWith(classOf[JUnitRunner])
-class SampleRedisRepositoryTest extends Specification with BeforeEach {
+@RunWith(classOf[SpringRunner])
+@SpringBootTest(classes = Array(classOf[ConfigForTest]))
+class SampleRedisRepositoryTest {
 
-  // befere -> test という風に実行順を保証する記述。
-  sequential
+  @Autowired
+  var sut: SampleRedisRepository = null
 
-  val sut = beanBy(classOf[SampleRedisRepository])
-
-  def before = {
+  @Before
+  def setUp = {
     sut.clearSampleValue // 初期設定
   }
 
-  "サンプルのドメインクラスのお試しテスト" should {
+  @Test
+  def 初期状態はnull(): Unit = {
+    assertThat(sut.getSampleValue, is(nullValue))
+  }
 
-    "初期状態はnull" in {
-      sut.getSampleValue must beNull
-    }
+  @Test
+  def 値を放り込んで取得できる(): Unit = {
+    sut.clearSampleValue
+    // 初期設定
+    val expect = "Redisから代表的な値を取ってくることが出来る"
 
-    "値を放り込んで、取得できる" in {
-      val expect = "Redisから代表的な値を取ってくることが出来る"
+    sut.setSampleValue(expect)
+    val actual = sut.getSampleValue
 
-      sut.setSampleValue(expect)
-      val actual = sut.getSampleValue
-
-      actual must equalTo(expect)
-    }
-
+    assertThat(actual, is(expect))
   }
 
 }
