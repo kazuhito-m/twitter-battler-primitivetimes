@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.social
+package com.github.kazuhito_m.twitterbattler.primitive.view
 
 import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.security.AuthUtil
 import org.slf4j.{Logger, LoggerFactory}
