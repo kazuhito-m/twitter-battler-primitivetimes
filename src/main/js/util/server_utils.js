@@ -18,7 +18,6 @@ class ServerUtils {
         xhr.send();
 
         const jsonText = xhr.responseText;
-
         const jsonObj = JSON.parse(jsonText);
 
         return jsonObj;
