@@ -28,11 +28,19 @@ class MenuPage {
 
         // プレイヤー情報を取得。
         const player = server.getJson('api/game/getPlayer');
-        console.log(player)
 
         // 初期表示系
+        html.setImageSrcById("playerImage", player.imageUrl);
+
         html.setTextById("playerId", player.id);
+        html.setTextById("playerName", player.screenName);
+
         html.setTextById("playerLv", player.level);
+        html.setTextById("playerAttackPoint", player.attackPoint);
+        html.setTextById("playerDefensePoint", player.defensePoint);
+        html.setTextById("playerSpeedPoint", player.speedPoint);
+        html.setTextById("playerMaxHitPoint", player.maxHitPoint);
+        html.setTextById("playerMaxSpecialPoint", player.maxSpecialPoint);
 
     }
 

@@ -41,7 +41,16 @@ class HtmlUtils {
     setTextById(id, text) {
         const document = this._document;
         const target = document.getElementById(id);
-        target.innerHTML = text;
+        target.textContent = text;
+    }
+
+    /**
+     * ID指定でimgタグのsrcにurlにセットする。
+     */
+    setImageSrcById(id, imageUrl) {
+        const document = this._document;
+        const target = document.getElementById(id);
+        target.src = imageUrl;
     }
 
 }

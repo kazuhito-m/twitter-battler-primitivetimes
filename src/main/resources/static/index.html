@@ -2,25 +2,87 @@
 <html lang="ja">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="screenId" content="main">
     <title>Twitter Buttler - メインメニュー</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="css/layout.css" rel="stylesheet"/>
+    <link href="css/prettify.css" rel="stylesheet"/>
+    <style type="text/css">body {padding: 5px 0 5px 0;}</style>
 </head>
 <body>
 
-<strong> PlayerId : <span id="playerId"></span> , Level : <span id="playerLv"></span></strong>
-
-<div id="container">
+<div class="container">
+    <header class="header">
+        <h1>Twitter Battler メインメニュー</h1>
+    </header>
+    <p>おつかれの場合は下のボタンからどうぞ。</p>
     <form action="/logout" method="post">
-        <h1>Twitter Buttler メインメニュー</h1>
-        <p>おつかれの場合は下のボタンからどうぞ。</p>
         <button type="submit">SignOut</button>
-    </form>
+    </form></div>
+
+<section id="status">
+
+    <div class="container-fluid">
+
+        <div class="page-header">
+            <h2>現在のステータス</h2>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <table id="sample" class="table-striped table-bordered table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th>つよさ</th>
+                        <th><img id="playerImage" src=""></th>
+                    </tr>
+                    </thead>
+                    <tbody id="workResultDetails">
+                    <tr>
+                        <td>なまえ</td>
+                        <td><span id="playerId"></span> ( <span id="playerName"></span> )</td>
+                    </tr>
+                    <tr>
+                        <td>レベル</td>
+                        <td><span id="playerLv"></span></td>
+                    </tr>
+                    <tr>
+                        <td>こうげき力</td>
+                        <td><span id="playerAttackPoint"></span></td>
+                    </tr>
+                    <tr>
+                        <td>しゅび力</td>
+                        <td><span id="playerDefensePoint"></span></td>
+                    </tr>
+                    <tr>
+                        <td>すばやさ</td>
+                        <td><span id="playerSpeedPoint"></span></td>
+                    </tr>
+                    <tr>
+                        <td>さいだいHP</td>
+                        <td><span id="playerMaxHitPoint"></span></td>
+                    </tr>
+                    <tr>
+                        <td>さいだいSP</td>
+                        <td><span id="playerMaxSpecialPoint"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<div class="container">
+    <footer class="footer">
+        <p>Version: <span id="appVer">取れない場合これを表示する</span></p>
+    </footer>
 </div>
 
 </body>

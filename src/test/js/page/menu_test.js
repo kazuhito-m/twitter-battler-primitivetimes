@@ -16,15 +16,18 @@ function createMockDocument() {
     const doc = mockBrowser.getDocument();
     const body = doc.getElementsByTagName("body").item(0);
 
-    const span1 = doc.createElement('span');
-    span1.id = 'playerId';
-    span1.innerHTML = "なんかかいておこう。";
-    body.appendChild(span1);
+    const ids = ['playerId', 'playerName', 'playerLv', 'playerAttackPoint', 'playerDefensePoint', 'playerSpeedPoint', 'playerMaxHitPoint', 'playerMaxSpecialPoint'];
 
-    const span2 = doc.createElement('span');
-    span2.setAttribute('id', 'playerLv');
-    span2.innerHTML = "なんｋなかいておこう２";
-    body.appendChild(span2);
+    for (let i = 0, len = ids.length; i < len; i++) {
+        const span = doc.createElement('span');
+        span.id = ids[i];
+        span.innerHTML = "なんかかいておこう。" + i;
+        body.appendChild(span);
+    }
+
+    const img = doc.createElement('img');
+    img.setAttribute('id', 'playerImage');
+    body.appendChild(img);
 
     return doc;
 }
