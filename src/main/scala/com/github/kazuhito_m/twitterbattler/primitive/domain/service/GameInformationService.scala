@@ -1,7 +1,10 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain
+package com.github.kazuhito_m.twitterbattler.primitive.domain.service
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.entity.Battler
+import com.github.kazuhito_m.twitterbattler.primitive.domain.factory.BattlerFactory
+import com.github.kazuhito_m.twitterbattler.primitive.domain.repository.TwitterRepository
 import org.slf4j.{Logger, LoggerFactory}
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 /**
@@ -14,6 +17,9 @@ class GameInformationService {
 
   protected val log: Logger = LoggerFactory.getLogger(classOf[GameInformationService])
 
+  @Autowired
+  val twitterRepository: TwitterRepository = null
+
   /**
     * プレイヤー情報を取得する。
     *
@@ -21,17 +27,9 @@ class GameInformationService {
     * @return 情報をつめたヤツ。
     */
   def getPlayer(id: String): Battler = {
-    log.debug("サービス内のgetPlayerに到達、idは" + id)
-    // TODO 仮実装、その改修。
-    Battler(
-      "テストのIDは" + id
-      , "テキトーなプロフィーうr"
-      , 1
-      , 12
-      , 5
-      , 5
-      , 3
-    )
+    // TODO Redisキャッシュ処理。
+    val player = BattlerFactory.create(twitterRepository.getProfile(id))
+    player
   }
 
 }

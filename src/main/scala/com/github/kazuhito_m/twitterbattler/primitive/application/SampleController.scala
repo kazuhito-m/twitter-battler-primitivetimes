@@ -1,6 +1,6 @@
 package com.github.kazuhito_m.twitterbattler.primitive.application
 
-import com.github.kazuhito_m.twitterbattler.primitive.domain.SampleRedisRepository
+import com.github.kazuhito_m.twitterbattler.primitive.domain.repository.SampleRedisRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod, RestController}
 

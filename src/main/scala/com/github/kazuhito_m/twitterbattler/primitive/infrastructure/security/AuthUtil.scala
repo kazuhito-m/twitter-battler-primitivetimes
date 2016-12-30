@@ -13,9 +13,9 @@ object AuthUtil {
 
   def authenticate(connection: Connection[_]) {
     val userProfile = connection.fetchUserProfile
-    val username = userProfile.getUsername
-    val authentication = new UsernamePasswordAuthenticationToken(username, null, null)
+    val id = userProfile.getUsername
+    val authentication = new UsernamePasswordAuthenticationToken(id, null, null)
     SecurityContextHolder.getContext.setAuthentication(authentication)
-    log.info("User " + userProfile.getFirstName + " " + userProfile.getLastName + " connected.")
+    log.debug("User " + id + "(" + userProfile.getFirstName + ") connected.")
   }
 }
