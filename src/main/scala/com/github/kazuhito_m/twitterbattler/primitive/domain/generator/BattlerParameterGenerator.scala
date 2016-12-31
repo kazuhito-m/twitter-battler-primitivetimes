@@ -13,24 +13,24 @@ trait BattlerParameterGenerator {
   /**
     * Twitterアカウントの情報からこのゲームのバトラーのパラメータを生成する。
     *
-    * @param profile         Twitterのプロファイル。
+    * @param twitter         Twitterのプロファイル。
     * @param firstSignUpDate このゲーム開始(最初にログインした)時刻。
     */
-  def generateBattler(profile: TwitterProfile, firstSignUpDate: Date): Battler = {
-    Battler(
-      profile.getScreenName
-      , profile.getName
-      , profile.getDescription
-      , calculateBattlerLevel(profile)
-      , calculateMaxHitPoint(profile)
-      , calculateMaxSpecialPoint(profile)
-      , calculateAttackPoint(profile)
-      , calculateDefensePoint(profile)
-      , calculateSpeedPoint(profile)
-      , profile.getProfileImageUrl
-      , firstSignUpDate
-      , new Date()
-    )
+  def generateBattler(twitter: TwitterProfile, firstSignUpDate: Date): Battler = {
+    val battler = new Battler()
+    battler.id = twitter.getName
+    battler.screenName = twitter.getScreenName
+    battler.biography = twitter.getDescription
+    battler.level = calculateBattlerLevel(twitter)
+    battler.maxHitPoint = calculateMaxHitPoint(twitter)
+    battler.maxSpecialPoint = calculateMaxSpecialPoint(twitter)
+    battler.attackPoint = calculateAttackPoint(twitter)
+    battler.defensePoint = calculateDefensePoint(twitter)
+    battler.speedPoint = calculateSpeedPoint(twitter)
+    battler.imageUrl = twitter.getProfileImageUrl
+    battler.firstSignUpDate = firstSignUpDate
+    battler.generateDate = new Date()
+    battler
   }
 
   /**

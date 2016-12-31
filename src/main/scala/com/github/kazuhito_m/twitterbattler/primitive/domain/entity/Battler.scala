@@ -1,6 +1,5 @@
 package com.github.kazuhito_m.twitterbattler.primitive.domain.entity
 
-
 import java.util.Date
 
 import org.springframework.data.annotation.Id
@@ -14,17 +13,19 @@ import scala.beans.BeanProperty
   * ゲーム内での戦闘キャラクター。
   */
 @RedisHash("battler")
-case class Battler(
-                    @BeanProperty @Id id: String
-                    , @BeanProperty screenName: String
-                    , @BeanProperty biography: String
-                    , @BeanProperty level: Int
-                    , @BeanProperty maxHitPoint: Long
-                    , @BeanProperty maxSpecialPoint: Long
-                    , @BeanProperty attackPoint: Long
-                    , @BeanProperty defensePoint: Long
-                    , @BeanProperty speedPoint: Long
-                    , @BeanProperty imageUrl: String
-                    , @BeanProperty firstSignUpDate: Date
-                    , @BeanProperty generateDate: Date
-                  )
+class Battler extends Serializable {
+
+  @BeanProperty @Id var id: String = null
+  @BeanProperty var screenName: String = ""
+  @BeanProperty var biography: String = ""
+  @BeanProperty var level: Int = 0
+  @BeanProperty var maxHitPoint: Long = 0L
+  @BeanProperty var maxSpecialPoint: Long = 0L
+  @BeanProperty var attackPoint: Long = 0L
+  @BeanProperty var defensePoint: Long = 0L
+  @BeanProperty var speedPoint: Long = 0L
+  @BeanProperty var imageUrl: String = ""
+  @BeanProperty var firstSignUpDate: Date = null
+  @BeanProperty var generateDate: Date = null
+
+}

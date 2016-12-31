@@ -68,6 +68,21 @@ class GameInformationRepositoryTest {
 
   // ユティリティ
 
-  def createSampleBattler(id: String, name: String) = Battler(id, name, "紹介", 1, 2, 3, 4, 5, 6, "http://example.com", new Date(), new Date())
+  def createSampleBattler(id: String, name: String) = {
+    val battler = new Battler()
+    battler.id = id
+    battler.screenName = name
+    battler.biography = "紹介文"
+    battler.level = 1
+    battler.maxHitPoint = 2
+    battler.maxSpecialPoint = 3
+    battler.attackPoint = 4
+    battler.defensePoint = 5
+    battler.speedPoint = 6
+    battler.imageUrl = "http://example.com"
+    battler.firstSignUpDate = new Date()
+    battler.generateDate = new Date()
+    battler
+  }
 
 }
