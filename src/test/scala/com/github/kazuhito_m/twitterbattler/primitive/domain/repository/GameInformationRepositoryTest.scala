@@ -48,6 +48,7 @@ class GameInformationRepositoryTest {
     assertThat(actual, is(nullValue))
   }
 
+  // ユティリティ
 
   @Test
   def redis中にBattlerオブジェクトが存在するかを調べることが出来る(): Unit = {
@@ -65,8 +66,6 @@ class GameInformationRepositoryTest {
     // 検証
     assertThat(actual2, is(false))
   }
-
-  // ユティリティ
 
   def createSampleBattler(id: String, name: String) = {
     val battler = new Battler()

@@ -19,14 +19,11 @@ class GameInformationService {
 
   /** Battlerの再生成の間隔(つまりキャッシュの保存期間) */
   val INTARVAL_OF_REGENERATE_BATTLER = 24 * 60 * 60 * 1000;
-
-  protected val log: Logger = LoggerFactory.getLogger(classOf[GameInformationService])
-
   @Autowired
   val twitterRepository: TwitterRepository = null
-
   @Autowired
   val gameRepository: GameInformationRepository = null
+  protected val log: Logger = LoggerFactory.getLogger(classOf[GameInformationService])
 
   /**
     * プレイヤー情報を取得する。

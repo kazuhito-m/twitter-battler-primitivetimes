@@ -8,18 +8,20 @@ import org.springframework.social.twitter.api.TwitterProfile
 
 object BattlerFactory extends BattlerParameterGenerator {
 
-  /**
+  /** s
     * Twitterのプロファイルオブジェクトを元にBattlerオブジェクトを生成する。
-    * @param profile Twitterからのプロフィールオブジェクト。
-    * @return ゲーム内のBattlerオブジェクト。
-    */
-  def create(profile: TwitterProfile, firstSignUpDate: Date): Battler = generateBattler(profile , firstSignUpDate)
-
-  /**s
-    * Twitterのプロファイルオブジェクトを元にBattlerオブジェクトを生成する。
+    *
     * @param profile Twitterからのプロフィールオブジェクト。
     * @return ゲーム内のBattlerオブジェクト。
     */
   def create(profile: TwitterProfile): Battler = create(profile, new Date())
+
+  /**
+    * Twitterのプロファイルオブジェクトを元にBattlerオブジェクトを生成する。
+    *
+    * @param profile Twitterからのプロフィールオブジェクト。
+    * @return ゲーム内のBattlerオブジェクト。
+    */
+  def create(profile: TwitterProfile, firstSignUpDate: Date): Battler = generateBattler(profile, firstSignUpDate)
 
 }

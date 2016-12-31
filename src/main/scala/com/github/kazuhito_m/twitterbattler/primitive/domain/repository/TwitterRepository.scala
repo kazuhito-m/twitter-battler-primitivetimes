@@ -12,6 +12,7 @@ class TwitterRepository {
 
   /**
     * Twitterから「指定されたIDのプロフィール情報」を取得し、オブジェクトで返す。
+    *
     * @param id TwitterID。
     * @return プロフィールオブジェクト。
     */

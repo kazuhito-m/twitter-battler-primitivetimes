@@ -10,6 +10,8 @@ import org.springframework.social.twitter.api.TwitterProfile
   */
 trait BattlerParameterGenerator {
 
+  val ONE_DAY_MS: Long = 1000 * 60 * 60 * 24
+
   /**
     * Twitterアカウントの情報からこのゲームのバトラーのパラメータを生成する。
     *
@@ -64,8 +66,6 @@ trait BattlerParameterGenerator {
     */
   def calculateSpeedPoint(profile: TwitterProfile) =
     profile.getStatusesCount / (getBetweenDays(profile.getCreatedDate, new Date()) + 1) + 1 // ツイート数 ÷ 日付 + 1
-
-  val ONE_DAY_MS: Long = 1000 * 60 * 60 * 24
 
   /**
     * ２つの日付の間隔(日数)を計算する。

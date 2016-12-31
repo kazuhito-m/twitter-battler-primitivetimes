@@ -15,7 +15,8 @@ import scala.beans.BeanProperty
 @RedisHash("battler")
 class Battler extends Serializable {
 
-  @BeanProperty @Id var id: String = null
+  @BeanProperty
+  @Id var id: String = null
   @BeanProperty var screenName: String = ""
   @BeanProperty var biography: String = ""
   @BeanProperty var level: Int = 0

@@ -6,7 +6,7 @@ import com.github.kazuhito_m.twitterbattler.primitive.domain.service.GameInforma
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMethod._
-import org.springframework.web.bind.annotation.{RequestMapping, ResponseBody, RestController}
+import org.springframework.web.bind.annotation.{RequestMapping, RestController}
 
 @RestController
 @RequestMapping(Array("/api/game"))
