@@ -1,9 +1,22 @@
 'use strict';
 
-const Condition = require('./condition');
+// クラスインポート。
+const HtmlUtils = require('./util/html_utils');
 
-const condition = new Condition();
-condition.productName = 'twitter-battler-primitivetimes';
+const MenuPage = require('./page/menu');
 
-// 外の世界との境界
-document.write(condition.productName);
+/** HTMLとの境界、エントリポイント。 */
+window.onload = function() {
+    const html = new HtmlUtils();
+    const screenId = html.getScreenId();
+    let page;
+    switch (screenId) {
+        case 'main':
+            page = new MenuPage();
+            break;
+        default:
+            alert('Invalid screenId');
+            break;
+    }
+    page.startUp();
+}

@@ -29,12 +29,12 @@ const paths = {
     mains: './src/main/js/*.js',
     main_dir: './src/main/js/',
     tests: './src/test/js/*.js',
-    srcs: './src/*/js/**',
+    srcs: './src/*/js/**/*',
     src_dir: './src',
     work_dir: './build/js/',
-    work_mains: './build/js/main/js/*.js',
-    work_tests: './build/js/test/js/*.js',
-    ps_tests: './build/js/power-assert-test/js/*.js',
+    work_mains: './build/js/main/js/**/*.js',
+    work_tests: './build/js/test/js/**/*.js',
+    ps_tests: './build/js/power-assert-test/js/**/*.js',
     ps_test_dir: './build/js/power-assert-test/js/',
     coverage_dir: './build/js/coverage',
     report_dir: './build/js/report',
@@ -285,7 +285,11 @@ gulp.task('develop', () => {
 
 // 本チャン出力まわり
 
-gulp.task('transpile', function() {
+gulp.task('clean_build_result', (cb) => {
+    return del([paths.dest_dir + '/index.js'], cb);
+});
+
+gulp.task('transpile', () => {
     return browserify({
             entries: paths.main_dir + '/index.js'
         })
@@ -295,12 +299,14 @@ gulp.task('transpile', function() {
         .bundle()
         .pipe(source('index.js'))
         .pipe(buffer())
-        .pipe(uglify()) // uglifyfyでbrowserify内で出来るのだが、圧縮結果が変わるのでここでやる
+        // TODO 可読性重視で一時的に殺す。本番になれば蘇らす。
+        //        .pipe(uglify()) // uglifyfyでbrowserify内で出来るのだが、圧縮結果が変わるのでここでやる
         .pipe(gulp.dest(paths.dest_dir));
 });
 
 gulp.task('build', (cb) => {
     return runSequence(
+        'clean_build_result',
         'test',
         'transpile',
         cb

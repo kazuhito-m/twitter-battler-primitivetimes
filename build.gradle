@@ -61,4 +61,4 @@ npm_test.dependsOn npm_install
 test.dependsOn npm_test
 
 // gradle bootRun の前にも、必ず「jsのトランスパイル」を挟む
-bootRun.dependsOn npm_run_build
+processResources.dependsOn npm_run_build

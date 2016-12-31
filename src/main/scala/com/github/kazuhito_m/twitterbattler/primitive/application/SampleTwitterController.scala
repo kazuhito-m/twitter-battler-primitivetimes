@@ -19,11 +19,11 @@ class SampleTwitterController {
     (name) => twitter.timelineOperations().getUserTimeline("@" + name)
   )
 
+  def opeTwitter(user: Principal, f: (String) => Object) = if (user == null) null else f(user.getName)
+
   @RequestMapping(value = Array("profile"), method = Array(GET, POST))
   def profile(user: Principal) = opeTwitter(user,
     (name) => twitter.userOperations().getUserProfile(name)
   )
-
-  def opeTwitter(user: Principal, f: (String) => Object) = if (user == null) null else f(user.getName)
 
 }

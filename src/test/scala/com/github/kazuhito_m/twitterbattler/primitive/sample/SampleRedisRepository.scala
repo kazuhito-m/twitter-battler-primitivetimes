@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain
+package com.github.kazuhito_m.twitterbattler.primitive.sample
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.StringRedisTemplate
@@ -27,11 +27,11 @@ class SampleRedisRepository {
     */
   def setSampleValue(value: String) = ofv.set(SAMPLE_KEY, value)
 
+  private def ofv = redisTemplate.opsForValue()
+
   /**
     * サンプル用テキトウキー自体を削除。
     */
   def clearSampleValue = redisTemplate.delete(SAMPLE_KEY)
-
-  private def ofv = redisTemplate.opsForValue()
 
 }

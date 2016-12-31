@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain
+package com.github.kazuhito_m.twitterbattler.primitive.sample
 
 import com.github.kazuhito_m.twitterbattler.primitive.ConfigForTest
 import org.hamcrest.CoreMatchers._

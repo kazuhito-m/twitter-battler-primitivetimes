@@ -17,3 +17,4 @@ spring:
 security:
   basic:
     enabled: false
+logging.level.com.github.kazuhito_m.twitterbattler.primitive: DEBUG
