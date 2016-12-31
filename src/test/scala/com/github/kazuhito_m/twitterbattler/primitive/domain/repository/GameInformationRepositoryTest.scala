@@ -35,7 +35,35 @@ class GameInformationRepositoryTest {
     // 値
     assertThat(actual.id, is(param.id))
     assertThat(actual.screenName, is(param.screenName))
-    // 削除
+  }
+
+  @Test
+  def redisに対しデータが無い場合にはnullを返す(): Unit = {
+    // 準備
+    val id = "testId"
+    // 実行
+    sut.deleteBattler(id)
+    val actual = sut.getBattler(id)
+    // 検証
+    assertThat(actual, is(nullValue))
+  }
+
+
+  @Test
+  def redis中にBattlerオブジェクトが存在するかを調べることが出来る(): Unit = {
+    // 準備
+    val param = createSampleBattler("testId", "名前")
+    sut.saveBattler(param)
+    // 実行
+    val actual = sut.isExistsBattler(param.id)
+    // 検証
+    assertThat(actual, is(true))
+    // 削除してみる
+    sut.deleteBattler(param.id)
+    // 実行
+    val actual2 = sut.isExistsBattler(param.id)
+    // 検証
+    assertThat(actual2, is(false))
   }
 
   // ユティリティ

@@ -31,6 +31,9 @@ class GameInformationRepository {
     */
   def deleteBattler(id: String): Unit = redisTemplate.delete(makeKey(id))
 
+  /** Battlerオブジェクトが存在するかを真偽値で返す。 */
+  def isExistsBattler(id: String) :Boolean = {getBattler(id) != null}
+
   /** RedisにBattlerオブジェクトを保存する文字列キーを作成する。 */
   def makeKey(id: String): String = BATTLER_KEY_PREFIX + id
 
