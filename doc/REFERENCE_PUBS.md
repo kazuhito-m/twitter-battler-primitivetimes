@@ -29,6 +29,10 @@
 ### Spring Data Redis
 
 - [わかりやすい資料](http://www.slideshare.net/yoshidanaohiro52/spring-framework-boot-data-spring-data-redis)
+- [RedisTemplateをDIされる際にカスタムする方法](http://blog.rakugakibox.net/entry/2015/07/27/spring-boot-with-redis)
+- [RedisTemplateのSerialize方法の指定](http://greenkun.hatenablog.com/entry/2015/08/20/235046)
+- [application.ymlのRedis関係設定値](https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/data/redis/RedisProperties.java)
+- [来たるべき日に「Scala用シリアライザ」を組む時の材料](https://gist.github.com/maji-KY/836dab8cb63038f915aa)
 
 ## Specs2
 
