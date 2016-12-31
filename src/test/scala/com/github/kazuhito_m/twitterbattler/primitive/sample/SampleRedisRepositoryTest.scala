@@ -1,7 +1,6 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain
+package com.github.kazuhito_m.twitterbattler.primitive.sample
 
 import com.github.kazuhito_m.twitterbattler.primitive.ConfigForTest
-import com.github.kazuhito_m.twitterbattler.primitive.domain.repository.SampleRedisRepository
 import org.hamcrest.CoreMatchers._
 import org.junit.Assert.assertThat
 import org.junit._

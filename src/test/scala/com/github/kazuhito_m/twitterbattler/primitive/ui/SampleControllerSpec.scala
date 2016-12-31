@@ -1,6 +1,6 @@
 package com.github.kazuhito_m.twitterbattler.primitive.ui
 
-import com.github.kazuhito_m.twitterbattler.primitive.application.SampleController
+import com.github.kazuhito_m.twitterbattler.primitive.sample.SampleController
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
