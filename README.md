@@ -16,7 +16,7 @@ Twitter Battler - Primitive Times
 
 以下を前提とします。
 
-- TODO
+- TODO 書きかけ、Javaとか使ってる。
 
 ### Devalopment Requirement
 
