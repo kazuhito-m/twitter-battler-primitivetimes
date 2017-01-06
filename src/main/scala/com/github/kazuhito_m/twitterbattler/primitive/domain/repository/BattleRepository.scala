@@ -38,7 +38,7 @@ class BattleRepository {
   /**
     * 現在の「指定ユーザの戦闘画面シーンID」を返す。
     */
-  def getBattleScene(id: String): BattleScene = ofv.get(makeKeyForSceneId(id)).asInstanceOf[BattleScene]
+  def getBattleScene(playerId: String): BattleScene = ofv.get(makeKeyForSceneId(playerId)).asInstanceOf[BattleScene]
 
   /** エイリアス */
   private def ofv = redisTemplate.opsForValue

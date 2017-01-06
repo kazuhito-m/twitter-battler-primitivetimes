@@ -22,4 +22,7 @@ class GameInformationController {
     gameInfoService.getPlayer(user.getName)
   }
 
+  @RequestMapping(value = Array("getBattleSceneId"), method = Array(GET, POST))
+  def getBattleSceneId(user: Principal): String = gameInfoService.getBattleSceneId(user.getName)
+
 }
