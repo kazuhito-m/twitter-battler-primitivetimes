@@ -19,12 +19,26 @@ class MenuPage {
     }
 
     /**
+     * 「対戦を開始」クリックイベント。
+     */
+    execPartyMake(e, html) {
+        alert('ここまできてるよ！つまりはクラスのメソッドとしてかけるよ！やったねたえちゃん！');
+        html.redirect('partymake.html');
+    }
+
+    /**
      * メインメニュー画面のOnLoad
      */
     startUp() {
 
         const server = this._server;
         const html = this._html;
+
+        // イベント定義。
+
+        html.addClickEventById('execPartyMake', (e) => this.execPartyMake(e, html));
+
+        // 初期表示。
 
         // プレイヤー情報を取得。
         const player = server.getJson('api/game/getPlayer');

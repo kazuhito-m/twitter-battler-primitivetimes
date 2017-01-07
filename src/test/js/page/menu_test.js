@@ -29,6 +29,10 @@ function createMockDocument() {
     img.setAttribute('id', 'playerImage');
     body.appendChild(img);
 
+    const a1 = doc.createElement('a');
+    a1.setAttribute('id', 'execPartyMake');
+    body.appendChild(a1);
+
     return doc;
 }
 
