@@ -49,17 +49,14 @@ class SceneController {
         const scenePrefix = sceneId.split(':')[0];
 
         // プレフィックスが一致するのに、一致しないHTMLを表示していれば、正しいHTML名を返す。
-        for (const spf in this.ID_DICTIONARY) {
-            const scId = this.ID_DICTIONARY[spf];
-            if (scenePrefix === spf && screenId !== scId) {
-                return scId + '.html'
-            }
+        const correctScreenId = this.ID_DICTIONARY[scenePrefix];
+        if (correctScreenId) {
+            if (screenId === correctScreenId) return null;
+            return correctScreenId + ".html";
         }
 
-        // 上記ループのプレフィックスから漏れた場合、HTMLのIDが「バトル以外で許されてるページ」でないなら、強制的にメニューに返す。
-        for (const okId of this.VALID_SCREEN_IDS) {
-            if (okId === screenId) return null;
-        }
+        // プレフィックス辞書から漏れた場合、HTMLのIDが「バトル以外で許されてるページ」でないなら、強制的にメニューに返す。
+        if (this.VALID_SCREEN_IDS.indexOf(screenId) >= 0) return null;
         return 'index.html';
     }
 
@@ -85,9 +82,10 @@ class SceneController {
 
         // HTML側のID を取得。
         const screenId = html.getScreenId();
-
         // サーバ側の「シーンID」と、表示HTMLが合ってるかをチェックし、不整合あればリダイレクトで移動する。
         const sceneId = server.getValue('api/game/getBattleSceneId');
+
+        console.log("sceneId:" + sceneId + ",screenId:" + screenId)
 
         // シーンIDのプレフィックスとHTMLが一致してるかを判定。
         const redirectHtml = this.getCorrectHtmlName(sceneId, screenId);

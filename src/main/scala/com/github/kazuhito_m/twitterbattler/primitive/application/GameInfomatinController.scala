@@ -18,11 +18,12 @@ class GameInformationController {
   private val gameInfoService: GameInformationService = null
 
   @RequestMapping(value = Array("getPlayer"), method = Array(GET, POST))
-  def getPlayer(user: Principal) = {
-    gameInfoService.getPlayer(user.getName)
-  }
+  def getPlayer(user: Principal) = gameInfoService.getPlayer(user.getName)
 
   @RequestMapping(value = Array("getBattleSceneId"), method = Array(GET, POST))
   def getBattleSceneId(user: Principal): String = gameInfoService.getBattleSceneId(user.getName)
+
+  @RequestMapping(value = Array("makeEnemyAndParty"), method = Array(GET, POST))
+  def makeEnemyAndParty(user: Principal) = gameInfoService.makeEnemyAndParty(user.getName)
 
 }

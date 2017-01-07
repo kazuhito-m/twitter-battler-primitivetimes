@@ -51,7 +51,7 @@ class GameInformationService {
   /**
     * Player情報の再作成間隔を過ぎているか否か。
     */
-  def isOverIntervalRegenerate(lastGenerateDate: Date) =
+  def isOverIntervalRegenerate(lastGenerateDate: Date): Boolean =
     (new Date().getTime - lastGenerateDate.getTime) > INTARVAL_OF_REGENERATE_BATTLER
 
   /**
@@ -60,6 +60,16 @@ class GameInformationService {
   def getBattleSceneId(playerId: String): String = {
     val scene = battleRepository.getBattleScene(playerId)
     if (scene == null) null else scene.id
+  }
+
+  /**
+    * 敵の決定とプレイヤーと敵のパーティーメンバーを生成する。
+    */
+  def makeEnemyAndParty(playerId: String): Unit = {
+    // 敵の決定とプレイヤーと敵のパーティーメンバーを生成
+    // TODO 実装
+    // シーンを入れ替える。
+    battleRepository.saveBattleScene(playerId, BattleScene.PartyMake)
   }
 
 }

@@ -32,4 +32,11 @@ describe('index.js(SceneController)のテスト', () => {
         assert.equal(sut.getCorrectHtmlName('BR:01', 'menu'), 'battleresult.html');
     });
 
+    it('サーバ側にIDが「パーティ作成画面(1/2)」、HTML側が「同じく」の場合、おかしいので正しいページ名を返す', () => {
+        const sut = new SceneController();
+        // 実行 & 検証
+        assert.equal(sut.getCorrectHtmlName('PM:01', 'partymake'), null);
+        assert.equal(sut.getCorrectHtmlName('PM:02', 'partymake'), null);
+    });
+
 });

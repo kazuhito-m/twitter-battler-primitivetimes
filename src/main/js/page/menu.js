@@ -21,8 +21,10 @@ class MenuPage {
     /**
      * 「対戦を開始」クリックイベント。
      */
-    execPartyMake(e, html) {
-        alert('ここまできてるよ！つまりはクラスのメソッドとしてかけるよ！やったねたえちゃん！');
+    execPartyMake(e, html, server) {
+        // パーティー作成＆対戦相手決定を開始。
+        server.getValue('api/game/makeEnemyAndParty');
+        // パーティー作成＆対戦相手決定画面に遷移。
         html.redirect('partymake.html');
     }
 
@@ -36,7 +38,7 @@ class MenuPage {
 
         // イベント定義。
 
-        html.addClickEventById('execPartyMake', (e) => this.execPartyMake(e, html));
+        html.addClickEventById('execPartyMake', (e) => this.execPartyMake(e, html, server));
 
         // 初期表示。
 
