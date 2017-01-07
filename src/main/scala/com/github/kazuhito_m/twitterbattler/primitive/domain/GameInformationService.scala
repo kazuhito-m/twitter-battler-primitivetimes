@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service
 @Service
 class GameInformationService {
 
+
   /** Battlerの再生成の間隔(つまりキャッシュの保存期間) */
   val INTARVAL_OF_REGENERATE_BATTLER = 24 * 60 * 60 * 1000;
 
@@ -70,6 +71,26 @@ class GameInformationService {
     // TODO 実装
     // シーンを入れ替える。
     battleRepository.saveBattleScene(playerId, BattleScene.PartyMake)
+  }
+
+  /**
+    * 設定された敵と両パーティーの情報を元に、バトルを開始する。
+    */
+  def startBattle(playerId: String): Unit = {
+    // バトル情報登録、パーティの初期状態の記憶、など。
+    // TODO 実装
+    // シーンを入れ替える。
+    battleRepository.saveBattleScene(playerId, BattleScene.BattleOperation)
+  }
+
+  /**
+    * 入力(クライアントからのJSON)をもとに「戦闘１ターン分」すすめる。
+    */
+  def operationForBattleTurn(playerId: String): Unit = {
+    // １ターン分の内部戦闘処理と戦闘を勧めた結果を計算。
+    // TODO 実装
+    // シーンを入れ替える。
+    battleRepository.saveBattleScene(playerId, BattleScene.BattleResult)
   }
 
 }

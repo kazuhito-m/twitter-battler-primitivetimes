@@ -9,23 +9,33 @@ const HtmlUtils = require('../util/html_utils');
 class BattlePage {
 
     constructor(htmlUtils = null) {
-        // テスト時にMockして動かせるように。
-        if (htmlUtils == null) {
-            this._html = new HtmlUtils();
-        } else {
-            this._html = htmlUtils;
+            // テスト時にMockして動かせるように。
+            if (htmlUtils == null) {
+                this._html = new HtmlUtils();
+            } else {
+                this._html = htmlUtils;
+            }
+            this._server = new ServerUtils();
         }
-        this._server = new ServerUtils();
+        /**
+         * 「たたかう」クリックイベント。
+         */
+    operationForBattleTurn(e, html, server) {
+        // バトル開始をサーバに申請。
+        server.getValue('api/game/operationForBattleTurn');
+        // Let's Battle ！な画面に遷移。
+        html.redirect('battle.html');
     }
 
     /**
      * OnLoad。
      */
     startUp() {
-
-        // TODO DebugWrite
+        const server = this._server;
         const html = this._html;
-        alert("screenId:" + html.getScreenId());
+
+        // イベント定義。
+        html.addClickEventById('operationForBattleTurn', (e) => this.operationForBattleTurn(e, html, server));
 
     }
 
