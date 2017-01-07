@@ -32,4 +32,7 @@ class GameInformationController {
   @RequestMapping(value = Array("operationForBattleTurn"), method = Array(GET, POST))
   def operationForBattleTurn(user: Principal) = gameInfoService.operationForBattleTurn(user.getName)
 
+  @RequestMapping(value = Array("okBattleResult"), method = Array(GET, POST))
+  def okBattleResult(user: Principal) = gameInfoService.okBattleResult(user.getName)
+
 }

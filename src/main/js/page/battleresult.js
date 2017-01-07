@@ -19,13 +19,24 @@ class BattleResultPage {
     }
 
     /**
+     * 結果に対しての「”OK”ボタン」クリックイベント。
+     */
+    okBattleResult(e, html, server) {
+        // バトル開始をサーバに申請。
+        server.getValue('api/game/okBattleResult');
+        // Let's Battle ！な画面に遷移。
+        html.redirect('index.html');
+    }
+
+    /**
      * OnLoad。
      */
     startUp() {
-
-        // TODO DebugWrite
+        const server = this._server;
         const html = this._html;
-        alert("screenId:" + html.getScreenId());
+
+        // イベント定義。
+        html.addClickEventById('okBattleResult', (e) => this.okBattleResult(e, html, server));
 
     }
 

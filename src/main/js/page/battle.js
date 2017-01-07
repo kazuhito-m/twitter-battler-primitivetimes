@@ -9,17 +9,18 @@ const HtmlUtils = require('../util/html_utils');
 class BattlePage {
 
     constructor(htmlUtils = null) {
-            // テスト時にMockして動かせるように。
-            if (htmlUtils == null) {
-                this._html = new HtmlUtils();
-            } else {
-                this._html = htmlUtils;
-            }
-            this._server = new ServerUtils();
+        // テスト時にMockして動かせるように。
+        if (htmlUtils == null) {
+            this._html = new HtmlUtils();
+        } else {
+            this._html = htmlUtils;
         }
-        /**
-         * 「たたかう」クリックイベント。
-         */
+        this._server = new ServerUtils();
+    }
+
+    /**
+     * 「たたかう」クリックイベント。
+     */
     operationForBattleTurn(e, html, server) {
         // バトル開始をサーバに申請。
         server.getValue('api/game/operationForBattleTurn');
