@@ -53,6 +53,13 @@ class HtmlUtils {
         target.src = imageUrl;
     }
 
+    /**
+     * 指定されたURLへとリダイレクトする。
+     */
+    redirect(url) {
+        this._document.location = url;
+    }
+
 }
 
 module.exports = HtmlUtils;
