@@ -93,6 +93,7 @@ class SceneController {
         const redirectHtml = this.getCorrectHtmlName(sceneId, screenId);
         if (redirectHtml) {
             // 一致してなくば、正しいページへリダイレクト。
+            console.log("RedirectTo: " + redirectHtml);
             html.redirect(redirectHtml);
         } else {
             // 自身表示されているHTMLページごとに対応するJSを読み込み・実行する。
