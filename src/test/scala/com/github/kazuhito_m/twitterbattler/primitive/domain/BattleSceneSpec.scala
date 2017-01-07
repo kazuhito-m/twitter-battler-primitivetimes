@@ -1,11 +1,11 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.constant
+package com.github.kazuhito_m.twitterbattler.primitive.domain
 
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class BattleSceneSpec  extends Specification {
+class BattleSceneSpec extends Specification {
 
   "BattleSceneのenumもどきのテスト" should {
 

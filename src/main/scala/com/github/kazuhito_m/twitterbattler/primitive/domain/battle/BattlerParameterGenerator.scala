@@ -1,8 +1,7 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.generator
+package com.github.kazuhito_m.twitterbattler.primitive.domain.battle
 
 import java.util.Date
 
-import com.github.kazuhito_m.twitterbattler.primitive.domain.entity.Battler
 import org.springframework.social.twitter.api.TwitterProfile
 
 /**

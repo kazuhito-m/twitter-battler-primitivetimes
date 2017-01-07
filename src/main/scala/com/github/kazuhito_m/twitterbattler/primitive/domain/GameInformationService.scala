@@ -1,10 +1,9 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.service
+package com.github.kazuhito_m.twitterbattler.primitive.domain
 
 import java.util.Date
 
-import com.github.kazuhito_m.twitterbattler.primitive.domain.entity.Battler
-import com.github.kazuhito_m.twitterbattler.primitive.domain.factory.BattlerFactory
-import com.github.kazuhito_m.twitterbattler.primitive.domain.repository.{BattleRepository, GameInformationRepository, TwitterRepository}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.battle.{BattleRepository, Battler, BattlerFactory}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.game.{GameInformationRepository, TwitterRepository}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

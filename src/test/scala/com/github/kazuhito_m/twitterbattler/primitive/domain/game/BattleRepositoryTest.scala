@@ -1,7 +1,8 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.repository
+package com.github.kazuhito_m.twitterbattler.primitive.domain.game
 
 import com.github.kazuhito_m.twitterbattler.primitive.ConfigForTest
-import com.github.kazuhito_m.twitterbattler.primitive.domain.constant.BattleScene
+import com.github.kazuhito_m.twitterbattler.primitive.domain.BattleScene
+import com.github.kazuhito_m.twitterbattler.primitive.domain.battle.BattleRepository
 import org.hamcrest.CoreMatchers._
 import org.junit.Assert.assertThat
 import org.junit._

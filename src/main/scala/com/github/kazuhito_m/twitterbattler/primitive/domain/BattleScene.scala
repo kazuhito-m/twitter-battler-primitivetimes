@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.constant
+package com.github.kazuhito_m.twitterbattler.primitive.domain
 
 /**
   * 「戦闘画面のシーン」のenumもどき。
