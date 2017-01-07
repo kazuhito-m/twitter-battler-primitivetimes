@@ -24,15 +24,6 @@ class SceneController {
         };
     }
 
-    // シーンIDのプレフィックス(２文字)と、screenId(HTMLファイルの拡張子以外)の組みあわせ辞書。
-    get ID_DICTIONARY() {
-        return {
-            'PM': 'partymake',
-            'BT': 'battle',
-            'BR': 'battleresult'
-        };
-    }
-
     // シーンIDが無い(戦闘中とかじゃない)時にも、行き来できるHTMLのID群。
     get VALID_SCREEN_IDS() {
         return ['menu'];
@@ -48,16 +39,21 @@ class SceneController {
         if (!sceneId) sceneId = '';
         const scenePrefix = sceneId.split(':')[0];
 
+        console.log("sceneId:" + sceneId + ",screenId:" + screenId + ",scenePrefix:" + scenePrefix);
+
         // プレフィックスが一致するのに、一致しないHTMLを表示していれば、正しいHTML名を返す。
-        const correctScreenId = this.ID_DICTIONARY[scenePrefix];
-        if (correctScreenId) {
-            if (screenId === correctScreenId) return null;
-            return correctScreenId + ".html";
+        if (screenId === scenePrefix) {
+            return null;
+        } else {
+            // プレフィックス辞書から漏れた場合、HTMLのIDが「バトル以外で許されてるページ」でないなら、強制的にメニューに返す。
+            if (scenePrefix) {
+                return scenePrefix + ".html";
+            } else {
+                if (this.VALID_SCREEN_IDS.indexOf(screenId) >= 0) return null;
+                return 'index.html';
+            }
         }
 
-        // プレフィックス辞書から漏れた場合、HTMLのIDが「バトル以外で許されてるページ」でないなら、強制的にメニューに返す。
-        if (this.VALID_SCREEN_IDS.indexOf(screenId) >= 0) return null;
-        return 'index.html';
     }
 
     /**

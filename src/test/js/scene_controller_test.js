@@ -15,28 +15,28 @@ describe('index.js(SceneController)のテスト', () => {
     it('サーバ側にIDが「パーティ作成画面(1/2)」、HTML側がmain(メニューページ)の場合、おかしいので正しいページ名を返す', () => {
         const sut = new SceneController();
         // 実行 & 検証
-        assert.equal(sut.getCorrectHtmlName('PM:01', 'menu'), 'partymake.html');
-        assert.equal(sut.getCorrectHtmlName('PM:02', 'menu'), 'partymake.html');
+        assert.equal(sut.getCorrectHtmlName('partymake:01', 'menu'), 'partymake.html');
+        assert.equal(sut.getCorrectHtmlName('partymake:02', 'menu'), 'partymake.html');
     });
 
     it('サーバ側にIDが「戦闘画面(1/2)」、HTML側がmain(メニューページ)の場合、おかしいので正しいページ名を返す', () => {
         const sut = new SceneController();
         // 実行 & 検証
-        assert.equal(sut.getCorrectHtmlName('BT:01', 'menu'), 'battle.html');
-        assert.equal(sut.getCorrectHtmlName('BT:02', 'menu'), 'battle.html');
+        assert.equal(sut.getCorrectHtmlName('battle:01', 'menu'), 'battle.html');
+        assert.equal(sut.getCorrectHtmlName('battle:02', 'menu'), 'battle.html');
     });
 
     it('サーバ側にIDが「戦闘結果画面」、HTML側がmain(メニューページ)の場合、おかしいので正しいページ名を返す', () => {
         const sut = new SceneController();
         // 実行 & 検証
-        assert.equal(sut.getCorrectHtmlName('BR:01', 'menu'), 'battleresult.html');
+        assert.equal(sut.getCorrectHtmlName('battleresult:01', 'menu'), 'battleresult.html');
     });
 
     it('サーバ側にIDが「パーティ作成画面(1/2)」、HTML側が「同じく」の場合、おかしいので正しいページ名を返す', () => {
         const sut = new SceneController();
         // 実行 & 検証
-        assert.equal(sut.getCorrectHtmlName('PM:01', 'partymake'), null);
-        assert.equal(sut.getCorrectHtmlName('PM:02', 'partymake'), null);
+        assert.equal(sut.getCorrectHtmlName('partymake:01', 'partymake'), null);
+        assert.equal(sut.getCorrectHtmlName('partymake:02', 'partymake'), null);
     });
 
 });
