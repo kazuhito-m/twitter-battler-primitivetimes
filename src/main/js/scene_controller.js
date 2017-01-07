@@ -39,21 +39,14 @@ class SceneController {
         if (!sceneId) sceneId = '';
         const scenePrefix = sceneId.split(':')[0];
 
-        console.log("sceneId:" + sceneId + ",screenId:" + screenId + ",scenePrefix:" + scenePrefix);
-
-        // プレフィックスが一致するのに、一致しないHTMLを表示していれば、正しいHTML名を返す。
-        if (screenId === scenePrefix) {
-            return null;
-        } else {
-            // プレフィックス辞書から漏れた場合、HTMLのIDが「バトル以外で許されてるページ」でないなら、強制的にメニューに返す。
-            if (scenePrefix) {
-                return scenePrefix + ".html";
-            } else {
-                if (this.VALID_SCREEN_IDS.indexOf(screenId) >= 0) return null;
-                return 'index.html';
-            }
-        }
-
+        // プレフィックスが一致する(サーバとHTMLの画面状態が完全一致)なら、問題なしでnull返し。
+        if (screenId === scenePrefix) return null;
+        // プレフィックスとHTML側IDが一致しないが、プレフィックス自体があるなら、是正のためプレフィックスと同じHTMLに遷移。
+        if (scenePrefix) return scenePrefix + ".html";
+        // プレフィックスは無い(サーバ側はバトル系画面じゃない)が、ゲームしている時に自由に行き来出来る画面ならOK。
+        if (this.VALID_SCREEN_IDS.indexOf(screenId) >= 0) return null;
+        // サーバがバトル状態じゃないし、行ったらイカン画面なら、強制的にindex.html。
+        return 'index.html';
     }
 
     /**
