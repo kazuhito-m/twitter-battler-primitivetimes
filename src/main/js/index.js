@@ -37,7 +37,7 @@ class SceneController {
     loadPage(screenId) {
         let page;
         switch (screenId) {
-            case 'main':
+            case 'menu':
                 page = new MenuPage();
                 break;
             default:
