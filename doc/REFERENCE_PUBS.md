@@ -101,3 +101,7 @@
 ## Game関連
 
 - [JSでRPGツクール出来るやつ(の解析を行っているサイト)](http://qiita.com/mizchi/items/ff3bc3f52b61d3e599c6)
+
+## Scala本体の悲喜こもごも
+
+- [enumの話](http://dev.classmethod.jp/server-side/scala-algebra-data-type/)
