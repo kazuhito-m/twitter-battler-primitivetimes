@@ -5,11 +5,24 @@ const HtmlUtils = require('./util/html_utils');
 const ServerUtils = require('./util/server_utils');
 
 const MenuPage = require('./page/menu');
+const PartyMakePage = require('./page/partymake');
+const BattlePage = require('./page/battle');
+const BattleResultPage = require('./page/battleresult');
 
 /*
  * 「サーバの状態」と「表示しているHTML」を制御するコントローラ。
  */
 class SceneController {
+
+    // HTMLのID(screenId)と、それに対応するページのJSのペア。
+    get SCREEN_ID_TO_PAGE_SCRIPT() {
+        return {
+            'menu': new MenuPage(),
+            'partymake': new PartyMakePage(),
+            'battle': new BattlePage(),
+            'battleresult': new BattleResultPage()
+        };
+    }
 
     // シーンIDのプレフィックス(２文字)と、screenId(HTMLファイルの拡張子以外)の組みあわせ辞書。
     get ID_DICTIONARY() {
@@ -54,16 +67,12 @@ class SceneController {
      * 自身表示されているHTMLページごとに対応するJSを読み込み・実行する。
      */
     loadPage(screenId) {
-        let page;
-        switch (screenId) {
-            case 'menu':
-                page = new MenuPage();
-                break;
-            default:
-                alert('Invalid screenId');
-                break;
+        const page = this.SCREEN_ID_TO_PAGE_SCRIPT[screenId];
+        if (page) {
+            page.startUp();
+        } else {
+            alert('Invalid screenId');
         }
-        page.startUp();
     }
 
     /**
@@ -80,12 +89,15 @@ class SceneController {
         // サーバ側の「シーンID」と、表示HTMLが合ってるかをチェックし、不整合あればリダイレクトで移動する。
         const sceneId = server.getValue('api/game/getBattleSceneId');
 
-        // シーンIDのプレフィックスとHTMLが一致してるかを判定。してなくばリダイレクト。
+        // シーンIDのプレフィックスとHTMLが一致してるかを判定。
         const redirectHtml = this.getCorrectHtmlName(sceneId, screenId);
-        if (redirectHtml) html.redirect(redirectHtml);
-
-        // 自身表示されているHTMLページごとに対応するJSを読み込み・実行する。
-        this.loadPage(screenId)
+        if (redirectHtml) {
+            // 一致してなくば、正しいページへリダイレクト。
+            html.redirect(redirectHtml);
+        } else {
+            // 自身表示されているHTMLページごとに対応するJSを読み込み・実行する。
+            this.loadPage(screenId);
+        }
     }
 
 }
