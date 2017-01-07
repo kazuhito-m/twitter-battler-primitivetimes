@@ -10,16 +10,23 @@ class ServerUtils {
     }
 
     /**
-     * URL指定でサーバから結果をJSONオブジェクトにして返す。
+     * URL指定でサーバから結果を値(オブジェクト)としてそのまま返す。
      */
-    getJson(url) {
+    getValue(url) {
         const xhr = this._xhr;
         xhr.open('POST', url, false);
         xhr.send();
 
         const jsonText = xhr.responseText;
-        const jsonObj = JSON.parse(jsonText);
+        return jsonText;
+    }
 
+    /**
+     * URL指定でサーバから結果をJSONオブジェクトにして返す。
+     */
+    getJson(url) {
+        const jsonText = this.getValue(url);
+        const jsonObj = JSON.parse(jsonText);
         return jsonObj;
     }
 

@@ -2,8 +2,8 @@ package com.github.kazuhito_m.twitterbattler.primitive.sample
 
 import java.io.{ObjectInputStream, ObjectOutputStream}
 
-import com.github.kazuhito_m.twitterbattler.primitive.domain.entity.Battler
-import com.github.kazuhito_m.twitterbattler.primitive.domain.repository.GameInformationRepositoryTest
+import com.github.kazuhito_m.twitterbattler.primitive.domain.battle.Battler
+import com.github.kazuhito_m.twitterbattler.primitive.domain.game.GameInformationRepositoryTest
 import com.sun.xml.internal.messaging.saaj.util.{ByteInputStream, ByteOutputStream}
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification

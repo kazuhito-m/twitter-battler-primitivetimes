@@ -53,6 +53,20 @@ class HtmlUtils {
         target.src = imageUrl;
     }
 
+    /**
+     * 指定されたURLへとリダイレクトする。
+     */
+    redirect(url) {
+        this._document.location = url;
+    }
+
+    /**
+     * Elementに'click'のイベントでリスナーを追加する。
+     */
+    addClickEventById(id, func) {
+        this._document.getElementById(id).addEventListener('click', func);
+    }
+
 }
 
 module.exports = HtmlUtils;

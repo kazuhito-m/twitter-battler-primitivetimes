@@ -19,12 +19,28 @@ class MenuPage {
     }
 
     /**
+     * 「対戦を開始」クリックイベント。
+     */
+    execPartyMake(e, html, server) {
+        // パーティー作成＆対戦相手決定を開始。
+        server.getValue('api/game/makeEnemyAndParty');
+        // パーティー作成＆対戦相手決定画面に遷移。
+        html.redirect('partymake.html');
+    }
+
+    /**
      * メインメニュー画面のOnLoad
      */
     startUp() {
 
         const server = this._server;
         const html = this._html;
+
+        // イベント定義。
+
+        html.addClickEventById('execPartyMake', (e) => this.execPartyMake(e, html, server));
+
+        // 初期表示。
 
         // プレイヤー情報を取得。
         const player = server.getJson('api/game/getPlayer');

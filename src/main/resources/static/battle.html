@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="screenId" content="battle">
+    <title>Twitter Buttler - Let's Battle ！</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="css/layout.css" rel="stylesheet"/>
+    <link href="css/prettify.css" rel="stylesheet"/>
+    <style type="text/css">body {padding: 5px 0 5px 0;}</style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Twitter Battler Let's Battle ！</h1>
+    </header>
+    <p>おつかれの場合は下のボタンからどうぞ。</p>
+    <form action="/logout" method="post">
+        <button type="submit">SignOut</button>
+    </form>
+</div>
+<section id="status">
+    <div class="container-fluid">
+    </div>
+</section>
+<section id="operations">
+    <a id="operationForBattleTurn">たたかう</a>
+</section>
+<div class="container">
+    <footer class="footer">
+        <p>Version: <span id="appVer">取れない場合これを表示する</span></p>
+    </footer>
+</div>
+</body>
+<script type="text/javascript" src="js/index.js"></script>
+</html>
