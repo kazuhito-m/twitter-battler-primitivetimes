@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.ui
+package com.github.kazuhito_m.twitterbattler.primitive.view
 
 import com.github.kazuhito_m.twitterbattler.primitive.sample.SampleController
 import org.junit.runner.RunWith

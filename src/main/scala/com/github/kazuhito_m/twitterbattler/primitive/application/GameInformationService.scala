@@ -1,7 +1,8 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain
+package com.github.kazuhito_m.twitterbattler.primitive.application
 
 import java.util.Date
 
+import com.github.kazuhito_m.twitterbattler.primitive.domain.BattleScene
 import com.github.kazuhito_m.twitterbattler.primitive.domain.battle.{BattleRepository, Battler, BattlerFactory}
 import com.github.kazuhito_m.twitterbattler.primitive.domain.game.{GameInformationRepository, TwitterRepository}
 import org.slf4j.{Logger, LoggerFactory}

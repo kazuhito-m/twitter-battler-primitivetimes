@@ -28,7 +28,7 @@ class BattleRepositoryTest {
     sut.deleteBattleScene(playerId)
     // 検証
     assertThat(actual, is(notNullValue()))
-    assertThat(actual.id, is("PM:01"))
+    assertThat(actual.id, is("partymake:01"))
   }
 
   @Test

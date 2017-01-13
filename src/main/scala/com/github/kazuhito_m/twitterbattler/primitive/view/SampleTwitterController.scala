@@ -1,4 +1,5 @@
-package com.github.kazuhito_m.twitterbattler.primitive.application
+package com.github.kazuhito_m.twitterbattler.primitive.view
+
 
 import java.security.Principal
 

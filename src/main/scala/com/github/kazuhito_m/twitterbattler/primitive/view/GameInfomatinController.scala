@@ -1,8 +1,8 @@
-package com.github.kazuhito_m.twitterbattler.primitive.application
+package com.github.kazuhito_m.twitterbattler.primitive.view
 
 import java.security.Principal
 
-import com.github.kazuhito_m.twitterbattler.primitive.domain.GameInformationService
+import com.github.kazuhito_m.twitterbattler.primitive.application.GameInformationService
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMethod._

@@ -10,13 +10,13 @@ class BattleSceneSpec extends Specification {
   "BattleSceneのenumもどきのテスト" should {
 
     "オブジェクトからid文字列が取得できる" in {
-      BattleScene.PartyMake.id must equalTo("PM:01")
-      BattleScene.PartyMakeMore.id must equalTo("PM:02")
+      BattleScene.PartyMake.id must equalTo("partymake:01")
+      BattleScene.PartyMakeMore.id must equalTo("partymake:02")
     }
 
     "id文字列からオブジェクトを取得できる" in {
-      BattleScene.byId("PM:01") must equalTo(BattleScene.PartyMake)
-      BattleScene.byId("PM:02") must equalTo(BattleScene.PartyMakeMore)
+      BattleScene.byId("partymake:01") must equalTo(BattleScene.PartyMake)
+      BattleScene.byId("partymake:02") must equalTo(BattleScene.PartyMakeMore)
     }
 
   }
