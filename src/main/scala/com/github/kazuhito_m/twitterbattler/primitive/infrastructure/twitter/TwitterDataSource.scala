@@ -1,14 +1,10 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.model.game
+package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.twitter
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.social.twitter.api.{Twitter, TwitterProfile}
 import org.springframework.stereotype.Repository
 
 @Repository
-class TwitterRepository {
-
-  @Autowired
-  val twitter: Twitter = null
+class TwitterDataSource(twitter: Twitter) {
 
   /**
     * Twitterから「指定されたIDのプロフィール情報」を取得し、オブジェクトで返す。

@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource
+package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource.battle
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.BattleScene
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.BattleRepository

@@ -2,20 +2,18 @@ package com.github.kazuhito_m.twitterbattler.primitive.application
 
 import java.util.Date
 
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.{Battler, BattlerFactory}
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.game.{GameInformationRepository, TwitterRepository}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.{Battler, BattlerRepository}
+import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.twitter.TwitterDataSource
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Service
 
 /**
-  * ゲームにおいての「全体的な」「静的な」情報をて提供するサービス。
-  *
-  * TODO : 主語が大きすぎて「なんでも屋」になりそう…いつでも再構成する心づもり。
+  * 戦闘キャラクタに関するサービス。
   */
 @Service
 class BattlerService(
-                      twitterRepository: TwitterRepository,
-                      gameRepository: GameInformationRepository
+                      battlerRepository: BattlerRepository,
+                      twitterRepository: TwitterDataSource
                     ) {
 
   /** Battlerの再生成の間隔(つまりキャッシュの保存期間) */
@@ -31,11 +29,10 @@ class BattlerService(
     */
   def getPlayer(id: String): Battler = {
     // まず、既存のユーザを取得。
-    var player = gameRepository.getBattler(id)
+    var player = battlerRepository.get(id)
     // あればそれを、なければ生成し保存する。
     if (player == null || isOverIntervalRegenerate(player.generateDate)) {
-      player = BattlerFactory.create(twitterRepository.getProfile(id))
-      gameRepository.saveBattler(player)
+      player = battlerRepository.create(id)
       log.debug("プレイヤーの情報を作成しました。id:" + player.id + ",lv:" + player.level)
     }
     player
