@@ -1,19 +1,14 @@
-package com.github.kazuhito_m.twitterbattler.primitive.view
-
+package com.github.kazuhito_m.twitterbattler.primitive.presentation.controller
 
 import java.security.Principal
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.social.twitter.api.Twitter
 import org.springframework.web.bind.annotation.RequestMethod._
 import org.springframework.web.bind.annotation.{RequestMapping, RestController}
 
 @RestController
 @RequestMapping(Array("/api/twitter"))
-class SampleTwitterController {
-
-  @Autowired
-  val twitter: Twitter = null
+class SampleTwitterController(twitter: Twitter) {
 
   @RequestMapping(value = Array("tl"), method = Array(GET, POST))
   def timeline(user: Principal) = opeTwitter(user,
