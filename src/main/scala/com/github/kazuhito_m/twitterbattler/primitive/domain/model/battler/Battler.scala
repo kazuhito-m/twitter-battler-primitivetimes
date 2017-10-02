@@ -1,6 +1,6 @@
 package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler
 
-import java.util.Date
+import java.time.LocalDateTime
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash
@@ -26,7 +26,7 @@ class Battler extends Serializable {
   @BeanProperty var defensePoint: Long = 0L
   @BeanProperty var speedPoint: Long = 0L
   @BeanProperty var imageUrl: String = ""
-  @BeanProperty var firstSignUpDate: Date = null
-  @BeanProperty var generateDate: Date = null
+  @BeanProperty var firstSignUpDate: LocalDateTime = null
+  @BeanProperty var generateDate: LocalDateTime = null
 
 }

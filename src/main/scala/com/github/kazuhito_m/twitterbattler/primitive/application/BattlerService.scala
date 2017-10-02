@@ -1,6 +1,7 @@
 package com.github.kazuhito_m.twitterbattler.primitive.application
 
-import java.util.Date
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.{Battler, BattlerRepository}
 import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.twitter.TwitterDataSource
@@ -41,7 +42,7 @@ class BattlerService(
   /**
     * Player情報の再作成間隔を過ぎているか否か。
     */
-  def isOverIntervalRegenerate(lastGenerateDate: Date): Boolean =
-    (new Date().getTime - lastGenerateDate.getTime) > INTARVAL_OF_REGENERATE_BATTLER
+  def isOverIntervalRegenerate(lastGenerateDate: LocalDateTime): Boolean =
+    ChronoUnit.MILLIS.between(lastGenerateDate, LocalDateTime.now()) > INTARVAL_OF_REGENERATE_BATTLER
 
 }

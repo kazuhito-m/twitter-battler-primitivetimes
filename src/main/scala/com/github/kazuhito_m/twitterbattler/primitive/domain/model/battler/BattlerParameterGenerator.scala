@@ -1,5 +1,6 @@
 package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler
 
+import java.time.LocalDateTime
 import java.util.Date
 
 import org.springframework.social.twitter.api.TwitterProfile
@@ -17,7 +18,7 @@ trait BattlerParameterGenerator {
     * @param twitter         Twitterのプロファイル。
     * @param firstSignUpDate このゲーム開始(最初にログインした)時刻。
     */
-  def generateBattler(twitter: TwitterProfile, firstSignUpDate: Date): Battler = {
+  def generateBattler(twitter: TwitterProfile, firstSignUpDate: LocalDateTime): Battler = {
     val battler = new Battler()
     battler.id = twitter.getScreenName
     battler.screenName = twitter.getName
@@ -30,7 +31,7 @@ trait BattlerParameterGenerator {
     battler.speedPoint = calculateSpeedPoint(twitter)
     battler.imageUrl = twitter.getProfileImageUrl
     battler.firstSignUpDate = firstSignUpDate
-    battler.generateDate = new Date()
+    battler.generateDate = LocalDateTime.now()
     battler
   }
 
@@ -85,6 +86,6 @@ trait BattlerParameterGenerator {
     * 指定した日付から現在の「経過日数」を計算する。
     * 一日目は「一日」と捉える。
     */
-  def getElapsedDay(from:Date): Long=  getBetweenDays(from , new Date()) + 1
+  def getElapsedDay(from: Date): Long = getBetweenDays(from, new Date()) + 1
 
 }
