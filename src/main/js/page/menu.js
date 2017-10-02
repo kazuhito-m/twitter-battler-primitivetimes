@@ -43,7 +43,7 @@ class MenuPage {
         // 初期表示。
 
         // プレイヤー情報を取得。
-        const player = server.getJson('api/game/getPlayer');
+        const player = server.getJson('api/battler/getPlayer');
 
         // 初期表示系
         html.setImageSrcById("playerImage", player.imageUrl);

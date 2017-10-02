@@ -65,7 +65,7 @@ describe('MenuPage', () => {
     it('MockingしたUtilityオブジェクトの呼び出しを確認', () => {
 
         // サーバ送信のMocking。
-        FakeRequest.respondTo('api/game/getPlayer', {
+        FakeRequest.respondTo('api/battler/getPlayer', {
             readyState: 4,
             status: 200,
             responseText: '{"id":"test_id","level":999}',

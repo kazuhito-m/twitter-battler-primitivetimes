@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle
+package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler
 
 import java.util.Date
 

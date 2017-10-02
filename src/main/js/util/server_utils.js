@@ -14,7 +14,7 @@ class ServerUtils {
      */
     getValue(url) {
         const xhr = this._xhr;
-        xhr.open('POST', url, false);
+        xhr.open('GET', url, false);
         xhr.send();
 
         const jsonText = xhr.responseText;

@@ -2,7 +2,7 @@ package com.github.kazuhito_m.twitterbattler.primitive.sample
 
 import java.io.{ObjectInputStream, ObjectOutputStream}
 
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.Battler
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.Battler
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.game.GameInformationRepositoryTest
 import com.sun.xml.internal.messaging.saaj.util.{ByteInputStream, ByteOutputStream}
 import org.junit.runner.RunWith

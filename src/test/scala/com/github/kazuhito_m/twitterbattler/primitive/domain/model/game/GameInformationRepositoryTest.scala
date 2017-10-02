@@ -3,7 +3,7 @@ package com.github.kazuhito_m.twitterbattler.primitive.domain.model.game
 import java.util.Date
 
 import com.github.kazuhito_m.twitterbattler.primitive.ConfigForTest
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.Battler
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.Battler
 import org.hamcrest.CoreMatchers._
 import org.junit.Assert.assertThat
 import org.junit._
