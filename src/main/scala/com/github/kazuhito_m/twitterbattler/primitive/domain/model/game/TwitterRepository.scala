@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.game
+package com.github.kazuhito_m.twitterbattler.primitive.domain.model.game
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.social.twitter.api.{Twitter, TwitterProfile}

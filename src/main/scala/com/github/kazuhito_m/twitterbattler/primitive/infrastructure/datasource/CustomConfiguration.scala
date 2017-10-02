@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.config
+package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource
 
 import org.springframework.context.annotation.{Bean, Configuration}
 import org.springframework.data.redis.connection.RedisConnectionFactory
@@ -13,7 +13,7 @@ class CustomConfiguration {
 
   /**
     * RedisTemplate定義。
-    * オブジェクト保存汎用。オブジェクト保存時に「JSONで保存」するよう、そｋだけカスタム。
+    * オブジェクト保存汎用。オブジェクト保存時に「JSONで保存」するよう、そこだけカスタム。
     */
   @Bean
   def redisTemplate(connectionFactory: RedisConnectionFactory): RedisTemplate[String, Object] = {

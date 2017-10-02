@@ -1,9 +1,9 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.game
+package com.github.kazuhito_m.twitterbattler.primitive.domain.model.game
 
 import java.util.Date
 
 import com.github.kazuhito_m.twitterbattler.primitive.ConfigForTest
-import com.github.kazuhito_m.twitterbattler.primitive.domain.battle.Battler
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.Battler
 import org.hamcrest.CoreMatchers._
 import org.junit.Assert.assertThat
 import org.junit._

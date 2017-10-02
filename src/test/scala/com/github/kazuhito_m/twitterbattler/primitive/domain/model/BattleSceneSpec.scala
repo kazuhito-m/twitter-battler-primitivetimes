@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain
+package com.github.kazuhito_m.twitterbattler.primitive.domain.model
 
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification

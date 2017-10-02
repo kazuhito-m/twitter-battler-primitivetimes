@@ -1,6 +1,6 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.battle
+package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle
 
-import com.github.kazuhito_m.twitterbattler.primitive.domain.BattleScene
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.BattleScene
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
