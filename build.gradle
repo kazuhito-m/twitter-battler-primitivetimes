@@ -37,6 +37,7 @@ dependencies {
     compile 'org.scala-lang:scala-library:2.11.8'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-redis'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.1'
 
     // sosial and security
     compile 'org.springframework.boot:spring-boot-devtools'
