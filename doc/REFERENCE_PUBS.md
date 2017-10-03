@@ -34,6 +34,7 @@
 - [application.ymlのRedis関係設定値](https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/data/redis/RedisProperties.java)
 - [来たるべき日に「Scala用シリアライザ」を組む時の材料](https://gist.github.com/maji-KY/836dab8cb63038f915aa)
 - [SpringDateRedisをキャッシュに使う方法](http://qiita.com/yoshidan/items/f7c10a43d2a40c3ce8df)
+- [Scala特有のオブジェクトをJsonシリアライズ/デシリアライズするには](https://www.walbrix.com/spring-scala/src/examples/webapp/WEB-INF/objectMapper.xml)
 
 ## Specs2
 
