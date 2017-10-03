@@ -23,7 +23,7 @@ class MenuPage {
      */
     execPartyMake(e, html, server) {
         // パーティー作成＆対戦相手決定を開始。
-        server.getValue('api/game/makeEnemyAndParty');
+        server.putValue('api/battle/makeEnemyAndParty');
         // パーティー作成＆対戦相手決定画面に遷移。
         html.redirect('partymake.html');
     }

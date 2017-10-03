@@ -23,7 +23,7 @@ class BattleResultPage {
      */
     okBattleResult(e, html, server) {
         // バトル開始をサーバに申請。
-        server.getValue('api/game/okBattleResult');
+        server.getValue('api/battle/okBattleResult');
         // Let's Battle ！な画面に遷移。
         html.redirect('index.html');
     }

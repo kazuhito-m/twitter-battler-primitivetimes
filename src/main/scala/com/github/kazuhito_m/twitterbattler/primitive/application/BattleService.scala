@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service
   * TODO : 主語が大きすぎて「なんでも屋」になりそう…いつでも再構成する心づもり。
   */
 @Service
-class GameInformationService(battleRepository: BattleRepository) {
+class BattleService(battleRepository: BattleRepository) {
 
-  protected val log: Logger = LoggerFactory.getLogger(classOf[GameInformationService])
+  protected val log: Logger = LoggerFactory.getLogger(classOf[BattleService])
 
   /**
     * 現在の「指定ユーザの戦闘画面シーンID」を返す。

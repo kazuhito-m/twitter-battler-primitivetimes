@@ -23,7 +23,7 @@ class PartyMakePage {
      */
     startBattle(e, html, server) {
         // バトル開始をサーバに申請。
-        server.getValue('api/game/startBattle');
+        server.getValue('api/battle/startBattle');
         // Let's Battle ！な画面に遷移。
         html.redirect('battle.html');
     }

@@ -2,24 +2,24 @@ package com.github.kazuhito_m.twitterbattler.primitive.presentation.controller
 
 import java.security.Principal
 
-import com.github.kazuhito_m.twitterbattler.primitive.application.{BattlerService, GameInformationService}
+import com.github.kazuhito_m.twitterbattler.primitive.application.{BattlerService, BattleService}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.web.bind.annotation.RequestMethod._
 import org.springframework.web.bind.annotation.{RequestMapping, RestController}
 
 @RestController
-@RequestMapping(Array("/api/game"))
-class GameInformationController(
-                                 gameInfoService: GameInformationService,
-                                 battlerService: BattlerService
-                               ) {
+@RequestMapping(Array("/api/battle"))
+class BattleController(
+                        gameInfoService: BattleService,
+                        battlerService: BattlerService
+                      ) {
 
-  protected val log: Logger = LoggerFactory.getLogger(classOf[GameInformationController])
+  protected val log: Logger = LoggerFactory.getLogger(classOf[BattleController])
 
   @RequestMapping(value = Array("getBattleSceneId"), method = Array(GET, POST))
   def getBattleSceneId(user: Principal): String = gameInfoService.getBattleSceneId(user.getName)
 
-  @RequestMapping(value = Array("makeEnemyAndParty"), method = Array(GET, POST))
+  @RequestMapping(value = Array("makeEnemyAndParty"), method = Array(POST))
   def makeEnemyAndParty(user: Principal) = gameInfoService.makeEnemyAndParty(user.getName)
 
   @RequestMapping(value = Array("startBattle"), method = Array(GET, POST))

@@ -22,6 +22,18 @@ class ServerUtils {
     }
 
     /**
+     * URL指定でサーバから結果を値(オブジェクト)としてそのまま返す (PUTで)。
+     */
+    putValue(url) {
+        const xhr = this._xhr;
+        xhr.open('PUT', url, false);
+        xhr.send();
+
+        const jsonText = xhr.responseText;
+        return jsonText;
+    }
+
+    /**
      * URL指定でサーバから結果をJSONオブジェクトにして返す。
      */
     getJson(url) {

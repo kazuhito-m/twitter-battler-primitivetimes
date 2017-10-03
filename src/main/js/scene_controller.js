@@ -72,7 +72,7 @@ class SceneController {
         // HTML側のID を取得。
         const screenId = html.getScreenId();
         // サーバ側の「シーンID」と、表示HTMLが合ってるかをチェックし、不整合あればリダイレクトで移動する。
-        const sceneId = server.getValue('api/game/getBattleSceneId');
+        const sceneId = server.getValue('api/battle/getBattleSceneId');
 
         console.log("sceneId:" + sceneId + ",screenId:" + screenId)
 

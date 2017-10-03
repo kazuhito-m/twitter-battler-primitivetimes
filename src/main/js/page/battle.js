@@ -23,7 +23,7 @@ class BattlePage {
      */
     operationForBattleTurn(e, html, server) {
         // バトル開始をサーバに申請。
-        server.getValue('api/game/operationForBattleTurn');
+        server.getValue('api/battle/operationForBattleTurn');
         // Let's Battle ！な画面に遷移。
         html.redirect('battle.html');
     }
