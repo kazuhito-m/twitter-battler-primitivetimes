@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import org.springframework.context.annotation.{Bean, Configuration}
 import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
@@ -24,7 +25,6 @@ class CustomConfiguration {
     val template = new RedisTemplate[String, Object]()
     template.setConnectionFactory(connectionFactory)
     template.setKeySerializer(new StringRedisSerializer())
-    //    template.setValueSerializer(new GenericJackson2JsonRedisSerializer) // ここだけカスタム
     template.setValueSerializer(new GenericJackson2JsonRedisSerializer(customObjectMapper)) // ここだけカスタム
     template.setHashKeySerializer(template.getKeySerializer())
     template.setHashValueSerializer(template.getValueSerializer())
@@ -35,7 +35,8 @@ class CustomConfiguration {
     val objectMapper = new ObjectMapper
     objectMapper.enableDefaultTyping(DefaultTyping.NON_FINAL, As.PROPERTY) // GenericJackson2JsonRedisSerializer のコンストラクタ未指定時のデフォルト
     // JSR310 Date and Time API 変換対応
-    objectMapper.registerModule(new JavaTimeModule)
+    objectMapper.registerModule(new JavaTimeModule)   // LocalDate系
+    objectMapper.registerModule(new DefaultScalaModule) // Scalaの型系
     objectMapper
   }
 
