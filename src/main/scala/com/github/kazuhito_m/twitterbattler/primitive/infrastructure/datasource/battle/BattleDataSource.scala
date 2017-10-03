@@ -2,27 +2,41 @@ package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.BattleScene
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.BattleRepository
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerRepository
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
-class BattleDataSource(redisTemplate: RedisTemplate[String, Object]) extends BattleRepository {
+class BattleDataSource(
+                        battlerRepository: BattlerRepository,
+                        redisTemplate: RedisTemplate[String, Object]
+                      ) extends BattleRepository {
 
   /** 戦闘画面シーンIDのキーヘッド */
   val BATTLE_SCENE_ID_KEY_PREFIX = "battleSceneId:"
 
   protected val log: Logger = LoggerFactory.getLogger(classOf[BattleDataSource])
 
-  def makeKeyForSceneId(playerId: String): String = BATTLE_SCENE_ID_KEY_PREFIX + playerId
+  /** RedisにBattleSceneオブジェクトを保存する文字列キーを作成する。 */
+  private def makeKeyForSceneId(id: Long): String = BATTLE_SCENE_ID_KEY_PREFIX + id.toString
 
-  def saveBattleScene(playerId: String, battleScene: BattleScene): Unit = ofv.set(makeKeyForSceneId(playerId), battleScene)
+  def saveBattleScene(playerTwitterId: String, battleScene: BattleScene): Unit = {
+    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    ofv.set(makeKeyForSceneId(id), battleScene)
+  }
 
-  def deleteBattleScene(playerId: String): Unit = redisTemplate.delete(makeKeyForSceneId(playerId))
+  def deleteBattleScene(playerTwitterId: String): Unit = {
+    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    redisTemplate.delete(makeKeyForSceneId(id))
+  }
 
-  def isExistsBattleScene(playerId: String): Boolean = getBattleScene(playerId) != null
+  def isExistsBattleScene(playerTwitterId: String): Boolean = getBattleScene(playerTwitterId) != null
 
-  def getBattleScene(playerId: String): BattleScene = ofv.get(makeKeyForSceneId(playerId)).asInstanceOf[BattleScene]
+  def getBattleScene(playerTwitterId: String): BattleScene = {
+    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    ofv.get(makeKeyForSceneId(id)).asInstanceOf[BattleScene]
+  }
 
   /** エイリアス */
   private def ofv = redisTemplate.opsForValue
