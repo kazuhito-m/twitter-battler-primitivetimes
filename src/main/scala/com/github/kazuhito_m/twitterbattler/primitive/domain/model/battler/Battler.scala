@@ -16,7 +16,8 @@ import scala.beans.BeanProperty
 class Battler extends Serializable {
 
   @BeanProperty
-  @Id var id: String = null
+  @Id var id: Long = 0L
+  @BeanProperty var twitterId: String = null
   @BeanProperty var screenName: String = ""
   @BeanProperty var biography: String = ""
   @BeanProperty var level: Int = 0

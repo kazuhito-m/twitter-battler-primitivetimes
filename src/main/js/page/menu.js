@@ -48,7 +48,7 @@ class MenuPage {
         // 初期表示系
         html.setImageSrcById("playerImage", player.imageUrl);
 
-        html.setTextById("playerId", player.id);
+        html.setTextById("playerId", player.twitterId);
         html.setTextById("playerName", player.screenName);
 
         html.setTextById("playerLv", player.level);

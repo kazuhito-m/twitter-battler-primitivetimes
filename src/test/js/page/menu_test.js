@@ -68,7 +68,7 @@ describe('MenuPage', () => {
         FakeRequest.respondTo('api/battler/getPlayer', {
             readyState: 4,
             status: 200,
-            responseText: '{"id":"test_id","level":999}',
+            responseText: '{"twitterId":"test_id","level":999}',
             responseHeaders: 'content-type: text/json'
         });
 

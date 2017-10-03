@@ -25,10 +25,12 @@ class BattlerService(
   /**
     * プレイヤー情報を取得する。
     *
-    * @param id ID(TwitterID)。
+    * @param twitterId ID(TwitterID)。
     * @return 情報をつめたヤツ。
     */
-  def getPlayer(id: String): Battler = {
+  def getPlayer(twitterId: String): Battler = {
+    // TwitterID(画面に表示されてるやつ)から、内部numberなID)に変換する。
+    val id: Long = battlerRepository.convertTwitterIdToId(twitterId)
     // まず、既存のユーザを取得。
     var player = battlerRepository.get(id)
     // あればそれを、なければ生成し保存する。

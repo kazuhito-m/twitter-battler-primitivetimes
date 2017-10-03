@@ -20,7 +20,8 @@ trait BattlerParameterGenerator {
     */
   def generateBattler(twitter: TwitterProfile, firstSignUpDate: LocalDateTime): Battler = {
     val battler = new Battler()
-    battler.id = twitter.getScreenName
+    battler.id = twitter.getId
+    battler.twitterId = twitter.getScreenName
     battler.screenName = twitter.getName
     battler.biography = twitter.getDescription
     battler.level = calculateBattlerLevel(twitter)
