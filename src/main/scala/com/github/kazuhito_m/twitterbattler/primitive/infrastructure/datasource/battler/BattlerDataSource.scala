@@ -17,7 +17,15 @@ class BattlerDataSource(
 
   protected val log: Logger = LoggerFactory.getLogger(classOf[BattlerDataSource])
 
-  override def convertTwitterIdToId(twitterId: String): Long = twitterDataSource.convertScreenNameToId(twitterId)
+  override def convertTwitterIdToId(twitterId: String): Long = {
+    // TODO あの手➖ーションなど「意識しないでキャッシュ出来る」方法
+    val key = "convertTwitterIdToId:" + twitterId
+    val hitId: String = ofv.get(key).asInstanceOf[String]
+    if (hitId != null) return hitId.toLong
+    val id: Long = twitterDataSource.convertScreenNameToId(twitterId)
+    ofv.set(key, id.toString)
+    id
+  }
 
   override def create(id: Long): Battler = {
     val battler = BattlerFactory.create(twitterDataSource.getProfile(id))
