@@ -1,4 +1,4 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.model.party
+package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler
 
 import scala.math._
 

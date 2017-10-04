@@ -29,4 +29,14 @@ trait BattlerRepository {
     */
   def isExists(id: Long): Boolean
 
+  /**
+    * 指定したバトラーIDの友達バトラーをランダムに人数指定で取得する。
+    */
+  def randomFriendBattlers(id: Long, size: Int): List[Battler]
+
+  /**
+    * ランダムに一人のバトラーを取得する。
+    */
+  def randomOneBattler(): Battler
+
 }
