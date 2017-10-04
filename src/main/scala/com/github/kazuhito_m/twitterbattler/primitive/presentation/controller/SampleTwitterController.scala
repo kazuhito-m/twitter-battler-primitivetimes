@@ -40,4 +40,7 @@ class SampleTwitterController(twitter: Twitter, redisTemplate: RedisTemplate[Str
 
   }
 
+  @RequestMapping(value = Array("twitterTest"), method = Array(GET))
+  def twitterTest() = twitter.timelineOperations().getHomeTimeline
+
 }
