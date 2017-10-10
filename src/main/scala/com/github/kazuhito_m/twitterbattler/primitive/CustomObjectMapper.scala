@@ -18,3 +18,4 @@ object CustomObjectMapper extends ObjectMapper {
   // Scala 特有の型系(case classなど)
   registerModule(new DefaultScalaModule)
 }
+
