@@ -4,6 +4,7 @@ import java.security.Principal
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.Battler
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.sample.Batlers
+import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.twitter.TwitterDataSource
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.social.twitter.api.Twitter
 import org.springframework.web.bind.annotation.RequestMethod._
@@ -11,7 +12,11 @@ import org.springframework.web.bind.annotation.{RequestMapping, RestController}
 
 @RestController
 @RequestMapping(Array("/api/twitter"))
-class SampleTwitterController(twitter: Twitter, redisTemplate: RedisTemplate[String, Object]) {
+class SampleTwitterController(
+                               twitter: Twitter,
+                               redisTemplate: RedisTemplate[String, Object],
+                               twitterRepository: TwitterDataSource
+                             ) {
 
   @RequestMapping(value = Array("tl"), method = Array(GET, POST))
   def timeline(user: Principal) = opeTwitter(user,
@@ -42,5 +47,9 @@ class SampleTwitterController(twitter: Twitter, redisTemplate: RedisTemplate[Str
 
   @RequestMapping(value = Array("twitterTest"), method = Array(GET))
   def twitterTest() = twitter.timelineOperations().getHomeTimeline
+
+  @RequestMapping(value = Array("randomIds"), method = Array(GET))
+  def randomIds(): List[Long] = twitterRepository.getRandomIds()
+
 
 }

@@ -17,7 +17,25 @@ class TwitterDataSource(twitter: Twitter) {
     ids(randomIndex)
   }
 
-  def getRandomIds(): List[Long] = List[Long]() // TODO 本実装(現在仮実装)。
+  def getRandomIds(): List[Long] = {
+    // 「だれでも使ってそうなワード(というか文字)」でツイートを検索、その発信者のIDを貯める。
+    var idsA: Set[Long] = searchIdFromTweetWord("は")
+    //    var idsB: Set[Long] = searchIdFromTweetWord("a")
+    //    var idsC: Set[Long] = searchIdFromTweetWord("今")
+    //    (idsA ++ idsB ++ idsC).toList
+    idsA.toList
+  }
+
+  private def searchIdFromTweetWord(word: String): Set[Long] = {
+    val searchOpe = twitter.searchOperations()
+    return searchOpe.search(word)
+      .getTweets
+      .asScala
+      .map { tweet => tweet.getUser }
+      .filter(!_.isProtected)
+      .map { user => user.getId }
+      .toSet
+  }
 
   def getProfile(id: Long): TwitterProfile = twitter.userOperations().getUserProfile(id)
 
