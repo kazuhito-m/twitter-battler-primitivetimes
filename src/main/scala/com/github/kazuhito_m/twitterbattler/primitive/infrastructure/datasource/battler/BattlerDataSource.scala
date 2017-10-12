@@ -1,10 +1,15 @@
 package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource.battler
 
+import java.util
+
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.{Battler, BattlerFactory, BattlerRepository, RandomChoiceIdList}
 import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.twitter.TwitterDataSource
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Repository
+
+import scala.collection.JavaConverters._
+import scala.math.{floor, random}
 
 @Repository
 class BattlerDataSource(
@@ -57,17 +62,44 @@ class BattlerDataSource(
     val choicesIds: List[Long] = new RandomChoiceIdList(ids).choice(size)
     if (choicesIds.size >= size) return choicesIds;
 
-    val followIds:List[Long] = twitterDataSource.getFollows(id)
+    val followIds: List[Long] = twitterDataSource.getFollows(id)
     val choiceWithFollowIds = choicesIds ++ new RandomChoiceIdList(followIds).choice(size - choicesIds.size)
     if (choiceWithFollowIds.size >= size) return choiceWithFollowIds;
 
-    val randomIds:List[Long] = twitterDataSource.getRandomIds()
+    val randomIds: List[Long] = this.getRandomIds()
     choiceWithFollowIds ++ new RandomChoiceIdList(randomIds).choice(size - choiceWithFollowIds.size)
   }
 
   override def randomOneBattler(): Battler = {
-    val id: Long = twitterDataSource.getRandomId()
-    getOrCreate(id)
+    getOrCreate(getRandomId)
+  }
+
+  private val RANDOM_IDS_KEY: String = "randomIds"
+
+  /**
+    * 因果の無いTwitterランダムID群を取得する。
+    * その際、アクセスにコストがかかるので、BattlerデータとIDデータをRedisに作成・保存する。
+    */
+  private def getRandomIds(): List[Long] = {
+    val accounts = twitterDataSource.getRandomAccounts()
+    // バトラーを作りながら保存。
+    accounts.foreach(account => registrar(BattlerFactory.create(account)))
+    // IDだけを抽出。
+    val ids: List[Long] = accounts.map { account => account.getId }
+    // Twitter側からがゼロ(RateOvetとか)なら、Redis側から出して返す。
+    if (ids.isEmpty) {
+      val idSet: util.Set[Object] = redisTemplate.opsForSet().members(RANDOM_IDS_KEY)
+      return idSet.asScala.map { value => value.asInstanceOf[Long] }.toList
+    }
+    // Twitter側で取得できた場合、Redisに保存する。
+    redisTemplate.opsForSet.add(RANDOM_IDS_KEY, ids.toArray)
+    ids;
+  }
+
+  private def getRandomId(): Long = {
+    val accounts: List[Long] = getRandomIds()
+    val randomIndex = floor(random * accounts.size).toInt
+    accounts(randomIndex)
   }
 
   /** RedisにBattlerオブジェクトを保存する文字列キーを作成する。 */

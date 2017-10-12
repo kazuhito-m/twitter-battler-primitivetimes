@@ -4,36 +4,28 @@ import org.springframework.social.twitter.api.{Twitter, TwitterProfile}
 import org.springframework.stereotype.Repository
 
 import scala.collection.JavaConverters._
-import scala.math.{floor, random}
 
 @Repository
 class TwitterDataSource(twitter: Twitter) {
 
   def convertScreenNameToId(screenName: String): Long = twitter.userOperations().getUserProfile(screenName).getId
 
-  def getRandomId(): Long = {
-    val ids: List[Long] = getRandomIds()
-    val randomIndex = floor(random * ids.size).toInt
-    ids(randomIndex)
-  }
-
-  def getRandomIds(): List[Long] = {
+  def getRandomAccounts(): List[TwitterProfile] = {
     // 「だれでも使ってそうなワード(というか文字)」でツイートを検索、その発信者のIDを貯める。
-    var idsA: Set[Long] = searchIdFromTweetWord("は")
+    var accounts: Set[TwitterProfile] = searchAccountsFromTweetWord("は")
     //    var idsB: Set[Long] = searchIdFromTweetWord("a")
     //    var idsC: Set[Long] = searchIdFromTweetWord("今")
     //    (idsA ++ idsB ++ idsC).toList
-    idsA.toList
+    accounts.toList
   }
 
-  private def searchIdFromTweetWord(word: String): Set[Long] = {
+  private def searchAccountsFromTweetWord(word: String): Set[TwitterProfile] = {
     val searchOpe = twitter.searchOperations()
     return searchOpe.search(word)
       .getTweets
       .asScala
       .map { tweet => tweet.getUser }
       .filter(!_.isProtected)
-      .map { user => user.getId }
       .toSet
   }
 

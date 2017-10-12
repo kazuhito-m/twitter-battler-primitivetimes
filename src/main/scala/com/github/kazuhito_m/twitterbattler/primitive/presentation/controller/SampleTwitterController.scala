@@ -48,8 +48,5 @@ class SampleTwitterController(
   @RequestMapping(value = Array("twitterTest"), method = Array(GET))
   def twitterTest() = twitter.timelineOperations().getHomeTimeline
 
-  @RequestMapping(value = Array("randomIds"), method = Array(GET))
-  def randomIds(): List[Long] = twitterRepository.getRandomIds()
-
 
 }
