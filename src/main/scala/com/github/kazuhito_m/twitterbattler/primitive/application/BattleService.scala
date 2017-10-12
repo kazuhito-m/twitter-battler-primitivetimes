@@ -63,6 +63,6 @@ class BattleService(battleRepository: BattleRepository) {
     battleRepository.saveBattleScene(playerTwitterId, null)
   }
 
-  def getBattle(playerTwitterId: String): Battle = battleRepository.createBattle(playerTwitterId)
+  def getBattle(playerTwitterId: String): Battle = battleRepository.getBattle(playerTwitterId)
 
 }
