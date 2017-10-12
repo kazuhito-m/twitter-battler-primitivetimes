@@ -37,7 +37,8 @@ class SceneController {
     getCorrectHtmlName(sceneId, screenId) {
         // シーンIDからプレフィックスを取得。
         if (!sceneId) sceneId = '';
-        const scenePrefix = sceneId.split(':')[0];
+        const fixedSceneId = sceneId.replace(/"/g, ''); // ダブルクオートは削除
+        const scenePrefix = fixedSceneId.split(':')[0];
 
         // プレフィックスが一致する(サーバとHTMLの画面状態が完全一致)なら、問題なしでnull返し。
         if (screenId === scenePrefix) return null;
@@ -74,7 +75,7 @@ class SceneController {
         // サーバ側の「シーンID」と、表示HTMLが合ってるかをチェックし、不整合あればリダイレクトで移動する。
         const sceneId = server.getValue('api/battle/getBattleSceneId');
 
-        console.log("sceneId:" + sceneId + ",screenId:" + screenId)
+        console.log("sceneId:" + sceneId + ",screenId:" + screenId);
 
         // シーンIDのプレフィックスとHTMLが一致してるかを判定。
         const redirectHtml = this.getCorrectHtmlName(sceneId, screenId);

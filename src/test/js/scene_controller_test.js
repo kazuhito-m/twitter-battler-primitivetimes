@@ -39,4 +39,11 @@ describe('index.js(SceneController)のテスト', () => {
         assert.equal(sut.getCorrectHtmlName('partymake:02', 'partymake'), null);
     });
 
+    it('サーバから帰ってきたScineIDがダブルクオート付きでも適切に処理出来る', () => {
+        const sut = new SceneController();
+        // 実行 & 検証
+        assert.equal(sut.getCorrectHtmlName('"partymake:01"', 'menu'), 'partymake.html');
+        assert.equal(sut.getCorrectHtmlName('""partymake:01""', 'menu'), 'partymake.html');
+    });
+
 });
