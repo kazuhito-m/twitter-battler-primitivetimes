@@ -1,7 +1,7 @@
 package com.github.kazuhito_m.twitterbattler.primitive.application
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.BattleScene
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.BattleRepository
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.{Battle, BattleRepository}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Service
 
@@ -28,7 +28,7 @@ class BattleService(battleRepository: BattleRepository) {
     */
   def makeEnemyAndParty(playerTwitterId: String): Unit = {
     // 敵の決定とプレイヤーと敵のパーティーメンバーを生成
-    // TODO 実装
+    battleRepository.createBattle(playerTwitterId);
     // シーンを入れ替える。
     battleRepository.saveBattleScene(playerTwitterId, BattleScene.PartyMake)
   }
@@ -63,5 +63,6 @@ class BattleService(battleRepository: BattleRepository) {
     battleRepository.saveBattleScene(playerTwitterId, null)
   }
 
+  def getBattle(playerTwitterId: String): Battle = battleRepository.createBattle(playerTwitterId)
 
 }

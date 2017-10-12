@@ -24,4 +24,8 @@ trait BattleRepository {
     */
   def getBattleScene(playerTwitterId: String): BattleScene
 
+  def createBattle(playerTwitterId: String): Battle
+
+  def getBattle(playerTwitterId: String): Battle
+
 }
