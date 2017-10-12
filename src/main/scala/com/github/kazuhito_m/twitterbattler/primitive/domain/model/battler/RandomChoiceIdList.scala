@@ -6,7 +6,7 @@ class RandomChoiceIdList(values: List[Long]) {
   def choice(size: Int): List[Long] = {
     var indexSet = Set[Int]()
     while (indexSet.size < size)
-      indexSet += floor(random * size).toInt
+      indexSet += floor(random * values.size).toInt
     indexSet.map { index => values(index) }.toList
   }
 }
