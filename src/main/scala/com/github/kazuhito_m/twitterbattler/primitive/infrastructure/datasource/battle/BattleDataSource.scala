@@ -59,6 +59,11 @@ class BattleDataSource(
     newBattle
   }
 
+  override def registerBattle(playerTwitterId: String, battle: Battle): Unit = {
+    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    registerBattle(id, battle)
+  }
+
   private def makeKeyForBaattleId(id: Long): String = BATTLE_ID_KEY_PREFIX + id.toString
 
   private def registerBattle(id: Long, battle: Battle): Unit = ofv.set(makeKeyForBaattleId(id), battle)
