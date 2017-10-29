@@ -18,10 +18,11 @@ class BattlerParameterGeneratorSpec extends Specification {
       // 放り込むパラメータ
       val profile = new TwitterProfile(1, null, null, null, null, null, null, null) {
         override def getCreatedDate() = new Date(1256399391000L)
+
         override def getStatusesCount: Int = 82071
       }
       // 実行＆検証
-      sut.calculateSpeedPoint(profile) must equalTo(32)
+      sut.calculateSpeedPoint(profile) must equalTo(29)
 
     }
 

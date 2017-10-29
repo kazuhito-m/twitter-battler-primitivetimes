@@ -12,7 +12,7 @@ trait BattlerRepository {
   /**
     * Battlerオブジェクトを保存する。すでにある場合は上書きする。
     */
-  def registrar(battler: Battler): Unit
+  def registar(battler: Battler): Unit
 
   /**
     * BattlerオブジェクトをIDで取得する。

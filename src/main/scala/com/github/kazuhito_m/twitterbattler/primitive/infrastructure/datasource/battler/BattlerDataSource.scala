@@ -34,7 +34,7 @@ class BattlerDataSource(
 
   override def create(id: Long): Battler = {
     val battler = BattlerFactory.create(twitterDataSource.getProfile(id))
-    registrar(battler)
+    registar(battler)
     battler
   }
 
@@ -44,7 +44,7 @@ class BattlerDataSource(
     return create(id)
   }
 
-  override def registrar(battler: Battler): Unit = ofv.set(makeKey(battler.id), battler)
+  override def registar(battler: Battler): Unit = ofv.set(makeKey(battler.id), battler)
 
   override def get(id: Long): Battler = ofv.get(makeKey(id)).asInstanceOf[Battler]
 
@@ -83,7 +83,7 @@ class BattlerDataSource(
   private def getRandomIds(): List[Long] = {
     val accounts = twitterDataSource.getRandomAccounts()
     // バトラーを作りながら保存。
-    accounts.foreach(account => registrar(BattlerFactory.create(account)))
+    accounts.foreach(account => registar(BattlerFactory.create(account)))
     // IDだけを抽出。
     val ids: List[Long] = accounts.map { account => account.getId }
     // Twitter側からがゼロ(RateOvetとか)なら、Redis側から出して返す。
