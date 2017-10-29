@@ -2,13 +2,15 @@ package com.github.kazuhito_m.twitterbattler.primitive.presentation.controller
 
 import java.security.Principal
 
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.{Commands, PartyActivity}
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.Battler
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.sample.Batlers
 import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.twitter.TwitterDataSource
+import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.social.twitter.api.Twitter
 import org.springframework.web.bind.annotation.RequestMethod._
-import org.springframework.web.bind.annotation.{RequestMapping, RestController}
+import org.springframework.web.bind.annotation.{RequestBody, RequestMapping, RestController}
 
 @RestController
 @RequestMapping(Array("/api/twitter"))
@@ -30,6 +32,19 @@ class SampleTwitterController(
     (name) => twitter.userOperations().getUserProfile(name)
   )
 
+  @RequestMapping(value = Array("commands"), method = Array(GET, POST))
+  def commands() = new Commands(PartyActivity.Fight)
+
+  @RequestMapping(value = Array("sendCommands"), method = Array(POST))
+  def sendCommands(@RequestBody commands: Commands): Unit = {
+    if (commands == null) {
+      logger.info("commandsはnull")
+      return
+    }
+    logger.info("commands.partyActivity:" + commands.partyActivity.toString)
+    //    logger.info("commands.partyActivity:" + commands)
+  }
+
   @RequestMapping(value = Array("jsonTest"), method = Array(GET))
   def jsonTest(): Unit = {
     val one: Battler = new Battler
@@ -48,5 +63,6 @@ class SampleTwitterController(
   @RequestMapping(value = Array("twitterTest"), method = Array(GET))
   def twitterTest() = twitter.timelineOperations().getHomeTimeline
 
+  val logger: Logger = LoggerFactory.getLogger("sampleTwitterController")
 
 }
