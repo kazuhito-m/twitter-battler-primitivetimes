@@ -48,8 +48,9 @@ class PartyMakePage {
     }
 
     viewParties(battle, html) {
-        this.viewParty(battle.mineParty, 1, html);
-        this.viewParty(battle.enemyParty, 2, html);
+        const status = battle.turns.lastTurn.afterStatus;
+        this.viewParty(status.mineParty, 1, html);
+        this.viewParty(status.enemyParty, 2, html);
     }
 
     viewParty(party, groupKey, html) {
