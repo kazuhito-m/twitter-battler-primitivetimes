@@ -11,6 +11,7 @@
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet"/>
     <link href="css/layout.css" rel="stylesheet"/>
     <link href="css/prettify.css" rel="stylesheet"/>
+    <link href="css/page/battle.css" rel="stylesheet"/>
     <style type="text/css">body {padding: 5px 0 5px 0;}</style>
 </head>
 <body>
@@ -23,15 +24,100 @@
         <button type="submit">SignOut</button>
     </form>
 </div>
-<section id="status">
-    <div class="container-fluid">
-    </div>
-</section>
-<section id="operations">
-    <a id="operationFight">たたかう</a>
-    <br/>
-    <a id="operationSurrender">こうさん</a>
-</section>
+<div class="container">
+    <section id="status">
+        <div class="container-fluid">
+        </div>
+    </section>
+    <section id="operations">
+        <div class="playerArea">
+            <div class="playerBox">
+                <table>
+                    <thead>
+                    <tr>
+                        <th><img id="battlerImage_1_1" src=""></th>
+                        <th><span id="battlerId_1_1"></span></th>
+                        <th><img id="battlerImage_1_2" src=""></th>
+                        <th><span id="battlerId_1_2"></span></th>
+                        <th><img id="battlerImage_1_3" src=""></th>
+                        <th><span id="battlerId_1_3"></span></th>
+                        <th><img id="battlerImage_1_4" src=""></th>
+                        <th><span id="battlerId_1_4"></span></th>
+                        <th><img id="battlerImage_1_5" src=""></th>
+                        <th><span id="battlerId_1_5"></span></th>
+                    </tr>
+                    </thead>
+                    <tbody id="workResultDetails_1_1">
+                    <tr>
+                        <td>H :</td>
+                        <td><span id="battlerMaxHitPoint_1_1"></span></td>
+                        <td>H :</td>
+                        <td><span id="battlerMaxHitPoint_1_2"></span></td>
+                        <td>H :</td>
+                        <td><span id="battlerMaxHitPoint_1_3"></span></td>
+                        <td>H :</td>
+                        <td><span id="battlerMaxHitPoint_1_4"></span></td>
+                        <td>H :</td>
+                        <td><span id="battlerMaxHitPoint_1_5"></span></td>
+                    </tr>
+                    <tr>
+                        <td>S :</td>
+                        <td><span id="battlerMaxSpecialPoint_1_1"></span></td>
+                        <td>S :</td>
+                        <td><span id="battlerMaxSpecialPoint_1_2"></span></td>
+                        <td>S :</td>
+                        <td><span id="battlerMaxSpecialPoint_1_3"></span></td>
+                        <td>S :</td>
+                        <td><span id="battlerMaxSpecialPoint_1_4"></span></td>
+                        <td>S :</td>
+                        <td><span id="battlerMaxSpecialPoint_1_5"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Lv:</td>
+                        <td><span id="battlerLv_1_1"></span></td>
+                        <td>Lv:</td>
+                        <td><span id="battlerLv_1_2"></span></td>
+                        <td>Lv:</td>
+                        <td><span id="battlerLv_1_3"></span></td>
+                        <td>Lv:</td>
+                        <td><span id="battlerLv_1_4"></span></td>
+                        <td>Lv:</td>
+                        <td><span id="battlerLv_1_5"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="enemyArea">
+            <table>
+                <tbody>
+                <tr>
+                    <th><img id="enemyImage_1_1" src=""></th>
+                    <th><img id="enemyImage_1_2" src=""></th>
+                    <th><img id="enemyImage_1_3" src=""></th>
+                    <th><img id="enemyImage_1_4" src=""></th>
+                    <th><img id="enemyImage_1_5" src=""></th>
+                </tr>
+                <tr>
+                    <td><span id="enemyId_1_1"></span></td>
+                    <td><span id="enemyId_1_2"></span></td>
+                    <td><span id="enemyId_1_3"></span></td>
+                    <td><span id="enemyId_1_4"></span></td>
+                    <td><span id="enemyId_1_5"></span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="underArea">
+            <div class="commandBox">
+                <p><a id="operationFight">たたかう</a></p>
+                <p><a id="operationSurrender">こうさん</a></p>
+            </div>
+            <div class="informationBox">
+                ここにこめんとが入る。
+            </div>
+        </div>
+    </section>
+</div>
 <div class="container">
     <footer class="footer">
         <p>Version: <span id="appVer">取れない場合これを表示する</span></p>
