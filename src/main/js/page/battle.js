@@ -18,14 +18,39 @@ class BattlePage {
         this._server = new ServerUtils();
     }
 
+    operationForBattleTurn(partyOperation, e, html, server) {
+        // JSON文字列を作成。
+        const operationJson = this.createOperationJson(partyOperation);
+        // TODO デバッグだから消す
+        alert("往診JSOｎ:" + operationJson);
+        // バトル開始をサーバに申請。
+        server.postValue('api/battle/operationForBattleTurn', operationJson);
+        // Let's Battle ！な画面に遷移。
+        html.redirect('battle.html');
+    }
+
+    createOperationJson(partyOperation) {
+        const operation = '$' + partyOperation + '$';
+        return `{
+          "@class" : "com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.Commands",
+          "partyActivity" : {
+            "@class" : "com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.PartyActivity${operation}"
+          }
+        }`;
+    }
+
     /**
      * 「たたかう」クリックイベント。
      */
-    operationForBattleTurn(e, html, server) {
-        // バトル開始をサーバに申請。
-        server.getValue('api/battle/operationForBattleTurn');
-        // Let's Battle ！な画面に遷移。
-        html.redirect('battle.html');
+    operationFight(e, html, server) {
+        this.operationForBattleTurn('Fight', e, html, server)
+    }
+
+    /**
+     * 「こうさん」クリックイベント。
+     */
+    operationSurrender(e, html, server) {
+        this.operationForBattleTurn('Surrender', e, html, server)
     }
 
     /**
@@ -36,8 +61,8 @@ class BattlePage {
         const html = this._html;
 
         // イベント定義。
-        html.addClickEventById('operationForBattleTurn', (e) => this.operationForBattleTurn(e, html, server));
-
+        html.addClickEventById('operationFight', (e) => this.operationFight(e, html, server));
+        html.addClickEventById('operationSurrender', (e) => this.operationSurrender(e, html, server));
     }
 
 }

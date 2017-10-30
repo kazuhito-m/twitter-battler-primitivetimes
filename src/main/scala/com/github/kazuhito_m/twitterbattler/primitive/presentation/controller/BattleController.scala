@@ -4,10 +4,10 @@ import java.security.Principal
 
 import com.github.kazuhito_m.twitterbattler.primitive.application.{BattleService, BattlerService}
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.Battle
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.{Commands, PartyActivity}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.Commands
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.web.bind.annotation.RequestMethod._
-import org.springframework.web.bind.annotation.{RequestMapping, RestController}
+import org.springframework.web.bind.annotation.{RequestBody, RequestMapping, RestController}
 
 @RestController
 @RequestMapping(Array("/api/battle"))
@@ -30,8 +30,9 @@ class BattleController(
   @RequestMapping(value = Array("startBattle"), method = Array(GET, POST))
   def startBattle(user: Principal) = battleService.startBattle(user.getName)
 
-  @RequestMapping(value = Array("operationForBattleTurn"), method = Array(GET, POST))
-  def operationForBattleTurn(user: Principal) = battleService.operationForBattleTurn(user.getName, new Commands(PartyActivity.Surrender))
+  @RequestMapping(value = Array("operationForBattleTurn"), method = Array(POST))
+  def operationForBattleTurn(user: Principal, @RequestBody commands: Commands)
+    = battleService.operationForBattleTurn(user.getName, commands)
 
   @RequestMapping(value = Array("okBattleResult"), method = Array(GET, POST))
   def okBattleResult(user: Principal) = battleService.okBattleResult(user.getName)
