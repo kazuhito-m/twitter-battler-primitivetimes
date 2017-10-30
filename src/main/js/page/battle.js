@@ -21,20 +21,17 @@ class BattlePage {
     operationForBattleTurn(partyOperation, e, html, server) {
         // JSON文字列を作成。
         const operationJson = this.createOperationJson(partyOperation);
-        // TODO デバッグだから消す
-        alert("往診JSOｎ:" + operationJson);
         // バトル開始をサーバに申請。
         server.postValue('api/battle/operationForBattleTurn', operationJson);
-        // Let's Battle ！な画面に遷移。
+        // 自画面を再描画。
         html.redirect('battle.html');
     }
 
     createOperationJson(partyOperation) {
-        const operation = '$' + partyOperation + '$';
         return `{
           "@class" : "com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.Commands",
           "partyActivity" : {
-            "@class" : "com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.PartyActivity${operation}"
+            "@class" : "com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.PartyActivity$${partyOperation}$"
           }
         }`;
     }
