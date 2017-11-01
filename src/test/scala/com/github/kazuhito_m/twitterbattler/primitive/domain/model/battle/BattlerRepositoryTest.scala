@@ -3,7 +3,7 @@ package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle
 import java.time.LocalDateTime
 
 import com.github.kazuhito_m.twitterbattler.primitive.ConfigForTest
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.{Battler, BattlerRepository}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.{Battler, BattlerRepository, BattlerStatus}
 import org.hamcrest.CoreMatchers._
 import org.junit.Assert.assertThat
 import org.junit._
@@ -73,8 +73,10 @@ class BattlerRepositoryTest {
     name,
     "紹介文",
     1,
-    2,
-    3,
+    new BattlerStatus(
+      2,
+      3
+    ),
     4,
     5,
     6,

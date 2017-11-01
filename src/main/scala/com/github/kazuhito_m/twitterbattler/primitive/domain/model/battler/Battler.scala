@@ -13,8 +13,7 @@ class Battler(
                val screenName: String,
                val biography: String,
                val level: Int,
-               val maxHitPoint: Long,
-               val maxSpecialPoint: Long,
+               val maxStatus: BattlerStatus,
                val attackPoint: Long,
                val defensePoint: Long,
                val speedPoint: Long,
@@ -29,8 +28,7 @@ class Battler(
             screenName: String,
             biography: String,
             level: Int,
-            maxHitPoint: Long,
-            maxSpecialPoint: Long,
+            maxStatus: BattlerStatus,
             attackPoint: Long,
             defensePoint: Long,
             speedPoint: Long,
@@ -43,14 +41,13 @@ class Battler(
     screenName,
     biography,
     level,
-    maxHitPoint,
-    maxSpecialPoint,
+    maxStatus,
     attackPoint,
     defensePoint,
     speedPoint,
     imageUrl,
     firstSignUpDate,
     generateDate,
-    new BattlerStatus(maxHitPoint, maxSpecialPoint)
+    maxStatus
   )
 }

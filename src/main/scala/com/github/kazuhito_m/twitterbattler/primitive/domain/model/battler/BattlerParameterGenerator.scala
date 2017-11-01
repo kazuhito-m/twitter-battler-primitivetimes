@@ -24,8 +24,10 @@ trait BattlerParameterGenerator {
     twitter.getName,
     twitter.getDescription,
     calculateBattlerLevel(twitter),
-    calculateMaxHitPoint(twitter),
-    calculateMaxSpecialPoint(twitter),
+    new BattlerStatus(
+      calculateMaxHitPoint(twitter),
+      calculateMaxSpecialPoint(twitter)
+    ),
     calculateAttackPoint(twitter),
     calculateDefensePoint(twitter),
     calculateSpeedPoint(twitter),
