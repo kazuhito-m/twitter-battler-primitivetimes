@@ -42,7 +42,7 @@ trait BattlerParameterGenerator {
     * 暫定 : (ツイート数 /100) ルート2
     */
   def calculateBattlerLevel(twitter: TwitterProfile): Int =
-    (Math.log(twitter.getStatusesCount / 100) / Math.log(2.0) + 1.0).asInstanceOf[Int]
+    (Math.log(twitter.getStatusesCount / 100 + 1) / Math.log(2.0) + 1.0).toInt
 
   /**
     * Twitter情報からバトラーの「最大HP」を計算する。
