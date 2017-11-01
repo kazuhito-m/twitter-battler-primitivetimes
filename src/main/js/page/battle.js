@@ -88,13 +88,34 @@ class BattlePage {
     }
 
     viewMineParty(party, html) {
-        // TODO 実装
-        alert('味方パーティの表示');
+        let index = 1;
+        this.viewMineBattler(party.owner, index, html);
+        for (var member of party.members[1]) {
+            this.viewMineBattler(member, ++index, html);
+        }
+    }
+
+    viewMineBattler(battler, index, html) {
+        const suffix = '_' + index;
+        html.setImageSrcById("battlerImage" + suffix, battler.imageUrl);
+        html.setTextById("battlerId" + suffix, battler.twitterId);
+        html.setTextById("battlerHitPoint" + suffix, battler.maxStatus.hitPoint);
+        html.setTextById("battlerSpecialPoint" + suffix, battler.maxStatus.specialPoint);
+        html.setTextById("battlerLv" + suffix, battler.level);
     }
 
     viewEnemyParty(party, html) {
-        // TODO 実装
-        alert('的パーティの表示');
+        let index = 1;
+        this.viewEnemyBattler(party.owner, index, html);
+        for (var member of party.members[1]) {
+            this.viewEnemyBattler(member, ++index, html);
+        }
+    }
+
+    viewEnemyBattler(battler, index, html) {
+        const suffix = '_' + index;
+        html.setImageSrcById("enemyImage" + suffix, battler.imageUrl);
+        html.setTextById("enemyId" + suffix, battler.twitterId);
     }
 
     animationTurn(turn) {
