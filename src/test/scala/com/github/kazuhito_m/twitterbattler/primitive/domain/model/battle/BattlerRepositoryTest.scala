@@ -67,21 +67,20 @@ class BattlerRepositoryTest {
     assertThat(actual2, is(false))
   }
 
-  def createSampleBattler(id: Int, name: String): Battler = {
-    val battler = new Battler()
-    battler.id = id
-    battler.screenName = name
-    battler.biography = "紹介文"
-    battler.level = 1
-    battler.maxHitPoint = 2
-    battler.maxSpecialPoint = 3
-    battler.attackPoint = 4
-    battler.defensePoint = 5
-    battler.speedPoint = 6
-    battler.imageUrl = "http://example.com"
-    battler.firstSignUpDate = LocalDateTime.now()
-    battler.generateDate = LocalDateTime.now()
-    battler
-  }
+  def createSampleBattler(id: Int, name: String) = new Battler(
+    id,
+    "twitterId",
+    name,
+    "紹介文",
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    "http://example.com",
+    LocalDateTime.now(),
+    LocalDateTime.now()
+  )
 
 }

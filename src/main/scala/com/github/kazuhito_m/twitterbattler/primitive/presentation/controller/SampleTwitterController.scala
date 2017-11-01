@@ -3,8 +3,6 @@ package com.github.kazuhito_m.twitterbattler.primitive.presentation.controller
 import java.security.Principal
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.{Commands, PartyActivity}
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.Battler
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.sample.Batlers
 import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.twitter.TwitterDataSource
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.data.redis.core.RedisTemplate
@@ -45,20 +43,20 @@ class SampleTwitterController(
     //    logger.info("commands.partyActivity:" + commands)
   }
 
-  @RequestMapping(value = Array("jsonTest"), method = Array(GET))
-  def jsonTest(): Unit = {
-    val one: Battler = new Battler
-    one.id = 1
-    one.twitterId = "testone"
-    val two: Battler = new Battler
-    two.id = 2
-    two.twitterId = "testtwo"
-
-    //    val battlers: Batlers = new Batlers(one, two)
-    val battlers: Batlers = new Batlers(List(one, two))
-    redisTemplate.opsForValue.set("test:abcd", battlers)
-
-  }
+  //  @RequestMapping(value = Array("jsonTest"), method = Array(GET))
+  //  def jsonTest(): Unit = {
+  //    val one: Battler = new Battler
+  //    one.id = 1
+  //    one.twitterId = "testone"
+  //    val two: Battler = new Battler
+  //    two.id = 2
+  //    two.twitterId = "testtwo"
+  //
+  //    //    val battlers: Batlers = new Batlers(one, two)
+  //    val battlers: Batlers = new Batlers(List(one, two))
+  //    redisTemplate.opsForValue.set("test:abcd", battlers)
+  //
+  //  }
 
   @RequestMapping(value = Array("twitterTest"), method = Array(GET))
   def twitterTest() = twitter.timelineOperations().getHomeTimeline
