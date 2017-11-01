@@ -53,6 +53,12 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+.enemyArea th {
+    padding: 1px 5px 1px 5px;
+}
+.enemyArea td {
+    padding: 1px 5px 1px 5px;
+}
 
 .playerArea {
     position: inherit;
@@ -71,4 +77,10 @@ body {
 .playerBox table {
     margin-left: auto;
     margin-right: auto;
+}
+.playerBox th {
+    padding: 1px 5px 1px 5px;
+}
+.playerBox td {
+    padding: 1px 5px 1px 5px;
 }
