@@ -72,8 +72,8 @@ class PartyMakePage {
         html.setTextById("battlerAttackPoint" + suffix, battler.attackPoint);
         html.setTextById("battlerDefensePoint" + suffix, battler.defensePoint);
         html.setTextById("battlerSpeedPoint" + suffix, battler.speedPoint);
-        html.setTextById("battlerMaxHitPoint" + suffix, battler.maxHitPoint);
-        html.setTextById("battlerMaxSpecialPoint" + suffix, battler.maxSpecialPoint);
+        html.setTextById("battlerMaxHitPoint" + suffix, battler.maxStatus.hitPoint);
+        html.setTextById("battlerMaxSpecialPoint" + suffix, battler.maxStatus.specialPoint);
     }
 
 }
