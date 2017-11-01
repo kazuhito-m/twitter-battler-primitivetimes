@@ -20,8 +20,41 @@ class Battler(
                val speedPoint: Long,
                val imageUrl: String,
                val firstSignUpDate: LocalDateTime,
-               val generateDate: LocalDateTime
+               val generateDate: LocalDateTime,
+               val nowStatus: BattlerStatus
              ) {
+
+  def this(
+            id: Long,
+            twitterId: String,
+            screenName: String,
+            biography: String,
+            level: Int,
+            maxHitPoint: Long,
+            maxSpecialPoint: Long,
+            attackPoint: Long,
+            defensePoint: Long,
+            speedPoint: Long,
+            imageUrl: String,
+            firstSignUpDate: LocalDateTime,
+            generateDate: LocalDateTime
+          ) = this(
+    id,
+    twitterId,
+    screenName,
+    biography,
+    level,
+    maxHitPoint,
+    maxSpecialPoint,
+    attackPoint,
+    defensePoint,
+    speedPoint,
+    imageUrl,
+    firstSignUpDate,
+    generateDate,
+    new BattlerStatus(maxHitPoint, maxSpecialPoint)
+  )
+
   def this() = this(
     0L,
     null,
@@ -35,6 +68,8 @@ class Battler(
     0L,
     "",
     null,
-    null
+    null,
+    new BattlerStatus(0L, 0L)
   )
+
 }
