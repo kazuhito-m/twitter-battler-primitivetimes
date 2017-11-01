@@ -60,6 +60,46 @@ class BattlePage {
         // イベント定義。
         html.addClickEventById('operationFight', (e) => this.operationFight(e, html, server));
         html.addClickEventById('operationSurrender', (e) => this.operationSurrender(e, html, server));
+
+        // 初期表示。
+
+        // 味方パーティ&敵パーティの情報を取得。
+        const battle = server.getJson('api/battle/getBattle');
+
+        // 初期表示系
+        this.viewBattle(battle, html);
+    }
+
+    viewBattle(battle, html) {
+        const turn = battle.turns.lastTurn;
+        // ターン最初の状態を表示。
+        this.viewParties(turn.beforeStatus, html);
+        // メッセージなど「ターンのやり取り」を表示
+        this.animationTurn(turn);
+        // ターン最後の状態を表示。
+        this.viewParties(turn.afterStatus, html);
+        // コマンドを表示。
+        html.visibleChangeById('commands', true);
+    }
+
+    viewParties(partyStatus, html) {
+        this.viewMineParty(partyStatus.mineParty, html);
+        this.viewEnemyParty(partyStatus.enemyParty, html);
+    }
+
+    viewMineParty(party, html) {
+        // TODO 実装
+        alert('味方パーティの表示');
+    }
+
+    viewEnemyParty(party, html) {
+        // TODO 実装
+        alert('的パーティの表示');
+    }
+
+    animationTurn(turn) {
+        // TODO 実装
+        alert('ターンのアニメ表示');
     }
 
 }
