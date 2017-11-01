@@ -23,7 +23,6 @@ class Battler(
                val generateDate: LocalDateTime,
                val nowStatus: BattlerStatus
              ) {
-
   def this(
             id: Long,
             twitterId: String,
@@ -54,22 +53,4 @@ class Battler(
     generateDate,
     new BattlerStatus(maxHitPoint, maxSpecialPoint)
   )
-
-  def this() = this(
-    0L,
-    null,
-    "",
-    "",
-    0,
-    0L,
-    0L,
-    0L,
-    0L,
-    0L,
-    "",
-    null,
-    null,
-    new BattlerStatus(0L, 0L)
-  )
-
 }
