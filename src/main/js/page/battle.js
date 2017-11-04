@@ -121,6 +121,7 @@ class BattlePage {
     animationTurn(turn) {
         // TODO 実装
         alert('ターンのアニメ表示');
+	console.log('turn:' + turn);
     }
 
 }
