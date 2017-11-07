@@ -22,7 +22,7 @@ class BattlerParameterGeneratorSpec extends Specification {
         override def getStatusesCount: Int = 82071
       }
       // 実行＆検証
-      sut.calculateSpeedPoint(profile) must equalTo(29)
+      sut.calculateSpeedPoint(profile) must equalTo(28)
 
     }
 

@@ -2,12 +2,12 @@ package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler
 
 trait BattlerRepository {
 
-  def convertTwitterIdToId(twitterId: String): Long
+  def convertTwitterIdToId(twitterId: String): BattlerIdentifier
 
   /**
     * 指定されたId(TwitterID)から、ゲームキャラクタデータを作成、同時に保存する。
     */
-  def create(id: Long): Battler
+  def create(identifier: BattlerIdentifier): Battler
 
   /**
     * Battlerオブジェクトを保存する。すでにある場合は上書きする。
@@ -17,22 +17,22 @@ trait BattlerRepository {
   /**
     * BattlerオブジェクトをIDで取得する。
     */
-  def get(id: Long): Battler
+  def get(identifier: BattlerIdentifier): Battler
 
   /**
     * BattlerオブジェクトをIDで削除する。
     */
-  def delete(id: Long): Unit
+  def delete(identifier: BattlerIdentifier): Unit
 
   /**
     * Battlerオブジェクトが存在するかを真偽値で返す。
     */
-  def isExists(id: Long): Boolean
+  def isExists(identifier: BattlerIdentifier): Boolean
 
   /**
     * 指定したバトラーIDの友達バトラーをランダムに人数指定で取得する。
     */
-  def randomFriendBattlers(id: Long, size: Int): List[Battler]
+  def randomFriendBattlers(identifier: BattlerIdentifier, size: Int): List[Battler]
 
   /**
     * ランダムに一人のバトラーを取得する。

@@ -2,7 +2,7 @@ package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.BattleScene
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.{Battle, BattleRepository, Turn, Turns}
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerRepository
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.{BattlerIdentifier, BattlerRepository}
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.party.{PartyFactory, PartyStatus}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.data.redis.core.RedisTemplate
@@ -23,27 +23,27 @@ class BattleDataSource(
   protected val log: Logger = LoggerFactory.getLogger(classOf[BattleDataSource])
 
   /** RedisにBattleSceneオブジェクトを保存する文字列キーを作成する。 */
-  private def makeKeyForSceneId(id: Long): String = BATTLE_SCENE_ID_KEY_PREFIX + id.toString
+  private def makeKeyForSceneId(identifier: BattlerIdentifier): String = BATTLE_SCENE_ID_KEY_PREFIX + identifier
 
   override def saveBattleScene(playerTwitterId: String, battleScene: BattleScene): Unit = {
-    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    val id = battlerRepository.convertTwitterIdToId(playerTwitterId)
     ofv.set(makeKeyForSceneId(id), battleScene)
   }
 
   override def deleteBattleScene(playerTwitterId: String): Unit = {
-    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    val id = battlerRepository.convertTwitterIdToId(playerTwitterId)
     redisTemplate.delete(makeKeyForSceneId(id))
   }
 
   override def isExistsBattleScene(playerTwitterId: String): Boolean = getBattleScene(playerTwitterId) != null
 
   override def getBattleScene(playerTwitterId: String): BattleScene = {
-    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    val id = battlerRepository.convertTwitterIdToId(playerTwitterId)
     ofv.get(makeKeyForSceneId(id)).asInstanceOf[BattleScene]
   }
 
   override def createBattle(playerTwitterId: String): Battle = {
-    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    val id = battlerRepository.convertTwitterIdToId(playerTwitterId)
     val player = battlerRepository.get(id)
     val partyFactory: PartyFactory = new PartyFactory(battlerRepository)
 
@@ -60,16 +60,16 @@ class BattleDataSource(
   }
 
   override def registerBattle(playerTwitterId: String, battle: Battle): Unit = {
-    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    val id = battlerRepository.convertTwitterIdToId(playerTwitterId)
     registerBattle(id, battle)
   }
 
-  private def makeKeyForBaattleId(id: Long): String = BATTLE_ID_KEY_PREFIX + id.toString
+  private def makeKeyForBaattleId(identifier: BattlerIdentifier): String = BATTLE_ID_KEY_PREFIX + identifier
 
-  private def registerBattle(id: Long, battle: Battle): Unit = ofv.set(makeKeyForBaattleId(id), battle)
+  private def registerBattle(identifier: BattlerIdentifier, battle: Battle): Unit = ofv.set(makeKeyForBaattleId(identifier), battle)
 
   override def getBattle(playerTwitterId: String): Battle = {
-    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    val id = battlerRepository.convertTwitterIdToId(playerTwitterId)
     ofv.get(makeKeyForBaattleId(id)).asInstanceOf[Battle]
   }
 

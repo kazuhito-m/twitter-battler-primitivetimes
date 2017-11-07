@@ -2,13 +2,15 @@ package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler
 
 import java.time.LocalDateTime
 
+import org.apache.coyote.http11.filters.IdentityInputFilter
+
 /**
   * バトラー。
   *
   * ゲーム内での戦闘キャラクター。
   */
 class Battler(
-               val id: Long,
+               val identifier: BattlerIdentifier,
                val twitterId: String,
                val screenName: String,
                val biography: String,
@@ -23,7 +25,7 @@ class Battler(
                val nowStatus: BattlerStatus
              ) {
   def this(
-            id: Long,
+            identifier: BattlerIdentifier,
             twitterId: String,
             screenName: String,
             biography: String,
@@ -36,7 +38,7 @@ class Battler(
             firstSignUpDate: LocalDateTime,
             generateDate: LocalDateTime
           ) = this(
-    id,
+    identifier,
     twitterId,
     screenName,
     biography,

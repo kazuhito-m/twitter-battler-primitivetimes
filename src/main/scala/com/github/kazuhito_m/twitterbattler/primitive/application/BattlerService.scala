@@ -30,13 +30,13 @@ class BattlerService(
     */
   def getPlayer(twitterId: String): Battler = {
     // TwitterID(画面に表示されてるやつ)から、内部numberなID)に変換する。
-    val id: Long = battlerRepository.convertTwitterIdToId(twitterId)
+    val id = battlerRepository.convertTwitterIdToId(twitterId)
     // まず、既存のユーザを取得。
     var player = battlerRepository.get(id)
     // あればそれを、なければ生成し保存する。
     if (player == null || isOverIntervalRegenerate(player.generateDate)) {
       player = battlerRepository.create(id)
-      log.debug("プレイヤーの情報を作成しました。id:" + player.id + ",lv:" + player.level)
+      log.debug("プレイヤーの情報を作成しました。id:" + player.identifier + ",lv:" + player.level)
     }
     player
   }

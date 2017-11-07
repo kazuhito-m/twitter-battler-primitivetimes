@@ -1,5 +1,6 @@
 package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.twitter
 
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerIdentifier
 import org.springframework.social.twitter.api.{Twitter, TwitterProfile}
 import org.springframework.stereotype.Repository
 
@@ -8,7 +9,10 @@ import scala.collection.JavaConverters._
 @Repository
 class TwitterDataSource(twitter: Twitter) {
 
-  def convertScreenNameToId(screenName: String): Long = twitter.userOperations().getUserProfile(screenName).getId
+  def convertScreenNameToId(screenName: String): BattlerIdentifier = {
+    val twitterId = twitter.userOperations().getUserProfile(screenName).getId
+    BattlerIdentifier(twitterId)
+  }
 
   def getRandomAccounts(): List[TwitterProfile] = {
     // 「だれでも使ってそうなワード(というか文字)」でツイートを検索、その発信者のIDを貯める。
@@ -29,11 +33,11 @@ class TwitterDataSource(twitter: Twitter) {
       .toSet
   }
 
-  def getProfile(id: Long): TwitterProfile = twitter.userOperations().getUserProfile(id)
+  def getProfile(identifier: BattlerIdentifier): TwitterProfile = twitter.userOperations().getUserProfile(identifier.value)
 
-  def getFollowers(id: Long): List[Long] = javaToScalaLongList(twitter.friendOperations().getFollowerIds(id))
+  def getFollowers(identifier: BattlerIdentifier): List[Long] = javaToScalaLongList(twitter.friendOperations().getFollowerIds(identifier.value))
 
-  def getFollows(id: Long): List[Long] = javaToScalaLongList(twitter.friendOperations().getFriendIds(id))
+  def getFollows(identifier: BattlerIdentifier): List[Long] = javaToScalaLongList(twitter.friendOperations().getFriendIds(identifier.value))
 
   private def javaToScalaLongList(source: java.util.List[java.lang.Long]): List[Long] = source.asScala
     .toList

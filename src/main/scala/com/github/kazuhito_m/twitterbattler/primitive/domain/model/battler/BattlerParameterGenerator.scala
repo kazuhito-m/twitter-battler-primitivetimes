@@ -19,7 +19,7 @@ trait BattlerParameterGenerator {
     * @param firstSignUpDate このゲーム開始(最初にログインした)時刻。
     */
   def generateBattler(twitter: TwitterProfile, firstSignUpDate: LocalDateTime): Battler = new Battler(
-    twitter.getId,
+    new BattlerIdentifier(twitter.getId),
     twitter.getScreenName,
     twitter.getName,
     twitter.getDescription,

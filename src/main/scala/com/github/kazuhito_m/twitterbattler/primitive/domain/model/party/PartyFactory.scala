@@ -12,7 +12,7 @@ class PartyFactory(battlerRepository: BattlerRepository) {
 
   private def createParty(player: Battler): Party = new Party(
     player,
-    battlerRepository.randomFriendBattlers(player.id, PARTY_MEMBER_COUNT - 1)
+    battlerRepository.randomFriendBattlers(player.identifier, PARTY_MEMBER_COUNT - 1)
   )
 
 }

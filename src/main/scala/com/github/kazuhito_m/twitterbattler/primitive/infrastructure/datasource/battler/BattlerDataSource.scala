@@ -2,7 +2,7 @@ package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource
 
 import java.util
 
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.{Battler, BattlerFactory, BattlerRepository, RandomChoiceIdList}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler._
 import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.twitter.TwitterDataSource
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.data.redis.core.RedisTemplate
@@ -22,47 +22,47 @@ class BattlerDataSource(
 
   protected val log: Logger = LoggerFactory.getLogger(classOf[BattlerDataSource])
 
-  override def convertTwitterIdToId(twitterId: String): Long = {
+  override def convertTwitterIdToId(twitterId: String): BattlerIdentifier = {
     // TODO あの手➖ーションなど「意識しないでキャッシュ出来る」方法
     val key = "convertTwitterIdToId:" + twitterId
     val hitId: String = ofv.get(key).asInstanceOf[String]
-    if (hitId != null) return hitId.toLong
-    val id: Long = twitterDataSource.convertScreenNameToId(twitterId)
-    ofv.set(key, id.toString)
-    id
+    if (hitId != null) return BattlerIdentifier(hitId.toLong)
+    val identifier: BattlerIdentifier = twitterDataSource.convertScreenNameToId(twitterId)
+    ofv.set(key, identifier.toString)
+    identifier
   }
 
-  override def create(id: Long): Battler = {
-    val battler = BattlerFactory.create(twitterDataSource.getProfile(id))
+  override def create(identifier: BattlerIdentifier): Battler = {
+    val battler = BattlerFactory.create(twitterDataSource.getProfile(identifier))
     registar(battler)
     battler
   }
 
-  private def getOrCreate(id: Long): Battler = {
-    val existsBattler = get(id)
+  private def getOrCreate(identifier: BattlerIdentifier): Battler = {
+    val existsBattler = get(identifier)
     if (existsBattler != null) return existsBattler
-    return create(id)
+    return create(identifier)
   }
 
-  override def registar(battler: Battler): Unit = ofv.set(makeKey(battler.id), battler)
+  override def registar(battler: Battler): Unit = ofv.set(makeKey(battler.identifier), battler)
 
-  override def get(id: Long): Battler = ofv.get(makeKey(id)).asInstanceOf[Battler]
+  override def get(identifier: BattlerIdentifier): Battler = ofv.get(makeKey(identifier)).asInstanceOf[Battler]
 
-  override def delete(id: Long): Unit = redisTemplate.delete(makeKey(id))
+  override def delete(identifier: BattlerIdentifier): Unit = redisTemplate.delete(makeKey(identifier))
 
-  override def isExists(id: Long): Boolean = get(id) != null
+  override def isExists(identifier: BattlerIdentifier): Boolean = get(identifier) != null
 
-  override def randomFriendBattlers(id: Long, size: Int): List[Battler] = {
-    val choicesIds: List[Long] = randomFriendIds(id, size)
-    choicesIds.map { id => getOrCreate(id) }
+  override def randomFriendBattlers(identifier: BattlerIdentifier, size: Int): List[Battler] = {
+    val choicesIds: List[Long] = randomFriendIds(identifier, size)
+    choicesIds.map { id => getOrCreate(identifier) }
   }
 
-  private def randomFriendIds(id: Long, size: Int): List[Long] = {
-    val ids: List[Long] = twitterDataSource.getFollowers(id)
+  private def randomFriendIds(identifier: BattlerIdentifier, size: Int): List[Long] = {
+    val ids: List[Long] = twitterDataSource.getFollowers(identifier)
     val choicesIds: List[Long] = new RandomChoiceIdList(ids).choice(size)
     if (choicesIds.size >= size) return choicesIds;
 
-    val followIds: List[Long] = twitterDataSource.getFollows(id)
+    val followIds: List[Long] = twitterDataSource.getFollows(identifier)
     val choiceWithFollowIds = choicesIds ++ new RandomChoiceIdList(followIds).choice(size - choicesIds.size)
     if (choiceWithFollowIds.size >= size) return choiceWithFollowIds;
 
@@ -96,14 +96,14 @@ class BattlerDataSource(
     ids;
   }
 
-  private def getRandomId(): Long = {
+  private def getRandomId(): BattlerIdentifier = {
     val accounts: List[Long] = getRandomIds()
     val randomIndex = floor(random * accounts.size).toInt
-    accounts(randomIndex)
+    BattlerIdentifier(accounts(randomIndex))
   }
 
   /** RedisにBattlerオブジェクトを保存する文字列キーを作成する。 */
-  private def makeKey(id: Long): String = BATTLER_KEY_PREFIX + id
+  private def makeKey(identifier: BattlerIdentifier): String = BATTLER_KEY_PREFIX + identifier
 
   /** エイリアス */
   private def ofv = redisTemplate.opsForValue
