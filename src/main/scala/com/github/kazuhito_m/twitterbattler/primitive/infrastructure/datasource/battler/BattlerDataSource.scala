@@ -54,7 +54,7 @@ class BattlerDataSource(
 
   override def randomFriendBattlers(identifier: BattlerIdentifier, size: Int): List[Battler] = {
     val choicesIds: List[Long] = randomFriendIds(identifier, size)
-    choicesIds.map { id => getOrCreate(identifier) }
+    choicesIds.map { choicesId => getOrCreate(BattlerIdentifier(choicesId)) }
   }
 
   private def randomFriendIds(identifier: BattlerIdentifier, size: Int): List[Long] = {
