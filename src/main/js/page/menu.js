@@ -37,15 +37,18 @@ class MenuPage {
         const html = this._html;
 
         // イベント定義。
-
         html.addClickEventById('execPartyMake', (e) => this.execPartyMake(e, html, server));
 
         // 初期表示。
 
         // プレイヤー情報を取得。
         const player = server.getJson('api/battler/getPlayer');
-
         // 初期表示系
+        this.viewPlayer(player, html);
+
+    }
+
+    viewPlayer(player, html) {
         html.setImageSrcById("playerImage", player.imageUrl);
 
         html.setTextById("playerId", player.twitterId);
@@ -55,9 +58,8 @@ class MenuPage {
         html.setTextById("playerAttackPoint", player.attackPoint);
         html.setTextById("playerDefensePoint", player.defensePoint);
         html.setTextById("playerSpeedPoint", player.speedPoint);
-        html.setTextById("playerMaxHitPoint", player.maxHitPoint);
-        html.setTextById("playerMaxSpecialPoint", player.maxSpecialPoint);
-
+        html.setTextById("playerMaxHitPoint", player.maxStatus.hitPoint);
+        html.setTextById("playerMaxSpecialPoint", player.maxStatus.specialPoint);
     }
 
 }

@@ -18,23 +18,23 @@ trait BattlerParameterGenerator {
     * @param twitter         Twitterのプロファイル。
     * @param firstSignUpDate このゲーム開始(最初にログインした)時刻。
     */
-  def generateBattler(twitter: TwitterProfile, firstSignUpDate: LocalDateTime): Battler = {
-    val battler = new Battler()
-    battler.id = twitter.getId
-    battler.twitterId = twitter.getScreenName
-    battler.screenName = twitter.getName
-    battler.biography = twitter.getDescription
-    battler.level = calculateBattlerLevel(twitter)
-    battler.maxHitPoint = calculateMaxHitPoint(twitter)
-    battler.maxSpecialPoint = calculateMaxSpecialPoint(twitter)
-    battler.attackPoint = calculateAttackPoint(twitter)
-    battler.defensePoint = calculateDefensePoint(twitter)
-    battler.speedPoint = calculateSpeedPoint(twitter)
-    battler.imageUrl = twitter.getProfileImageUrl
-    battler.firstSignUpDate = firstSignUpDate
-    battler.generateDate = LocalDateTime.now()
-    battler
-  }
+  def generateBattler(twitter: TwitterProfile, firstSignUpDate: LocalDateTime): Battler = new Battler(
+    twitter.getId,
+    twitter.getScreenName,
+    twitter.getName,
+    twitter.getDescription,
+    calculateBattlerLevel(twitter),
+    new BattlerStatus(
+      calculateMaxHitPoint(twitter),
+      calculateMaxSpecialPoint(twitter)
+    ),
+    calculateAttackPoint(twitter),
+    calculateDefensePoint(twitter),
+    calculateSpeedPoint(twitter),
+    twitter.getProfileImageUrl,
+    firstSignUpDate,
+    LocalDateTime.now()
+  )
 
   /**
     * Twitter情報からバトラーのレベルを計算する。
@@ -42,7 +42,7 @@ trait BattlerParameterGenerator {
     * 暫定 : (ツイート数 /100) ルート2
     */
   def calculateBattlerLevel(twitter: TwitterProfile): Int =
-    (Math.log(twitter.getStatusesCount / 100) / Math.log(2.0) + 1.0).asInstanceOf[Int]
+    (Math.log(twitter.getStatusesCount / 100 + 1) / Math.log(2.0) + 1.0).toInt
 
   /**
     * Twitter情報からバトラーの「最大HP」を計算する。

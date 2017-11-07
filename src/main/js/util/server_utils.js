@@ -24,10 +24,15 @@ class ServerUtils {
     /**
      * URL指定でサーバから結果を値(オブジェクト)としてそのまま返す (PUTで)。
      */
-    postValue(url) {
+    postValue(url, sendValue) {
         const xhr = this._xhr;
         xhr.open('POST', url, false);
-        xhr.send();
+        if (sendValue) {
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(sendValue);
+        } else {
+            xhr.send();
+        }
 
         const jsonText = xhr.responseText;
         return jsonText;

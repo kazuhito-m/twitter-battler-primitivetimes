@@ -1,7 +1,9 @@
 package com.github.kazuhito_m.twitterbattler.primitive.application
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.BattleScene
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.{Battle, BattleRepository}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.{Commands, PartyActivity}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.result.{Result, VictoryOrDefeat}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.{Battle, BattleFacilitator, BattleRepository}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.stereotype.Service
 
@@ -37,8 +39,6 @@ class BattleService(battleRepository: BattleRepository) {
     * 設定された敵と両パーティーの情報を元に、バトルを開始する。
     */
   def startBattle(playerTwitterId: String): Unit = {
-    // バトル情報登録、パーティの初期状態の記憶、など。
-    // TODO 実装
     // シーンを入れ替える。
     battleRepository.saveBattleScene(playerTwitterId, BattleScene.BattleOperation)
   }
@@ -46,11 +46,19 @@ class BattleService(battleRepository: BattleRepository) {
   /**
     * 入力(クライアントからのJSON)をもとに「戦闘１ターン分」すすめる。
     */
-  def operationForBattleTurn(playerTwitterId: String): Unit = {
+  def operationForBattleTurn(playerTwitterId: String, commands: Commands): Unit = {
     // １ターン分の内部戦闘処理と戦闘を勧めた結果を計算。
-    // TODO 実装
-    // シーンを入れ替える。
-    battleRepository.saveBattleScene(playerTwitterId, BattleScene.BattleResult)
+    val battle = battleRepository.getBattle(playerTwitterId)
+    // コマンドで「こうさん」してたら、即時終了。
+    if (commands.partyActivity == PartyActivity.Surrender) {
+      val lossBattle = battle.withResult(new Result(true, VictoryOrDefeat.Loss))
+      battleRepository.registerBattle(playerTwitterId, lossBattle)
+      battleRepository.saveBattleScene(playerTwitterId, BattleScene.BattleResult)
+    }
+    // コマンドで「たたかう」なら、ターンを一つすすめる。
+    val battleFowardOneTurn = (new BattleFacilitator()).proceedNextTurn(commands, battle)
+    // 結果、勝敗がついてたら、シーンを入れかえる。
+    if (battleFowardOneTurn.hasEnded) battleRepository.saveBattleScene(playerTwitterId, BattleScene.BattleResult)
   }
 
   /**

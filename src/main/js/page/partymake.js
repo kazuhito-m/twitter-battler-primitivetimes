@@ -48,8 +48,9 @@ class PartyMakePage {
     }
 
     viewParties(battle, html) {
-        this.viewParty(battle.mineParty, 1, html);
-        this.viewParty(battle.enemyParty, 2, html);
+        const status = battle.turns.lastTurn.afterStatus;
+        this.viewParty(status.mineParty, 1, html);
+        this.viewParty(status.enemyParty, 2, html);
     }
 
     viewParty(party, groupKey, html) {
@@ -71,8 +72,8 @@ class PartyMakePage {
         html.setTextById("battlerAttackPoint" + suffix, battler.attackPoint);
         html.setTextById("battlerDefensePoint" + suffix, battler.defensePoint);
         html.setTextById("battlerSpeedPoint" + suffix, battler.speedPoint);
-        html.setTextById("battlerMaxHitPoint" + suffix, battler.maxHitPoint);
-        html.setTextById("battlerMaxSpecialPoint" + suffix, battler.maxSpecialPoint);
+        html.setTextById("battlerMaxHitPoint" + suffix, battler.maxStatus.hitPoint);
+        html.setTextById("battlerMaxSpecialPoint" + suffix, battler.maxStatus.specialPoint);
     }
 
 }

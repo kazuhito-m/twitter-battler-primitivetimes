@@ -67,6 +67,14 @@ class HtmlUtils {
         this._document.getElementById(id).addEventListener('click', func);
     }
 
+    /**
+     * Elementの表示・非表示を切り替える。
+     */
+    visibleChangeById(id, visible) {
+        const displayState = visible ? 'block' : 'none';
+        this._document.getElementById(id).style.display = displayState;
+    }
+
 }
 
 module.exports = HtmlUtils;

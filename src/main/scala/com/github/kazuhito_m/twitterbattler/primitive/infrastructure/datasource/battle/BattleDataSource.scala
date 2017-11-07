@@ -1,9 +1,9 @@
 package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource.battle
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.BattleScene
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.{Battle, BattleRepository}
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.{Battle, BattleRepository, Turn, Turns}
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerRepository
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.party.PartyFactory
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.party.{PartyFactory, PartyStatus}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Repository
@@ -45,14 +45,23 @@ class BattleDataSource(
   override def createBattle(playerTwitterId: String): Battle = {
     val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
     val player = battlerRepository.get(id)
-    val pertyFactory: PartyFactory = new PartyFactory(battlerRepository)
+    val partyFactory: PartyFactory = new PartyFactory(battlerRepository)
 
-    val newBattle = new Battle(
-      pertyFactory.createPlayerParty(player),
-      pertyFactory.createEnemyParty()
+    val partyStatus: PartyStatus = new PartyStatus(
+      partyFactory.createPlayerParty(player),
+      partyFactory.createEnemyParty()
     )
+
+    val turns = new Turns(new Turn(partyStatus))
+    val newBattle = new Battle(turns)
+
     registerBattle(id, newBattle)
     newBattle
+  }
+
+  override def registerBattle(playerTwitterId: String, battle: Battle): Unit = {
+    val id: Long = battlerRepository.convertTwitterIdToId(playerTwitterId)
+    registerBattle(id, battle)
   }
 
   private def makeKeyForBaattleId(id: Long): String = BATTLE_ID_KEY_PREFIX + id.toString

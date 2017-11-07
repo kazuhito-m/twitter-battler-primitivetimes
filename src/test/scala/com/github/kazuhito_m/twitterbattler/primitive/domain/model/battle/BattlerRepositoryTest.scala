@@ -1,9 +1,9 @@
-package com.github.kazuhito_m.twitterbattler.primitive.domain.model.game
+package com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle
 
-import java.util.Date
+import java.time.LocalDateTime
 
 import com.github.kazuhito_m.twitterbattler.primitive.ConfigForTest
-import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.Battler
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.{Battler, BattlerRepository, BattlerStatus}
 import org.hamcrest.CoreMatchers._
 import org.junit.Assert.assertThat
 import org.junit._
@@ -14,10 +14,10 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
 @SpringBootTest(classes = Array(classOf[ConfigForTest]))
-class GameInformationRepositoryTest {
+class BattlerRepositoryTest {
 
   @Autowired
-  var sut: GameInformationRepository = null
+  var sut: BattlerRepository = null
 
   @Before
   def setUp = {}
@@ -25,11 +25,11 @@ class GameInformationRepositoryTest {
   @Test
   def redisに対しオブジェクトをそのまま保存復元出来る(): Unit = {
     // 準備
-    val param = createSampleBattler("testId", "名前")
+    val param = createSampleBattler(123456, "名前")
     // 実行
-    sut.saveBattler(param)
-    val actual = sut.getBattler(param.id)
-    sut.deleteBattler(param.id)
+    sut.registar(param)
+    val actual = sut.get(param.id)
+    sut.delete(param.id)
     // 検証
     assertThat(actual, is(notNullValue))
     // 値
@@ -40,10 +40,10 @@ class GameInformationRepositoryTest {
   @Test
   def redisに対しデータが無い場合にはnullを返す(): Unit = {
     // 準備
-    val id = "testId"
+    val id = 4321
     // 実行
-    sut.deleteBattler(id)
-    val actual = sut.getBattler(id)
+    sut.delete(id)
+    val actual = sut.get(id)
     // 検証
     assertThat(actual, is(nullValue))
   }
@@ -53,35 +53,36 @@ class GameInformationRepositoryTest {
   @Test
   def redis中にBattlerオブジェクトが存在するかを調べることが出来る(): Unit = {
     // 準備
-    val param = createSampleBattler("testId", "名前")
-    sut.saveBattler(param)
+    val param = createSampleBattler(123456, "名前")
+    sut.registar(param)
     // 実行
-    val actual = sut.isExistsBattler(param.id)
+    val actual = sut.isExists(param.id)
     // 検証
     assertThat(actual, is(true))
     // 削除してみる
-    sut.deleteBattler(param.id)
+    sut.delete(param.id)
     // 実行
-    val actual2 = sut.isExistsBattler(param.id)
+    val actual2 = sut.isExists(param.id)
     // 検証
     assertThat(actual2, is(false))
   }
 
-  def createSampleBattler(id: String, name: String) = {
-    val battler = new Battler()
-    battler.id = id
-    battler.screenName = name
-    battler.biography = "紹介文"
-    battler.level = 1
-    battler.maxHitPoint = 2
-    battler.maxSpecialPoint = 3
-    battler.attackPoint = 4
-    battler.defensePoint = 5
-    battler.speedPoint = 6
-    battler.imageUrl = "http://example.com"
-    battler.firstSignUpDate = new Date()
-    battler.generateDate = new Date()
-    battler
-  }
+  def createSampleBattler(id: Int, name: String) = new Battler(
+    id,
+    "twitterId",
+    name,
+    "紹介文",
+    1,
+    new BattlerStatus(
+      2,
+      3
+    ),
+    4,
+    5,
+    6,
+    "http://example.com",
+    LocalDateTime.now(),
+    LocalDateTime.now()
+  )
 
 }

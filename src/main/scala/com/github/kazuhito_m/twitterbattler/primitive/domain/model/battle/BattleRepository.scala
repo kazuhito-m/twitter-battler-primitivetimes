@@ -26,6 +26,8 @@ trait BattleRepository {
 
   def createBattle(playerTwitterId: String): Battle
 
+  def registerBattle(playerTwitterId: String, battle: Battle): Unit
+
   def getBattle(playerTwitterId: String): Battle
 
 }
