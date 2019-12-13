@@ -1,1 +1,3 @@
 rootProject.name = 'twitter-battler-primitivetimes'
+// include 'frontend'
+include 'server'
