@@ -1,0 +1,27 @@
+plugins {
+  id "com.github.node-gradle.node" version "2.2.0"
+  id "java"
+}
+
+ext {
+  node_version = '13.5.0'
+  npm_version = '6.13.4'
+}
+
+node {
+  version = "${node_version}"
+  npmVersion = "${npm_version}"
+  download = true
+}
+
+npm_build.onlyIf {
+  !project.hasProperty('skipFrontend')
+}
+
+processResources.dependsOn npm_build
+npm_build.dependsOn npm_install
+
+test.dependsOn npm_test
+
+clean.dependsOn npm_run_clean
+npm_clean.dependsOn npm_install
