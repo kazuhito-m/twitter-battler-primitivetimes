@@ -1,7 +1,12 @@
 package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource;
 
+import com.github.kazuhito_m.twitterbattler.primitive.CustomObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * 設定ファイルに記述しきれない設定・Bean定義などを定義する。
@@ -17,7 +22,7 @@ public class CustomConfiguration {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer(CustomObjectMapper)); // ここだけカスタム
+        template.setValueSerializer(new GenericJackson2JsonRedisSerializer(new CustomObjectMapper())); // ここだけカスタム
         template.setHashKeySerializer(template.getKeySerializer());
         template.setHashValueSerializer(template.getValueSerializer());
         return template;

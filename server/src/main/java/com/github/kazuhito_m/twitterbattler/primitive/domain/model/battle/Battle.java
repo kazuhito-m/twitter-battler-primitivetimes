@@ -11,13 +11,15 @@ public class Battle {
         this.result = result;
     }
 
+    public Battle(Turns turns) {
+        this(turns, Result.NO_RESULT);
+    }
 
     public Battle withResult(Result result) {
         return new Battle(this.turns, result);
     }
 
     public boolean hasEnded() {
-        result.enable();
+        return result.enable();
     }
-
 }

@@ -13,7 +13,7 @@ jar {
 jigReports.dependsOn(clean, compileJava, processResources)
 bootRun.mustRunAfter(clean)
 
-sourceCompatibility = '1.11'
+sourceCompatibility = '1.13'
 
 
 repositories {
@@ -23,14 +23,13 @@ repositories {
 dependencies {
     implementation platform('org.springframework.boot:spring-boot-dependencies:2.2.0.RELEASE')
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation('org.springframework.boot:spring-boot-starter-data-redis')
 
     // sosial and security
-    implementation('org.springframework.boot:spring-boot-devtools')
     implementation('org.springframework.boot:spring-boot-starter-security')
-    implementation('org.springframework.boot:spring-boot-starter-social-twitter')
+//    implementation('org.springframework.boot:spring-boot-starter-social-twitter')
 
-    runtimeOnly("com.h2database:h2")
+    implementation('org.twitter4j:twitter4j:4.0.7')
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group: 'org.junit.vintage')

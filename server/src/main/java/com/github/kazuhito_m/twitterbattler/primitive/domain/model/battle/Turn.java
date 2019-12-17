@@ -13,4 +13,8 @@ public class Turn {
         this.afterStatus = afterStatus;
         this.activities = activities;
     }
+
+    public Turn(PartyStatus status) {
+        this(status, status, new Activities());
+    }
 }

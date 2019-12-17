@@ -4,6 +4,7 @@ import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.comman
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.PartyActivity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -14,7 +15,7 @@ import java.util.function.Function;
 public class SampleTwitterController {
     final Twitter twitter;
     final RedisTemplate<String, Object> redisTemplate;
-    final TwitterDataSource twitterRepository:
+    final TwitterDataSource twitterRepository;
 
     final static Logger logger = LoggerFactory.getLogger(SampleTwitterController.class);
 
@@ -36,7 +37,7 @@ public class SampleTwitterController {
 
     @GetMapping("profile")
     String profile(Principal user) {
-        return opeTwitter(user, (name) -> twitter.userOperations().getUserProfile(name)),
+        return opeTwitter(user, (name) -> twitter.userOperations().getUserProfile(name));
     }
 
     @GetMapping("commands")

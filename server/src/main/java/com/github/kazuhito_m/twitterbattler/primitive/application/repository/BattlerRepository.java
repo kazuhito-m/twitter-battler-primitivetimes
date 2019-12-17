@@ -2,10 +2,9 @@ package com.github.kazuhito_m.twitterbattler.primitive.application.repository;
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.Battler;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerIdentifier;
+import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.RandomBattlerPickup;
 
-import java.util.List;
-
-public interface BattlerRepository {
+public interface BattlerRepository extends RandomBattlerPickup {
     BattlerIdentifier convertTwitterIdToId(String twitterId);
 
     /**
@@ -32,14 +31,4 @@ public interface BattlerRepository {
      * Battlerオブジェクトが存在するかを真偽値で返す。
      */
     boolean isExists(BattlerIdentifier identifier);
-
-    /**
-     * 指定したバトラーIDの友達バトラーをランダムに人数指定で取得する。
-     */
-    List<Battler> randomFriendBattlers(BattlerIdentifier identifier, int size);
-
-    /**
-     * ランダムに一人のバトラーを取得する。
-     */
-    Battler randomOneBattler();
 }
