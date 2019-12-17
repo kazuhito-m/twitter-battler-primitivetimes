@@ -16,7 +16,7 @@ public interface BattlerRepository {
     /**
      * Battlerオブジェクトを保存する。すでにある場合は上書きする。
      */
-    void registar(Battler battler);
+    void register(Battler battler);
 
     /**
      * BattlerオブジェクトをIDで取得する。
