@@ -1,11 +1,15 @@
 package com.github.kazuhito_m.twitterbattler.primitive.presentation.controller.sample;
 
+import com.github.kazuhito_m.twitterbattler.primitive.application.repository.TwitterRepository;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.Commands;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.command.PartyActivity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 
 import java.security.Principal;
 import java.util.function.Function;
@@ -13,19 +17,18 @@ import java.util.function.Function;
 @RestController
 @RequestMapping("/api/twitter")
 public class SampleTwitterController {
-    final Twitter twitter;
+    final Twitter twitter = TwitterFactory.getSingleton();
     final RedisTemplate<String, Object> redisTemplate;
-    final TwitterDataSource twitterRepository;
+    final TwitterRepository twitterRepository;
 
-    final static Logger logger = LoggerFactory.getLogger(SampleTwitterController.class);
+    final static Logger LOGGER = LoggerFactory.getLogger(SampleTwitterController.class);
 
-
-    @GetMapping("tl")
-    String timeline(Principal user) {
-        return opeTwitter(user,
-                (name) -> twitter.timelineOperations().getUserTimeline("@" + name)
-        );
-    }
+//    @GetMapping("tl")
+//    String timeline(Principal user) {
+//        return opeTwitter(user,
+//                (name) -> twitter.getUserTimeline("@" + name)
+//        );
+//    }
 
 
     String opeTwitter(Principal user, Function<String, Object> f) {
@@ -35,10 +38,10 @@ public class SampleTwitterController {
         return null;
     }
 
-    @GetMapping("profile")
-    String profile(Principal user) {
-        return opeTwitter(user, (name) -> twitter.userOperations().getUserProfile(name));
-    }
+//    @GetMapping("profile")
+//    String profile(Principal user) {
+//        return opeTwitter(user, (name) -> twitter.getUser(name));
+//    }
 
     @GetMapping("commands")
     Commands commands() {
@@ -48,10 +51,10 @@ public class SampleTwitterController {
     @PostMapping("sendCommands")
     void sendCommands(@RequestBody Commands commands) {
         if (commands == null) {
-            logger.info("commandsはnull");
+            LOGGER.info("commandsはnull");
             return;
         }
-        logger.info("commands.partyActivity:" + commands.partyActivity().toString());
+        LOGGER.info("commands.partyActivity:" + commands.partyActivity().toString());
         //    logger.info("commands.partyActivity:" + commands)
     }
 
@@ -71,7 +74,12 @@ public class SampleTwitterController {
     //  }
 
     @GetMapping("twitterTest")
-    String twitterTest() {
-        return twitter.timelineOperations().getHomeTimeline();
+    String twitterTest() throws TwitterException {
+        return twitter.getHomeTimeline().toString();
+    }
+
+    public SampleTwitterController(RedisTemplate<String, Object> redisTemplate, TwitterRepository twitterRepository) {
+        this.redisTemplate = redisTemplate;
+        this.twitterRepository = twitterRepository;
     }
 }

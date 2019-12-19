@@ -14,7 +14,7 @@ public class BattleController {
 
     @GetMapping("getBattleSceneId")
     String getBattleSceneId(Principal user) {
-        battleService.getBattleSceneId(user.getName());
+        return battleService.getBattleSceneId(user.getName());
     }
 
     @PostMapping("makeEnemyAndParty")

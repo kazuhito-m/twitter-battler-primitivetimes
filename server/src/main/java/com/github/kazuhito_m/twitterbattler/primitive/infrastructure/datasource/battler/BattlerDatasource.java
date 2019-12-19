@@ -1,6 +1,7 @@
 package com.github.kazuhito_m.twitterbattler.primitive.infrastructure.datasource.battler;
 
 import com.github.kazuhito_m.twitterbattler.primitive.application.repository.BattlerRepository;
+import com.github.kazuhito_m.twitterbattler.primitive.application.repository.TwitterRepository;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.Battler;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerFactory;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerIdentifier;
@@ -26,6 +27,7 @@ public class BattlerDatasource implements BattlerRepository {
     private static final String BATTLER_KEY_PREFIX = "battler:";
 
     final RedisTemplate<String, Object> redisTemplate;
+    final TwitterRepository twitterRepository;
 
     @Override
     public BattlerIdentifier convertTwitterIdToId(String twitterId) {
@@ -33,14 +35,14 @@ public class BattlerDatasource implements BattlerRepository {
         var key = "convertTwitterIdToId:" + twitterId;
         String hitId = (String) ofv().get(key);
         if (hitId != null) return new BattlerIdentifier(Long.valueOf(hitId));
-        BattlerIdentifier identifier = twitterDataSource.convertScreenNameToId(twitterId);
+        BattlerIdentifier identifier = twitterRepository.convertScreenNameToId(twitterId);
         ofv().set(key, identifier.toString());
         return identifier;
     }
 
     @Override
     public Battler create(BattlerIdentifier identifier) {
-        var battler = BattlerFactory.create(twitterDataSource.getProfile(identifier));
+        var battler = battlerFactory().create(twitterRepository.getProfile(identifier));
         register(battler);
         return battler;
     }
@@ -90,11 +92,11 @@ public class BattlerDatasource implements BattlerRepository {
     }
 
     private List<Long> randomFriendIds(BattlerIdentifier identifier, int size) {
-        List<Long> ids = twitterDataSource.getFollowers(identifier);
+        List<Long> ids = twitterRepository.getFollowers(identifier);
         List<Long> choicesIds = new RandomChoiceIdList(ids).choice(size);
         if (choicesIds.size() >= size) return choicesIds;
 
-        List<Long> followIds = twitterDataSource.getFollows(identifier);
+        List<Long> followIds = twitterRepository.getFollows(identifier);
         choicesIds.addAll(
                 new RandomChoiceIdList(followIds).
                         choice(size - choicesIds.size())
@@ -116,9 +118,9 @@ public class BattlerDatasource implements BattlerRepository {
      * その際、アクセスにコストがかかるので、BattlerデータとIDデータをRedisに作成・保存する。
      */
     private List<Long> getRandomIds() {
-        var accounts = twitterDataSource.getRandomAccounts();
+        var accounts = twitterRepository.getRandomAccounts();
         // バトラーを作りながら保存。
-        accounts.foreach(account -> register(BattlerFactory.create(account)));
+        accounts.forEach(account -> register(battlerFactory().create(account)));
         // IDだけを抽出。
         List<Long> ids = accounts.stream()
                 .map(account -> account.getId())
@@ -128,7 +130,7 @@ public class BattlerDatasource implements BattlerRepository {
             Set<Object> idSet = redisTemplate.opsForSet()
                     .members(RANDOM_IDS_KEY);
             return idSet.stream()
-                    .map(varue -> (Long) varue)
+                    .map(value -> (Long) value)
                     .collect(toList());
         }
         // Twitter側で取得できた場合、Redisに保存する。
@@ -151,6 +153,10 @@ public class BattlerDatasource implements BattlerRepository {
         return BATTLER_KEY_PREFIX + identifier;
     }
 
+    private BattlerFactory battlerFactory() {
+        return new BattlerFactory();
+    }
+
     /**
      * エイリアス
      */
@@ -158,7 +164,8 @@ public class BattlerDatasource implements BattlerRepository {
         return redisTemplate.opsForValue();
     }
 
-    BattlerDatasource(RedisTemplate<String, Object> redisTemplate) {
+    BattlerDatasource(RedisTemplate<String, Object> redisTemplate, TwitterRepository twitterRepository) {
         this.redisTemplate = redisTemplate;
+        this.twitterRepository = twitterRepository;
     }
 }

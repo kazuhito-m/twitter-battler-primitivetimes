@@ -27,9 +27,7 @@ dependencies {
 
     // sosial and security
     implementation('org.springframework.boot:spring-boot-starter-security')
-//    implementation('org.springframework.boot:spring-boot-starter-social-twitter')
-
-    implementation('org.twitter4j:twitter4j:4.0.7')
+    implementation('org.twitter4j:twitter4j-core:4.0.7')
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group: 'org.junit.vintage')
