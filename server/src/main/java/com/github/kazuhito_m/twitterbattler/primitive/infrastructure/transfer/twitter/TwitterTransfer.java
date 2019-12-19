@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.toSet;
 public class TwitterTransfer implements TwitterRepository {
     static final Logger LOGGER = LoggerFactory.getLogger(TwitterTransfer.class);
 
-    final Twitter twitter = TwitterFactory.getSingleton();
+    final Twitter twitter;
 
     @Override
     public BattlerIdentifier convertScreenNameToId(String screenName) {
@@ -93,5 +93,9 @@ public class TwitterTransfer implements TwitterRepository {
             LOGGER.error("Twitterとのやり取りに失敗。", e);
             throw new TbTwitterException(e);
         }
+    }
+
+    public TwitterTransfer(Twitter twitter) {
+        this.twitter = twitter;
     }
 }

@@ -7,17 +7,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.function.Function;
 
 @RestController
-@RequestMapping("/api/twitter")
+@RequestMapping("/api/test/twitter")
 public class SampleTwitterController {
-    final Twitter twitter = TwitterFactory.getSingleton();
+    final Twitter twitter;
     final RedisTemplate<String, Object> redisTemplate;
     final TwitterRepository twitterRepository;
 
@@ -74,11 +75,14 @@ public class SampleTwitterController {
     //  }
 
     @GetMapping("twitterTest")
-    String twitterTest() throws TwitterException {
-        return twitter.getHomeTimeline().toString();
+    List<Status> twitterTest() throws TwitterException {
+        List<Status> statuses = twitter.getHomeTimeline();
+        LOGGER.info("ここで返す奴");
+        return statuses;
     }
 
-    public SampleTwitterController(RedisTemplate<String, Object> redisTemplate, TwitterRepository twitterRepository) {
+    public SampleTwitterController(Twitter twitter, RedisTemplate<String, Object> redisTemplate, TwitterRepository twitterRepository) {
+        this.twitter = twitter;
         this.redisTemplate = redisTemplate;
         this.twitterRepository = twitterRepository;
     }
