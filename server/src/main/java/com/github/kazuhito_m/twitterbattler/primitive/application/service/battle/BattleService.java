@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 // TODO : 主語が大きすぎて「なんでも屋」になりそう…いつでも再構成する心づもり。
 @Service
 public class BattleService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BattleService.class);
-
     final BattleRepository battleRepository;
 
     /**
@@ -76,6 +74,8 @@ public class BattleService {
     public Battle getBattle(String playerTwitterId) {
         return battleRepository.getBattle(playerTwitterId);
     }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BattleService.class);
 
     BattleService(BattleRepository battleRepository) {
         this.battleRepository = battleRepository;

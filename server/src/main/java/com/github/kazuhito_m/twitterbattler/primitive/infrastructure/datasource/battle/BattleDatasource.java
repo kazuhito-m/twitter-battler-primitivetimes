@@ -9,15 +9,12 @@ import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battle.Turns;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerIdentifier;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.party.PartyFactory;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.party.PartyStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class BattleDatasource implements BattleRepository {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BattleDatasource.class);
     /**
      * 戦闘画面シーンIDのキーヘッド
      */

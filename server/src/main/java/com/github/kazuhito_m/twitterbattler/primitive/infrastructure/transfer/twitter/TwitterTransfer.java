@@ -18,8 +18,6 @@ import static java.util.stream.Collectors.toSet;
 
 @Repository
 public class TwitterTransfer implements TwitterRepository {
-    static final Logger LOGGER = LoggerFactory.getLogger(TwitterTransfer.class);
-
     final Twitter twitter;
 
     @Override
@@ -94,6 +92,8 @@ public class TwitterTransfer implements TwitterRepository {
             throw new TbTwitterException(e);
         }
     }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TwitterTransfer.class);
 
     public TwitterTransfer(Twitter twitter) {
         this.twitter = twitter;

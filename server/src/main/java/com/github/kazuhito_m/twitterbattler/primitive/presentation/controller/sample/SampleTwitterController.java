@@ -22,8 +22,6 @@ public class SampleTwitterController {
     final RedisTemplate<String, Object> redisTemplate;
     final TwitterRepository twitterRepository;
 
-    final static Logger LOGGER = LoggerFactory.getLogger(SampleTwitterController.class);
-
 //    @GetMapping("tl")
 //    String timeline(Principal user) {
 //        return opeTwitter(user,
@@ -81,7 +79,9 @@ public class SampleTwitterController {
         return statuses;
     }
 
-    public SampleTwitterController(Twitter twitter, RedisTemplate<String, Object> redisTemplate, TwitterRepository twitterRepository) {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleTwitterController.class);
+
+    SampleTwitterController(Twitter twitter, RedisTemplate<String, Object> redisTemplate, TwitterRepository twitterRepository) {
         this.twitter = twitter;
         this.redisTemplate = redisTemplate;
         this.twitterRepository = twitterRepository;

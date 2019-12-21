@@ -2,6 +2,7 @@ package com.github.kazuhito_m.twitterbattler.primitive.application.service.battl
 
 import com.github.kazuhito_m.twitterbattler.primitive.application.repository.BattlerRepository;
 import com.github.kazuhito_m.twitterbattler.primitive.application.repository.TwitterRepository;
+import com.github.kazuhito_m.twitterbattler.primitive.application.service.battle.BattleService;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.Battler;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerIdentifier;
 import org.slf4j.Logger;
@@ -13,8 +14,6 @@ import java.time.temporal.ChronoUnit;
 
 @Service
 public class BattlerService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BattlerService.class);
-
     /**
      * Battlerの再生成の間隔(つまりキャッシュの保存期間)
      */
@@ -40,6 +39,8 @@ public class BattlerService {
         long elapsed = ChronoUnit.MILLIS.between(lastGenerateDate, LocalDateTime.now());
         return elapsed > INTERVAL_OF_REGENERATE_BATTLER;
     }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BattleService.class);
 
     BattlerService(BattlerRepository battlerRepository, TwitterRepository twitterRepository) {
         this.battlerRepository = battlerRepository;

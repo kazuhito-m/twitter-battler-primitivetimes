@@ -16,8 +16,6 @@ import twitter4j.conf.ConfigurationBuilder;
 @ConditionalOnClass({TwitterFactory.class, Twitter.class})
 @EnableConfigurationProperties(Twitter4jProperties.class)
 public class Twitter4jAutoConfiguration {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Twitter4jAutoConfiguration.class);
-
     final Twitter4jProperties properties;
 
     @Bean
@@ -49,6 +47,8 @@ public class Twitter4jAutoConfiguration {
     public Twitter twitter(TwitterFactory twitterFactory) {
         return twitterFactory.getInstance();
     }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Twitter4jAutoConfiguration.class);
 
     Twitter4jAutoConfiguration(Twitter4jProperties properties) {
         this.properties = properties;
