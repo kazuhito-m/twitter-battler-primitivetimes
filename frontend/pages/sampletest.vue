@@ -22,14 +22,14 @@ import { Component, Vue } from 'nuxt-property-decorator'
 @Component
 export default class SampleTest extends Vue {
   public sendTest() {
-    const targetUrl = document.getElementById('targetUrl').value
-    const sendJson = document.getElementById('sendJson').value
-    const xhr = new XMLHttpRequest()
-    xhr.open('POST', targetUrl, false)
-    xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.send(sendJson)
-    const jsonText = xhr.responseText
-    document.getElementById('resultJson').value = jsonText
+    //   const targetUrl = document.getElementById('targetUrl').value
+    //   const sendJson = document.getElementById('sendJson').value
+    //   const xhr = new XMLHttpRequest()
+    //   xhr.open('POST', targetUrl, false)
+    //   xhr.setRequestHeader('Content-Type', 'application/json')
+    //   xhr.send(sendJson)
+    //   const jsonText = xhr.responseText
+    //   document.getElementById('resultJson').value = jsonText
     alert('成功')
   }
 }
