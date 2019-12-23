@@ -17,3 +17,8 @@
   - https://qiita.com/itouuuuuuuuu/items/51fc4f3edbfcd71548a5
 - 公式…なんだけど、これ最新化されてるんだろうか？
   - https://typescript.nuxtjs.org/guide/setup.html
+
+## Nuxt & TwitterLogin
+
+- コレもそのまま実践
+  - https://blog.8tak4.com/post/176366654280/impl-oauth-nuxtjs
