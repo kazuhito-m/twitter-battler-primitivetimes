@@ -1,11 +1,17 @@
 <template>
   <div class="container">
     <div>
-      <form action="/signin/twitter" method="post">
-        <h1 class="subtitle">Twitter Buttlerへようこそ！</h1>
-        <p>下のボタンから SingUp または SingIn してください。</p>
-        <button type="submit">SingUp/SignIn</button>
+      <header class="header">
+        <h1 class="subtitle">Twitter Battler Battle Result</h1>
+      </header>
+      <p>おつかれの場合は下のボタンからどうぞ。</p>
+      <form action="/logout" method="post">
+        <button type="submit">SignOut</button>
       </form>
+      <section id="status"></section>
+      <section id="operations">
+        <a id="okBattleResult" class="button--green">結果OK</a>
+      </section>
     </div>
   </div>
 </template>
@@ -14,7 +20,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
-export default class Login extends Vue {}
+export default class BattleResult extends Vue {}
 </script>
 
 <style>
