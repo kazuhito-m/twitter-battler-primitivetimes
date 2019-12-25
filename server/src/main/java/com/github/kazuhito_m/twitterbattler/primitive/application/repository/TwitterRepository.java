@@ -18,4 +18,6 @@ public interface TwitterRepository {
     List<Long> getFollowers(BattlerIdentifier identifier);
 
     List<Long> getFollows(BattlerIdentifier identifier);
+
+    String authUrl(String callbackUrl);
 }

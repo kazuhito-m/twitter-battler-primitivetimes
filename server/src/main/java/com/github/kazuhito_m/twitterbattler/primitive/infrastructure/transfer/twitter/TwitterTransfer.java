@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import twitter4j.*;
+import twitter4j.auth.RequestToken;
 
 import java.util.Arrays;
 import java.util.List;
@@ -87,6 +88,17 @@ public class TwitterTransfer implements TwitterRepository {
             return Arrays.stream(friendsIDs.getIDs())
                     .mapToObj(i -> i)
                     .collect(toList());
+        } catch (TwitterException e) {
+            LOGGER.error("Twitterとのやり取りに失敗。", e);
+            throw new TbTwitterException(e);
+        }
+    }
+
+    @Override
+    public String authUrl(String callbackUrl) {
+        try {
+            RequestToken requestToken = twitter.getOAuthRequestToken("http://localhost:3000/loggedin");
+            return requestToken.getAuthorizationURL();
         } catch (TwitterException e) {
             LOGGER.error("Twitterとのやり取りに失敗。", e);
             throw new TbTwitterException(e);
