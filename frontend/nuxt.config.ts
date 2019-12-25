@@ -41,13 +41,22 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  proxy: {
+    '/api': {
+      target: 'http://localhost:8080',
+      pathRewrite: {
+        '^/api': '/'
+      }
+    }
+  },
   /*
    ** Build configuration
    */

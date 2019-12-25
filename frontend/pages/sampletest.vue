@@ -12,6 +12,14 @@
         <p>送信する値:<textarea id="sendJson"></textarea></p>
         <p>結果:<textarea id="resultJson"></textarea></p>
       </div>
+      <div>
+        <button id="sendTest" @click="test2" type="button">
+          色々お試し
+        </button>
+        <button id="sendTest" @click="getToken" type="button">
+          OAuthおくってみる
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -31,6 +39,11 @@ export default class SampleTest extends Vue {
     //   const jsonText = xhr.responseText
     //   document.getElementById('resultJson').value = jsonText
     alert('成功')
+  }
+
+  public test2() {
+    const serverUrl = location.href.replace(this.$route.name as string, '別の')
+    alert('serverUrl:' + serverUrl)
   }
 }
 </script>
