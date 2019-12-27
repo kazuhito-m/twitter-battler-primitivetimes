@@ -4,11 +4,19 @@ import com.github.kazuhito_m.twitterbattler.primitive.application.repository.Twi
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerIdentifier;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.twitter.TbTwitterException;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.twitter.TwitterUser;
+import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.config.twitter.OAuth;
+import com.github.kazuhito_m.twitterbattler.primitive.infrastructure.config.twitter.Twitter4jProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 import twitter4j.*;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.OAuthAuthorization;
 import twitter4j.auth.RequestToken;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +28,10 @@ import static java.util.stream.Collectors.toSet;
 @Repository
 public class TwitterTransfer implements TwitterRepository {
     final Twitter twitter;
+    final Twitter4jProperties properties;
+    final TwitterFactory factory;
+    final RedisTemplate<String, String> redisTemplate;
+
 
     @Override
     public BattlerIdentifier convertScreenNameToId(String screenName) {
@@ -97,7 +109,11 @@ public class TwitterTransfer implements TwitterRepository {
     @Override
     public String authUrl(String callbackUrl) {
         try {
-            RequestToken requestToken = twitter.getOAuthRequestToken("http://localhost:3000/loggedin");
+            Twitter newTwitter = createTwitterForAuthUrl();
+            RequestToken requestToken = newTwitter.getOAuthRequestToken(callbackUrl);
+
+            ofv().append(makeOAuthKey(requestToken.getToken()), requestToken.getTokenSecret());
+
             return requestToken.getAuthorizationURL();
         } catch (TwitterException e) {
             LOGGER.error("Twitterとのやり取りに失敗。", e);
@@ -105,9 +121,45 @@ public class TwitterTransfer implements TwitterRepository {
         }
     }
 
+    @Override
+    public AccessToken accessToken(String oAuthToken, String oAuthVerifier) {
+        try {
+            String tokenSecret = (String) ofv().get(makeOAuthKey(oAuthToken));
+            RequestToken requestToken = new RequestToken(oAuthToken, tokenSecret);
+            Twitter newTwitter = createTwitterForAuthUrl();
+            AccessToken accessToken = newTwitter.getOAuthAccessToken(requestToken, oAuthVerifier);
+            return accessToken;
+        } catch (TwitterException e) {
+            LOGGER.error("Twitterとのやり取りに失敗。", e);
+            throw new TbTwitterException(e);
+        }
+    }
+
+    private Twitter createTwitterForAuthUrl() {
+        OAuth oAuth = properties.getOauth();
+        ConfigurationBuilder builder = new ConfigurationBuilder();
+        Configuration conf = builder
+                .setOAuthConsumerKey(oAuth.getConsumerKey())
+                .setOAuthConsumerSecret(oAuth.getConsumerSecret())
+                .build();
+        OAuthAuthorization oa = new OAuthAuthorization(conf);
+        return factory.getInstance(oa);
+    }
+
+    private String makeOAuthKey(String oAuthToken) {
+        return "oAuthToken:" + oAuthToken;
+    }
+
+    private ValueOperations ofv() {
+        return redisTemplate.opsForValue();
+    }
+
     private static final Logger LOGGER = LoggerFactory.getLogger(TwitterTransfer.class);
 
-    public TwitterTransfer(Twitter twitter) {
+    public TwitterTransfer(Twitter twitter, Twitter4jProperties properties, TwitterFactory factory, RedisTemplate<String, String> redisTemplate) {
         this.twitter = twitter;
+        this.properties = properties;
+        this.factory = factory;
+        this.redisTemplate = redisTemplate;
     }
 }

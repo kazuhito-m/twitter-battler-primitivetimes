@@ -2,6 +2,7 @@ package com.github.kazuhito_m.twitterbattler.primitive.application.repository;
 
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.battler.BattlerIdentifier;
 import com.github.kazuhito_m.twitterbattler.primitive.domain.model.twitter.TwitterUser;
+import twitter4j.auth.AccessToken;
 
 import java.util.List;
 import java.util.Set;
@@ -20,4 +21,6 @@ public interface TwitterRepository {
     List<Long> getFollows(BattlerIdentifier identifier);
 
     String authUrl(String callbackUrl);
+
+    AccessToken accessToken(String oAuthToken, String oAuthVerifier);
 }

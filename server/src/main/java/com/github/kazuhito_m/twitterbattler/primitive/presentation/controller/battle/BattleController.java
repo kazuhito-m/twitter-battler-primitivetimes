@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/battle")
 public class BattleController {
     final BattleService battleService;

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.function.Function;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/test/twitter")
 public class SampleTwitterController {
     final Twitter twitter;

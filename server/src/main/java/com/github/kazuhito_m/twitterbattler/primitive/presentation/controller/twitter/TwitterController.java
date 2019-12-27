@@ -3,42 +3,32 @@ package com.github.kazuhito_m.twitterbattler.primitive.presentation.controller.t
 import com.github.kazuhito_m.twitterbattler.primitive.application.repository.TwitterRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import twitter4j.auth.AccessToken;
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/twitter")
-
 public class TwitterController {
     final TwitterRepository twitterRepository;
 
     @PostMapping("/authUrl")
-    String authUrl(@Param("callbackUrl") String callbackUrl) {
-        return twitterRepository.authUrl(callbackUrl);
+    String authUrl(@RequestBody String callbackUrl) {
+        // TODO これ、ちょっとめんどくさいので、素直なJSON等にするのが良さげ。
+        String decodedUrl = URLDecoder
+                .decode(callbackUrl, StandardCharsets.UTF_8)
+                .replaceAll("=$", "");
+        return twitterRepository.authUrl(decodedUrl);
     }
 
-//
-//
-//    ProviderSignInUtils signInUtils = new ProviderSignInUtils();
-//
-//    @GetMapping("/signup")
-//    String signup(WebRequest request) {
-//        //    log.info("signup() が呼ばれた時。")
-//        //    log.info("signInUtils : " + signInUtils)
-//        FeatureDescriptor connection = signInUtils.getConnectionFromSession(request);
-//        if (connection != null) {
-//            AuthUtil.authenticate(connection);
-//            signInUtils.doPostSignUp(connection.getDisplayName(), request);
-//        }
-//        return "redirect:/";
-//    }
-//
-//    @PostMapping("/signin")
-//    String signin(WebRequest request) {
-//        return "redirect:/login.html";
-//    }
+    @PostMapping("/accessToken")
+    AccessTokenResponse accessToken(@RequestBody OAuthCallback callback) {
+        AccessToken accessToken = twitterRepository.accessToken(callback.oAuthToken, callback.oAuthVerifier);
+        return new AccessTokenResponse(accessToken.getToken(), accessToken.getTokenSecret());
+    }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TwitterController.class);
 

@@ -12,10 +12,10 @@ spring:
 twitter4j:
   debug: true
   oauth:
-    consumer-key: xxx
-    consumer-secret: yyy
-    access-token: zzz
-    access-token-secret: kazuhito
+    consumer-key: mxsGonBL83TVN11yjKS9Q
+    consumer-secret: WrqFsVdaGkT89VmLT2xvFSrQNyE0lq2CuSjyxiEI7c
+    access-token:
+    access-token-secret:
 security:
   basic:
     enabled: false
