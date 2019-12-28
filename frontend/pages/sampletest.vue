@@ -5,20 +5,12 @@
       <div>
         <button id="sendTest" @click="sendTest" type="button">テスト</button>
         <input
-          id="targetUrl"
+          v-model="targetUrl"
           type="text"
           value="http://localhost:8080/api/twitter/commands"
         />
-        <p>送信する値:<textarea id="sendJson"></textarea></p>
-        <p>結果:<textarea id="resultJson"></textarea></p>
-      </div>
-      <div>
-        <button id="sendTest" @click="test2" type="button">
-          色々お試し
-        </button>
-        <button id="sendTest" @click="getToken" type="button">
-          OAuthおくってみる
-        </button>
+        <p>送信する値:<textarea v-model="sendJson"></textarea></p>
+        <p>結果:<textarea v-model="resultJson"></textarea></p>
       </div>
     </div>
   </div>
@@ -26,24 +18,28 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import axios from '@/infrastructure/axios'
 
 @Component
 export default class SampleTest extends Vue {
-  public sendTest() {
-    //   const targetUrl = document.getElementById('targetUrl').value
-    //   const sendJson = document.getElementById('sendJson').value
+  public targetUrl: string = 'http://localhost:8080/api/twitter/sessionTest'
+  public sendJson: string = ''
+  public resultJson: string = ''
+
+  public async sendTest() {
+    // const d = document as Document
+    // const targetUrl = d.getElementById('targetUrl') as HTMLElement
+    // const sendJson = d.getElementById('sendJson') as HTMLElement
     //   const xhr = new XMLHttpRequest()
     //   xhr.open('POST', targetUrl, false)
     //   xhr.setRequestHeader('Content-Type', 'application/json')
     //   xhr.send(sendJson)
     //   const jsonText = xhr.responseText
     //   document.getElementById('resultJson').value = jsonText
-    alert('成功')
-  }
 
-  public test2() {
-    const serverUrl = location.href.replace(this.$route.name as string, '別の')
-    alert('serverUrl:' + serverUrl)
+    const response = await axios.get(this.targetUrl)
+    this.resultJson = response.data
+    alert('成功')
   }
 }
 </script>

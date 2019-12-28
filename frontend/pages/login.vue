@@ -4,7 +4,7 @@
       <form action="/signin/twitter" method="post">
         <h1 class="subtitle">Twitter Buttlerへようこそ！</h1>
         <p>下のボタンから SingUp または SingIn してください。</p>
-        <a class="button--green" @click="singIn()">SingUp/SignIn</a>
+        <a @click="signIn" class="button--green">SingUp/SignIn</a>
       </form>
     </div>
   </div>
@@ -12,17 +12,17 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import axios from 'axios'
+import axios from '@/infrastructure/axios'
 
 @Component
 export default class Login extends Vue {
   public async signIn() {
-    const params = new URLSearchParams()
-    params.append('callbackUrl', this.makeCallbackUrl())
-    const httpClient = axios.create()
-    const response = await httpClient.post('/api/twitter/authUrl', params)
+    console.log('url:' + this.makeCallbackUrl())
+    const response = await axios.post(
+      '/api/twitter/authUrl',
+      this.makeCallbackUrl()
+    ) // TODO めんどくさいのでBody全体を文字列で、また変える。
     const singnInUrl = response.data
-    console.log(singnInUrl)
     location.href = singnInUrl
   }
 
