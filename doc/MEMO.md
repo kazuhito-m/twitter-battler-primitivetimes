@@ -72,6 +72,8 @@
   - https://i-yusuke.com/entry/twitter-bearer-token/
 - 動かない…けれど勉強にはなった
   - https://qiita.com/olt/items/89e4a5846ea8db8866dc
+- これもTwitterじゃない例
+  - https://qiita.com/ryu3/items/4ddc0364b3eb8d5dd402
 
 ## Twitter自体の操作
 
@@ -86,3 +88,13 @@
   - https://stackoverflow.com/questions/44748575/how-to-get-current-route-name-in-nuxt-js
 - 好きなフォントを使う
   - https://qiita.com/yujiteshima/items/e4a2cf1574ad6e61feda
+  
+## nuxt oAuth
+
+予め言うておくと「Tiwtter認証はくらいあんとではできない」ので、恐らサーバを挟む例が多い。
+
+- Twitterだけ仲間はずれ、しゅってできそうで、ゆめあ在ったのに
+  - https://github.com/nuxt-community/auth-module/blob/dev/examples/demo/pages/login.vue
+- これもExpress使ってる例
+  - https://qiita.com/devalon/items/4aee442693862667c1eb
+  
