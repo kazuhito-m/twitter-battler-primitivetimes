@@ -1,43 +1,45 @@
-# ide setting files
-/.idea/
+# For idea
+**/out
+.idea
+*.iml
+*.ipr
+*.iws
 
-# scala's files
+# For eclipse
+.project
+.classpath
+.settings/
+bin/
 
-*.class
+# For Gradle
+**/build
+build/**
+.gradle
+
+# For astah
+*.lock
+
+# For local
+temp
+
+# For mac
+.DS_Store
+
+# backup files
+*.un~
+
+
+# log files
 *.log
 
-# sbt specific
-.cache
-.history
-.lib/
-dist/*
-target/
-lib_managed/
-src_managed/
-project/boot/
-project/plugins/project/
+# For Eclipse
+.classpath
+.project
+.settings
 
-# Scala-IDE specific
-.scala_dependencies
-.worksheet
+# For npm
+node_modules/
 
-# ENSIME specific
-.ensime_cache/
-.ensime
-
-# Gradle work files
-.gradle/
-build/
-
-# what's ?
-/classes/
-
-# node.js 
-node_modules
-src/main/resources/static/js/index.js
-
-# idea
-*.iml
-
-# user difinition
-src/main/resources/config/sosial.yml
+# For Cypress
+cypress/videos
+cypress/screenshots

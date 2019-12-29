@@ -1,0 +1,22 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password: null
+    database: 0
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+twitter4j:
+  debug: true
+  oauth:
+    consumer-key: mxsGonBL83TVN11yjKS9Q
+    consumer-secret: WrqFsVdaGkT89VmLT2xvFSrQNyE0lq2CuSjyxiEI7c
+    access-token:
+    access-token-secret:
+security:
+  basic:
+    enabled: false
+logging.level.com.github.kazuhito_m.twitterbattler.primitive: DEBUG

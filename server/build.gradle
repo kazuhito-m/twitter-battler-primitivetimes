@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot' version '2.2.0.RELEASE'
+    id "org.dddjava.jig-gradle-plugin" version "2019.10.4"
+}
+
+jar {
+    baseName = 'twitter-battler-primitivetimes'
+    version = '0.0.1-SNAPSHOT'
+}
+
+jigReports.dependsOn(clean, compileJava, processResources)
+bootRun.mustRunAfter(clean)
+
+sourceCompatibility = '1.13'
+
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation platform('org.springframework.boot:spring-boot-dependencies:2.2.0.RELEASE')
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation('org.springframework.boot:spring-boot-starter-data-redis')
+
+    // sosial and security
+//    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.twitter4j:twitter4j-core:4.0.7')
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group: 'org.junit.vintage')
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
