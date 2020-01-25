@@ -80,6 +80,11 @@ public class SampleTwitterController {
         return statuses;
     }
 
+    @GetMapping("test2")
+    String test2() {
+        return "これが変えればOK！";
+    }
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SampleTwitterController.class);
 
     SampleTwitterController(Twitter twitter, RedisTemplate<String, Object> redisTemplate, TwitterRepository twitterRepository) {
